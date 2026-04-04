@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Le Guide Express MBS : 10 étapes pour reprendre le contrôle de ton budget. Un parcours structuré sur Notion, avec templates prêts à l'emploi. 49€, accès à vie.">
+  <title>Guide Express MBS : reprends ton budget en main</title>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ───── RESET & BASE ───── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --beige: #F2EBE0;
+      --brown: #2C1F14;
+      --gold: #C4A882;
+      --terracotta: #C4614A;
+      --terracotta-dark: #A8503D;
+      --white: #FFFFFF;
+      --light-gold: #D4BFA0;
+      --soft-bg: #FAF7F3;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--brown);
+      background: var(--white);
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'DM Serif Display', serif;
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--brown);
+    }
+
+    h1 { font-size: clamp(2rem, 5.5vw, 3.2rem); }
+    h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); }
+    h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); }
+
+    p { color: #5C4A3A; }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ───── LAYOUT ───── */
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      padding: 72px 24px;
+    }
+
+    /* ───── COMPONENTS ───── */
+    .cta-primary {
+      display: inline-block;
+      background: var(--terracotta);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 1.08rem;
+      font-weight: 600;
+      padding: 18px 44px;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(196, 97, 74, 0.25);
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .cta-primary:hover {
+      background: var(--terracotta-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(196, 97, 74, 0.35);
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 20px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 14px;
+      box-shadow: 0 1px 6px rgba(44, 31, 20, 0.05);
+      padding: 28px;
+    }
+
+    .card-soft {
+      background: var(--soft-bg);
+      border-radius: 12px;
+      box-shadow: 0 1px 6px rgba(44, 31, 20, 0.05);
+      padding: 24px;
+    }
+
+    /* ───── TOPBAR ───── */
+    .topbar {
+      background: var(--brown);
+      color: var(--light-gold);
+      text-align: center;
+      padding: 10px 24px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    /* ───── HERO ───── */
+    .hero {
+      background: var(--beige);
+      padding: 80px 24px 72px;
+      text-align: center;
+    }
+
+    .hero .badge {
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      max-width: 680px;
+      margin: 0 auto 20px;
+    }
+
+    .hero h1 span {
+      color: var(--terracotta);
+    }
+
+    .hero .subtitle {
+      font-size: 1.1rem;
+      color: #5C4A3A;
+      max-width: 560px;
+      margin: 0 auto 36px;
+    }
+
+    .hero .micro-copy {
+      margin-top: 14px;
+      font-size: 0.82rem;
+      color: #8A7565;
+    }
+
+    /* ───── SOCIAL PROOF BAR ───── */
+    .proof-bar {
+      background: var(--white);
+      padding: 48px 24px;
+      border-top: 1px solid rgba(196, 168, 130, 0.2);
+      border-bottom: 1px solid rgba(196, 168, 130, 0.2);
+    }
+
+    .proof-bar .container {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .proof-item {
+      text-align: center;
+    }
+
+    .proof-item .proof-number {
+      display: block;
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--terracotta);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .proof-item .proof-label {
+      font-size: 0.88rem;
+      color: #8A7565;
+    }
+
+    /* ───── PROBLEM ───── */
+    .problem {
+      background: var(--soft-bg);
+    }
+
+    .problem .container {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .problem h2 {
+      margin-bottom: 32px;
+    }
+
+    .problem-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+
+    .problem-list li {
+      padding-left: 28px;
+      position: relative;
+      color: #5C4A3A;
+    }
+
+    .problem-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .problem-outro {
+      background: var(--beige);
+      border-radius: 12px;
+      padding: 24px 28px;
+      color: #5C4A3A;
+      font-style: italic;
+    }
+
+    /* ───── BEFORE/AFTER ───── */
+    .before-after {
+      background: var(--white);
+    }
+
+    .before-after h2 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .ba-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .ba-col {
+      border-radius: 14px;
+      padding: 28px;
+    }
+
+    .ba-before {
+      background: #FDF3F1;
+      border: 1px solid rgba(196, 97, 74, 0.15);
+    }
+
+    .ba-after {
+      background: #F3FAF3;
+      border: 1px solid rgba(100, 160, 100, 0.2);
+    }
+
+    .ba-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .ba-before .ba-label { color: var(--terracotta); }
+    .ba-after .ba-label { color: #4A8A4A; }
+
+    .ba-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ba-col ul li {
+      font-size: 0.95rem;
+      color: #5C4A3A;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .ba-before ul li::before { content: '✗'; position: absolute; left: 0; color: var(--terracotta); font-weight: 700; }
+    .ba-after ul li::before { content: '✓'; position: absolute; left: 0; color: #4A8A4A; font-weight: 700; }
+
+    .ba-arrow {
+      font-size: 1.8rem;
+      color: var(--gold);
+      text-align: center;
+    }
+
+    /* ───── SOLUTION ───── */
+    .solution {
+      background: var(--soft-bg);
+    }
+
+    .solution h2 {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .solution .section-intro {
+      text-align: center;
+      color: #5C4A3A;
+      margin-bottom: 48px;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .step-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 28px 24px;
+      box-shadow: 0 1px 6px rgba(44, 31, 20, 0.05);
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      color: var(--white);
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+    }
+
+    .step-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    .step-card p {
+      font-size: 0.95rem;
+    }
+
+    /* ───── MID CTA ───── */
+    .mid-cta {
+      background: var(--beige);
+      text-align: center;
+      padding: 56px 24px;
+    }
+
+    .mid-cta h2 {
+      margin-bottom: 24px;
+    }
+
+    .mid-cta .micro-copy {
+      margin-top: 14px;
+      font-size: 0.82rem;
+      color: #8A7565;
+    }
+
+    /* ───── CONTENT ───── */
+    .content {
+      background: var(--white);
+    }
+
+    .content h2 {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .content .section-intro {
+      text-align: center;
+      color: #5C4A3A;
+      margin-bottom: 44px;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .content-card {
+      background: var(--soft-bg);
+      border-radius: 12px;
+      padding: 22px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .content-card .icon {
+      font-size: 1.5rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .content-card h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--brown);
+    }
+
+    .content-card p {
+      font-size: 0.9rem;
+      color: #5C4A3A;
+    }
+
+    /* ───── STEPS DETAIL ───── */
+    .steps-detail {
+      background: var(--soft-bg);
+    }
+
+    .steps-detail h2 {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .steps-detail .section-intro {
+      text-align: center;
+      color: #5C4A3A;
+      margin-bottom: 44px;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .step-detail {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .step-detail .step-num {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      color: var(--white);
+      font-family: 'DM Serif Display', serif;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .step-detail h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--brown);
+      margin-bottom: 2px;
+    }
+
+    .step-detail p {
+      font-size: 0.9rem;
+      color: #5C4A3A;
+    }
+
+    .bonus-tag {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    /* ───── CREATOR ───── */
+    .creator {
+      background: var(--beige);
+    }
+
+    .creator .container {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .creator-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    /* #PHOTO_GUILLAUME: Replace emoji with <img src="..." alt="Guillaume" style="width:100%;height:100%;object-fit:cover;"> */
+
+    .creator-text .eyebrow {
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .creator-text h2 {
+      margin-bottom: 16px;
+    }
+
+    .creator-text p {
+      color: #5C4A3A;
+      margin-bottom: 12px;
+    }
+
+    /* ───── FOR WHO ───── */
+    .for-who {
+      background: var(--soft-bg);
+    }
+
+    .for-who h2 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .for-who-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .for-who-col {
+      border-radius: 14px;
+      padding: 28px;
+    }
+
+    .for-yes {
+      background: var(--white);
+      border-top: 3px solid var(--gold);
+    }
+
+    .for-no {
+      background: var(--white);
+      border-top: 3px solid #D4C4B8;
+    }
+
+    .for-who-col h3 {
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .for-yes h3 { color: var(--terracotta); }
+    .for-no h3 { color: #8A7565; }
+
+    .for-who-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .for-who-col ul li {
+      font-size: 0.95rem;
+      color: #5C4A3A;
+      padding-left: 22px;
+      position: relative;
+    }
+
+    .for-yes ul li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+    .for-no ul li::before { content: '✗'; position: absolute; left: 0; color: #D4C4B8; font-weight: 700; }
+
+    /* ───── PRICING ───── */
+    .pricing {
+      background: var(--white);
+      text-align: center;
+    }
+
+    .pricing h2 {
+      margin-bottom: 12px;
+    }
+
+    .pricing .section-intro {
+      color: #5C4A3A;
+      margin-bottom: 44px;
+    }
+
+    .pricing-card {
+      max-width: 480px;
+      margin: 0 auto;
+      background: var(--soft-bg);
+      border-radius: 16px;
+      padding: 44px 40px;
+      box-shadow: 0 4px 24px rgba(44, 31, 20, 0.08);
+      border: 1px solid rgba(196, 168, 130, 0.25);
+    }
+
+    .pricing-badge {
+      margin-bottom: 20px;
+    }
+
+    .pricing-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: var(--brown);
+      margin-bottom: 8px;
+    }
+
+    .pricing-price {
+      margin: 20px 0;
+    }
+
+    .pricing-amount {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3rem;
+      color: var(--terracotta);
+      line-height: 1;
+    }
+
+    .pricing-currency {
+      font-size: 1.4rem;
+      color: var(--terracotta);
+      vertical-align: super;
+    }
+
+    .pricing-old {
+      font-size: 1.3rem;
+      color: #8A7565;
+      text-decoration: line-through;
+      margin-right: 8px;
+    }
+
+    .pricing-note {
+      font-size: 0.85rem;
+      color: #8A7565;
+      margin-top: 4px;
+    }
+
+    .pricing-promo {
+      display: inline-block;
+      background: var(--terracotta);
+      color: var(--white);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-top: 8px;
+    }
+
+    .pricing-features {
+      list-style: none;
+      text-align: left;
+      margin: 28px 0 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pricing-features li {
+      font-size: 0.95rem;
+      color: #5C4A3A;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .pricing-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .pricing-guarantee {
+      margin-top: 20px;
+      font-size: 0.82rem;
+      color: #8A7565;
+    }
+
+    /* ───── ROI ───── */
+    .roi-box {
+      background: var(--beige);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-top: 28px;
+      text-align: left;
+    }
+
+    .roi-box h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: 8px;
+    }
+
+    .roi-box p {
+      font-size: 0.9rem;
+      color: #5C4A3A;
+    }
+
+    /* ───── FAQ ───── */
+    .faq {
+      background: var(--soft-bg);
+    }
+
+    .faq h2 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--brown);
+      transition: all 0.2s;
+    }
+
+    .faq-question:hover {
+      color: var(--terracotta);
+    }
+
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-left: 16px;
+      transition: transform 0.35s ease;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 500px;
+    }
+
+    .faq-answer-inner {
+      padding: 0 24px 20px;
+      font-size: 0.95rem;
+      color: #5C4A3A;
+    }
+
+    /* ───── FINAL CTA ───── */
+    .final-cta {
+      background: var(--brown);
+      text-align: center;
+      padding: 80px 24px;
+    }
+
+    .final-cta h2 {
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .final-cta p {
+      color: var(--light-gold);
+      margin-bottom: 36px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .final-cta .micro-copy {
+      margin-top: 14px;
+      font-size: 0.82rem;
+      color: var(--gold);
+    }
+
+    /* ───── FOOTER ───── */
+    .footer {
+      background: var(--brown);
+      border-top: 1px solid rgba(196, 168, 130, 0.15);
+      padding: 28px 24px;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--light-gold);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: #8A7565;
+    }
+
+    /* ───── STICKY MOBILE CTA ───── */
+    .sticky-cta {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      border-top: 1px solid rgba(196, 168, 130, 0.3);
+      padding: 12px 20px;
+      z-index: 100;
+      box-shadow: 0 -4px 16px rgba(44, 31, 20, 0.1);
+    }
+
+    .sticky-cta a {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--terracotta);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 15px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .sticky-cta a:hover {
+      background: var(--terracotta-dark);
+    }
+
+    .sticky-cta.visible {
+      display: block;
+    }
+
+    /* ───── RESPONSIVE ───── */
+    @media (max-width: 680px) {
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .for-who-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ba-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ba-arrow {
+        transform: rotate(90deg);
+        font-size: 1.5rem;
+      }
+
+      .creator .container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .creator-avatar {
+        margin: 0 auto;
+      }
+
+      .pricing-card {
+        padding: 32px 24px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      section {
+        padding: 56px 20px;
+      }
+
+      .hero {
+        padding: 60px 20px 56px;
+      }
+
+      .proof-bar .container {
+        gap: 32px;
+      }
+
+      .cta-primary {
+        padding: 16px 32px;
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .proof-bar .container {
+        flex-direction: column;
+        gap: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- ───── TOPBAR ───── -->
+<div class="topbar">
+  Paiement sécurisé · Accès immédiat · 49€ une seule fois
+</div>
+
+<!-- ───── HERO ───── -->
+<section class="hero" id="hero">
+  <div class="container">
+    <span class="badge">Guide Express</span>
+    <h1>Ton argent file sans que tu saches où ? <span>Ça s'arrête ici.</span></h1>
+    <p class="subtitle">
+      10 étapes pour reprendre le contrôle de ton budget, voir clair dans tes finances et arrêter de stresser en fin de mois. Mise en place en 1 heure, maintien en 5 min par semaine.
+    </p>
+    <!-- STRIPE_LINK: Replace with your Stripe Payment Link (49€) -->
+    <a href="#" class="cta-primary">Je reprends mon budget en main</a>
+    <p class="micro-copy">Accès immédiat sur Notion · 49€ paiement unique · Accès à vie</p>
+  </div>
+</section>
+
+<!-- ───── SOCIAL PROOF BAR ───── -->
+<div class="proof-bar">
+  <div class="container">
+    <div class="proof-item">
+      <span class="proof-number">180+</span>
+      <span class="proof-label">personnes dans la communauté MBS</span>
+    </div>
+    <div class="proof-item">
+      <span class="proof-number">37</span>
+      <span class="proof-label">articles publiés sur le blog</span>
+    </div>
+    <div class="proof-item">
+      <span class="proof-number">5 min</span>
+      <span class="proof-label">par semaine pour maintenir ton budget</span>
+    </div>
+  </div>
+</div>
+
+<!-- ───── PROBLEM ───── -->
+<section class="problem">
+  <div class="container">
+    <h2>Tu te reconnais ?</h2>
+    <ul class="problem-list">
+      <li>Tu regardes ton solde bancaire avec une boule au ventre à chaque fin de mois</li>
+      <li>Tu gagnes correctement ta vie, mais tu ne sais pas où passe ton argent</li>
+      <li>Tu as déjà essayé un tableur Excel ou une appli budget, et tu as abandonné au bout de 2 semaines</li>
+      <li>Tu te dis "le mois prochain je gère"... depuis 6 mois</li>
+      <li>Le moindre imprévu (panne, facture, réparation) te met dans le rouge</li>
+      <li>Tu penses à l'argent tout le temps, sans jamais vraiment régler le problème</li>
+    </ul>
+    <div class="problem-outro">
+      Ce n'est pas un problème de volonté. Tu n'as pas besoin de te "motiver" à mieux gérer. Tu as besoin d'un système simple qui fait le travail à ta place.
+    </div>
+  </div>
+</section>
+
+<!-- ───── BEFORE/AFTER ───── -->
+<section class="before-after">
+  <div class="container">
+    <h2>Avant et après le Guide Express</h2>
+    <div class="ba-grid">
+      <div class="ba-col ba-before">
+        <p class="ba-label">Avant</p>
+        <ul>
+          <li>Flou total sur tes dépenses</li>
+          <li>Stress à chaque fin de mois</li>
+          <li>Tableurs abandonnés en 2 semaines</li>
+          <li>Culpabilité à chaque achat plaisir</li>
+          <li>Zéro épargne, zéro filet de sécurité</li>
+          <li>Projets repoussés indéfiniment</li>
+        </ul>
+      </div>
+      <div class="ba-arrow">→</div>
+      <div class="ba-col ba-after">
+        <p class="ba-label">Après</p>
+        <ul>
+          <li>Tu sais où va chaque euro</li>
+          <li>Tu ouvres ton appli bancaire sereinement</li>
+          <li>Un système qui tient en 5 min/semaine</li>
+          <li>Tu dépenses sans culpabilité</li>
+          <li>50 à 200€ d'économies identifiées par mois</li>
+          <li>Tes projets de vie avancent enfin</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── SOLUTION ───── -->
+<section class="solution">
+  <div class="container">
+    <h2>La méthode en 3 temps</h2>
+    <p class="section-intro">Pas besoin d'être un expert en finances. Le Guide Express te prend par la main, de A à Z.</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>Comprendre</h3>
+        <p>On commence par ta relation à l'argent et tes projets de vie. Pas de chiffres tout de suite. D'abord, le mindset.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>Structurer</h3>
+        <p>État des lieux, catégories de dépenses, reste à vivre, budget mensuel. En 1 heure, tu as ton système.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>Piloter</h3>
+        <p>Comptes organisés, tableau Notion prêt, checklist mensuelle. 5 minutes par semaine pour garder le cap.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── MID-PAGE CTA ───── -->
+<section class="mid-cta">
+  <div class="container">
+    <h2>Prêt à voir clair dans tes finances ?</h2>
+    <!-- STRIPE_LINK: Replace with your Stripe Payment Link (49€) -->
+    <a href="#" class="cta-primary">Je reprends mon budget en main</a>
+    <p class="micro-copy">Accès immédiat · 49€ une seule fois</p>
+  </div>
+</section>
+
+<!-- ───── CONTENT (10 steps detail) ───── -->
+<section class="steps-detail">
+  <div class="container">
+    <h2>Le parcours complet en 10 étapes</h2>
+    <p class="section-intro">Tu dupliques la page Notion, tu avances à ton rythme. Tout est là.</p>
+    <div class="steps-list">
+      <div class="step-detail">
+        <div class="step-num">0</div>
+        <div>
+          <h3>Mindset et psychologie de l'argent</h3>
+          <p>Comprendre tes habitudes avant de vouloir tout changer. C'est là que la plupart des méthodes échouent : elles sautent cette étape.</p>
+        </div>
+      </div>
+      <div class="step-detail">
+        <div class="step-num">1</div>
+        <div>
+          <h3>Définir tes projets de vie</h3>
+          <p>Ce que tu veux vraiment, avant même de parler d'argent. Ton budget doit servir ta vie, pas l'inverse.</p>
+        </div>
+      </div>
+      <div class="step-detail">
+        <div class="step-num">2</div>
+        <div>
+          <h3>Faire ton état des lieux financier</h3>
+          <p>Poser les bases : ce que tu gagnes, ce que tu dépenses, et où tu en es. Une photo claire de ta situation.</p>
+        </div>
+      </div>
+      <div class="step-detail">
+        <div class="step-num">3</div>
+        <div>
+          <h3>Catégoriser tes dépenses</h3>
+          <p>Voir clair dans tes habitudes, sans culpabilité. Savoir où part ton argent change tout.</p>
+        </div>
+      </div>
+      <div class="step-detail">
+        <div class="step-num">4</div>
+        <div>
+          <h3>Calculer ton reste à vivre</h3>
+          <p>Ce qui te reste vraiment chaque mois, une fois l'essentiel payé. Le chiffre le plus important de ton budget.</p>
+        </div>
+      </div>
+      <div class="step-detail">
+        <div class="step-num">5</div>
+        <div>
+          <h3>Construire ton budget mensuel</h3>
+          <p>Ton budget simple, souple, et réaliste. Inspiré de la méthode 50/30/20, adapté à la vraie vie.</p>
+        </div>
+      </div>
+      <div class="step-detail">
+        <div class="step-num">6</div>
+        <div>
+          <h3>Organiser tes comptes bancaires</h3>
+          <p>Un système clair pour ne plus t'y perdre. Chaque compte a un rôle, chaque euro a une destination.</p>
+        </div>
+      </div>
+      <div class="step-detail">
+        <div class="step-num">7</div>
+        <div>
+          <h3>Ton tableau de budget Notion</h3>
+          <p>Un modèle interactif prêt à l'emploi. Tu dupliques, tu remplis, tu suis ton budget en quelques clics.</p>
+        </div>
+      </div>
+      <div class="step-detail">
+        <div class="step-num">8</div>
+        <div>
+          <h3>Checklist mensuelle</h3>
+          <p>Ce que tu fais chaque début de mois pour garder le cap. 5 minutes, pas plus.</p>
+        </div>
+      </div>
+      <div class="step-detail">
+        <div class="step-num">9</div>
+        <div>
+          <h3>Conclusion et prochaines étapes</h3>
+          <p>Bravo, tu as ton système. Maintenant, on le fait vivre.</p>
+        </div>
+      </div>
+      <div class="step-detail">
+        <div class="bonus-tag">+</div>
+        <div>
+          <h3>Bonus : Journal d'achat 7 jours</h3>
+          <p>Un outil de prise de conscience de tes dépenses. 7 jours pour comprendre tes automatismes.</p>
+        </div>
+      </div>
+      <div class="step-detail">
+        <div class="bonus-tag">+</div>
+        <div>
+          <h3>Bonus : Tableau de budget interactif</h3>
+          <p>Un suivi mensuel visuel sur Notion. Tes chiffres, tes catégories, tes progrès. En un coup d'œil.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── CREATOR ───── -->
+<section class="creator">
+  <div class="container">
+    <!-- #PHOTO_GUILLAUME: Replace emoji with <img src="URL" alt="Guillaume, fondateur de Mon Budget Simple" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"> -->
+    <div class="creator-avatar">👤</div>
+    <div class="creator-text">
+      <p class="eyebrow">Qui suis-je</p>
+      <h2>Guillaume</h2>
+      <p>
+        42 ans, père de deux filles, freelance dans le web. Pendant des années, j'ai vécu ce que tu vis peut-être : le stress de l'argent, le flou en fin de mois, cette impression que tout file entre les doigts.
+      </p>
+      <p>
+        J'ai testé des tableurs, des applis, des méthodes trouvées en ligne. Rien ne tenait. Alors j'ai construit mon propre système, en appliquant ce que je sais faire : simplifier, structurer, automatiser. Ça a tout changé.
+      </p>
+      <p>
+        Mon Budget Simple, c'est ce système. Pas de jargon financier, pas de leçon de morale. Juste un outil clair, créé par quelqu'un qui a vécu le problème et qui a trouvé ce qui marche.
+      </p>
+      <!-- TODO: Guillaume, ajoute ici ton moment déclencheur personnel. Exemple : "Le jour où j'ai découvert un découvert de XXX€ alors que je venais de recevoir mon salaire, j'ai compris que le problème n'était pas combien je gagnais, mais comment je gérais." -->
+    </div>
+  </div>
+</section>
+
+<!-- ───── FOR WHO / NOT FOR WHO ───── -->
+<section class="for-who">
+  <div class="container">
+    <h2>C'est fait pour toi ?</h2>
+    <div class="for-who-grid">
+      <div class="for-who-col for-yes">
+        <h3>Oui, si tu...</h3>
+        <ul>
+          <li>Veux enfin savoir où passe ton argent chaque mois</li>
+          <li>En as marre du stress en fin de mois</li>
+          <li>Cherches une méthode simple qui tient dans la durée</li>
+          <li>Veux épargner sans te priver de tout</li>
+          <li>Préfères agir maintenant plutôt qu'attendre "le bon moment"</li>
+          <li>As des revenus réguliers ou irréguliers (la méthode s'adapte)</li>
+        </ul>
+      </div>
+      <div class="for-who-col for-no">
+        <h3>Pas pour toi, si tu...</h3>
+        <ul>
+          <li>Cherches des conseils en bourse ou en investissement</li>
+          <li>Veux déléguer ta gestion à un conseiller</li>
+          <li>N'es pas prêt à consacrer 1 heure au setup initial</li>
+          <li>Attends une solution magique sans aucun effort</li>
+          <li>Gères déjà ton budget efficacement et épargnes chaque mois</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── PRICING ───── -->
+<section class="pricing">
+  <div class="container">
+    <h2>Un investissement qui se rentabilise en quelques semaines</h2>
+    <p class="section-intro">Les personnes qui suivent le Guide Express identifient en moyenne 30 à 80€ d'économies par mois. Le guide se rembourse en 2 à 4 semaines.</p>
+    <div class="pricing-card">
+      <span class="badge pricing-badge">Guide Express MBS</span>
+      <p class="pricing-name">10 étapes pour reprendre ton budget en main</p>
+      <div class="pricing-price">
+        <span class="pricing-currency">€</span><span class="pricing-amount">49</span>
+        <p class="pricing-note">paiement unique · accès à vie</p>
+        <p class="pricing-promo">Code MBS-DEPART : 39€ au lieu de 49€</p>
+      </div>
+      <ul class="pricing-features">
+        <li>Le parcours complet en 10 étapes sur Notion</li>
+        <li>Templates Notion prêts à l'emploi (duplique et remplis)</li>
+        <li>Tableau de budget interactif</li>
+        <li>Journal d'achat 7 jours</li>
+        <li>Checklist mensuelle de suivi</li>
+        <li>Méthode inspirée du 50/30/20, adaptée à la vraie vie</li>
+        <li>Mises à jour incluses à vie</li>
+        <li>Accès immédiat après paiement</li>
+      </ul>
+      <!-- STRIPE_LINK: Replace with your Stripe Payment Link (49€) -->
+      <a href="#" class="cta-primary" style="width: 100%; text-align: center;">Je reprends mon budget en main</a>
+      <p class="pricing-guarantee">Paiement sécurisé par Stripe</p>
+      <div class="roi-box">
+        <h3>Le calcul est simple</h3>
+        <p>Si tu identifies ne serait-ce que 40€ d'économies par mois (la moyenne est entre 30 et 80€), le guide est rentabilisé en 5 semaines. Après, c'est du bonus chaque mois.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── FAQ ───── -->
+<section class="faq">
+  <div class="container">
+    <h2>Questions fréquentes</h2>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question">
+          C'est quoi exactement ? Un PDF, une formation vidéo ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            C'est un parcours structuré en 10 étapes, hébergé sur Notion. Tu dupliques la page dans ton espace Notion et tu avances à ton rythme. Il y a du texte pédagogique, des templates interactifs et des outils prêts à l'emploi. Pas de vidéo, pas de PDF.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Je ne connais pas Notion, c'est un problème ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Pas du tout. Notion est gratuit et le template est déjà configuré pour toi. Tu cliques sur "Dupliquer", et c'est prêt. Pas besoin de savoir utiliser Notion : tu remplis les champs, tu coches les étapes, c'est tout. Si tu sais utiliser un navigateur web, tu sais utiliser ce guide.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          49€ pour un guide, c'est pas un peu cher ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            La plupart des personnes qui suivent le guide identifient entre 30 et 80€ d'économies par mois. À 40€/mois d'économies, le guide est rentabilisé en 5 semaines. Après, ce sont des économies chaque mois, à vie. Et avec le code MBS-DEPART, c'est 39€ au lieu de 49€.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          C'est un abonnement ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Non. C'est un paiement unique de 49€ (ou 39€ avec le code MBS-DEPART). Tu paies une fois, tu accèdes à vie. Pas de frais cachés, pas de renouvellement automatique.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Ça marche si j'ai des revenus irréguliers ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Oui. La méthode est pensée pour s'adapter aux revenus qui bougent (freelances, CDD, commissions, intérimaires). L'étape sur le reste à vivre et le budget mensuel prend en compte cette réalité.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          J'ai déjà essayé de faire un budget, ça n'a jamais marché
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Normal. La plupart des méthodes sautent l'essentiel : ta relation à l'argent. Le Guide Express commence par le mindset (étape 0) avant de passer aux chiffres. Ce n'est pas juste un tableau de plus. C'est un système complet qui part de tes habitudes, avec une checklist mensuelle pour que ça tienne dans le temps.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Combien de temps ça prend ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Le setup initial prend environ 1 heure. Après, c'est 5 à 10 minutes par semaine pour maintenir ton budget. Les premiers résultats (clarté sur tes dépenses) arrivent dès la première semaine. Les économies concrètes, en 2 à 4 semaines.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Je peux le partager avec mon/ma conjoint(e) ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Le guide est prévu pour un usage individuel, mais le partage en couple est tout à fait possible. Si tu veux une méthode pensée spécifiquement pour gérer un budget à deux, regarde la formation "Budget à deux" qui est faite pour ça.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ───── FINAL CTA ───── -->
+<section class="final-cta">
+  <div class="container">
+    <h2>Le meilleur moment pour commencer, c'est maintenant</h2>
+    <p>Tu n'as pas besoin d'attendre d'être dans une meilleure situation. Le Guide Express est là pour t'aider à y arriver, pas après. 1 heure de setup, et tu reprends le contrôle.</p>
+    <!-- STRIPE_LINK: Replace with your Stripe Payment Link (49€) -->
+    <a href="#" class="cta-primary">Je reprends mon budget en main</a>
+    <p class="micro-copy">49€ · Accès immédiat · Paiement unique</p>
+  </div>
+</section>
+
+<!-- ───── FOOTER ───── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="https://www.monbudgetsimple.fr/mentions-legales">Mentions légales</a>
+      <a href="https://www.monbudgetsimple.fr/politique-de-confidentialite">Politique de confidentialite</a>
+      <a href="https://www.monbudgetsimple.fr/cgv">CGV</a>
+      <a href="mailto:contact@monbudgetsimple.fr">Contact</a>
+    </div>
+    <p class="footer-copy">© 2026 Mon Budget Simple · Tous droits réservés</p>
+  </div>
+</footer>
+
+<!-- ───── STICKY MOBILE CTA ───── -->
+<div class="sticky-cta" id="sticky-cta">
+  <!-- STRIPE_LINK: Replace with your Stripe Payment Link (49€) -->
+  <a href="#">Je reprends mon budget en main</a>
+</div>
+
+<script>
+  // ───── FAQ ACCORDION ─────
+  document.querySelectorAll('.faq-question').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = this.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(el) {
+        el.classList.remove('open');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+      }
+    });
+  });
+
+  // ───── STICKY MOBILE CTA ─────
+  var stickyCta = document.getElementById('sticky-cta');
+  var hero = document.getElementById('hero');
+
+  if (stickyCta && hero && 'IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(
+      function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            stickyCta.classList.remove('visible');
+          } else {
+            stickyCta.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(hero);
+  }
+</script>
+
+</body>
+</html>
