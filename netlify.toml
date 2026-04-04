@@ -1,0 +1,29 @@
+# Netlify configuration for go.monbudgetsimple.fr
+
+# Redirect root to main website
+[[redirects]]
+  from = "/"
+  to = "https://www.monbudgetsimple.fr"
+  status = 302
+  force = true
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Cache Google Fonts
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# 404 page
+[[redirects]]
+  from = "/*"
+  to = "https://www.monbudgetsimple.fr"
+  status = 302

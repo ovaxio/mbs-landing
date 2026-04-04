@@ -2,19 +2,45 @@
 
 ## Projet
 
-Repo de landing pages HTML standalone pour Mon Budget Simple, un business d'éducation financière en français.
-Chaque page est un fichier `.html` autonome (HTML + CSS + JS inline, pas de framework, pas de build step).
-Les pages sont ensuite hébergées sur Podia ou servies en standalone.
+Repo de landing pages HTML pour Mon Budget Simple, un business d'éducation financière en français.
+Les landing pages sont hébergées sur Netlify (go.monbudgetsimple.fr), séparées du site vitrine Podia (www.monbudgetsimple.fr).
+
+### Architecture
+
+```
+go.monbudgetsimple.fr (Netlify)        → Landing pages de vente + confirmation
+Stripe Payment Links                   → Paiement direct, codes promo
+www.monbudgetsimple.fr (Podia)         → Site vitrine + blog SEO + hébergement cours
+ActiveCampaign                         → Email marketing
+GTM + GA4 + Google Ads                 → Tracking (sur les landing pages uniquement)
+```
+
+### Flow d'achat
+
+1. Client arrive sur `go.monbudgetsimple.fr/guide-express` (landing page)
+2. Clic CTA → Stripe Payment Link (paiement hébergé par Stripe)
+3. Après paiement → `go.monbudgetsimple.fr/confirmation` (page de confirmation)
+4. Page de confirmation : lien d'accès Podia + conversion tracking Google Ads
+5. Email ActiveCampaign envoyé en parallèle avec le lien Podia
+
+### Livraison des formations
+
+Les formations sont hébergées sur Podia. Après paiement Stripe, le client accède à sa formation via un lien d'inscription gratuit Podia affiché sur la page de confirmation.
+Pas de bridge technique (webhook/API) — le client s'inscrit lui-même sur Podia.
+Quand le volume dépasse 50 ventes/mois, automatiser via Make.com (Stripe webhook → Podia API).
 
 ---
 
 ## Stack technique
 
 - **HTML5** — fichiers single-page, tout inline (style + script dans le même fichier)
-- **CSS** — custom properties (variables CSS), pas de framework CSS, pas de Tailwind
+- **CSS** — custom properties (variables CSS), pas de framework CSS
 - **JS** — vanilla uniquement, pas de dépendances, pas de bundler
 - **Fonts** — Google Fonts via CDN : `DM Serif Display` (titres), `Inter` (body)
-- **Pas dep** : React, npm, build step, SCSS, PostCSS, images locales (tout en emoji/SVG inline)
+- **Tracking** — GTM + gtag.js (seuls scripts externes autorisés) + Google Ads conversion tag inline sur confirmation.html
+- **Déploiement** — Netlify, domaine `go.monbudgetsimple.fr`
+- **Paiement** — Stripe Payment Links (pas d'API, pas de backend)
+- **Pas de** : React, npm, build step, SCSS, PostCSS, Node.js, framework CSS
 
 ---
 
@@ -37,16 +63,16 @@ Les pages sont ensuite hébergées sur Podia ou servies en standalone.
 
 ### Couleurs sémantiques
 
-| Rôle              | Variable              | Usage                                         |
-| ----------------- | --------------------- | --------------------------------------------- |
-| Texte principal   | `--brown`             | Titres, corps de texte                        |
-| Texte secondaire  | `#5C4A3A`             | Sous-titres, descriptions                     |
-| Texte tertiaire   | `#8A7565`             | Micro-copy, légendes, prix barrés             |
-| Accent primaire   | `--terracotta`        | CTA, highlights, chiffres clés                |
-| Accent secondaire | `--gold`              | Badges, décorations, séparateurs, FAQ toggles |
-| Fond clair        | `--beige`             | Hero, sections alternées                      |
-| Fond subtil       | `--soft-bg` (#FAF7F3) | Cards, sections alternées                     |
-| Fond sombre       | `--brown`             | Topbar, footer, section finale CTA            |
+| Rôle | Variable | Usage |
+|---|---|---|
+| Texte principal | `--brown` | Titres, corps de texte |
+| Texte secondaire | `#5C4A3A` | Sous-titres, descriptions |
+| Texte tertiaire | `#8A7565` | Micro-copy, légendes, prix barrés |
+| Accent primaire | `--terracotta` | CTA, highlights, chiffres clés |
+| Accent secondaire | `--gold` | Badges, décorations, séparateurs, FAQ toggles |
+| Fond clair | `--beige` | Hero, sections alternées |
+| Fond subtil | `--soft-bg` | Cards, sections alternées |
+| Fond sombre | `--brown` | Topbar, footer, section finale CTA |
 
 ### Typographie
 
@@ -70,6 +96,7 @@ Les pages sont ensuite hébergées sur Podia ou servies en standalone.
   border-radius: 8px;
   text-decoration: none;
   box-shadow: 0 4px 14px rgba(196,97,74,0.25);
+  transition: all 0.2s;
 }
 .cta-primary:hover {
   background: var(--terracotta-dark);
@@ -95,18 +122,18 @@ Les pages sont ensuite hébergées sur Podia ou servies en standalone.
 
 #### Cards
 - Background : `var(--white)` ou `var(--soft-bg)`
-- Border-radius : 12px–14px
+- Border-radius : 12px-14px
 - Box-shadow : `0 1px 6px rgba(44,31,20,0.05)`
-- Padding : 22px–32px
+- Padding : 22px-32px
 
 #### Sticky mobile CTA
-Toutes les pages doivent inclure un CTA sticky en bas sur mobile (apparaît au scroll après le hero).
+Toutes les landing pages doivent inclure un CTA sticky en bas sur mobile (apparaît au scroll après le hero).
 
 ### Espacements
 
 - Padding vertical des sections : `72px 24px`
 - `.container` : `max-width: 760px; margin: 0 auto; padding: 0 24px`
-- Gap grids : 18px–28px
+- Gap grids : 18px-28px
 
 ---
 
@@ -124,7 +151,7 @@ Chaque landing page suit cette structure de sections (dans l'ordre) :
 8. **Contenu du produit** — grille de cards avec icônes emoji
 9. **Créateur** — section "Qui suis-je", avatar, texte personnel
 10. **Pour qui / Pas pour qui** — 2 colonnes oui/non
-11. **Pricing** — card centrée avec prix, liste de features, garanties
+11. **Pricing** — card centrée avec prix, liste de features, CTA. Lien → Stripe Payment Link
 12. **FAQ** — accordéon JS (click toggle)
 13. **Final CTA** — section fond `--brown`, H2, CTA terracotta
 14. **Footer** — fond `--brown`, liens légaux, copyright
@@ -133,102 +160,131 @@ L'ordre peut varier mais le Hero + Final CTA sont obligatoires.
 
 ---
 
+## Tracking
+
+### GTM (Google Tag Manager)
+- Script externe autorisé sur toutes les landing pages
+- Snippet dans `<head>` + `<noscript>` après `<body>`
+- GA4 et tout autre pixel configurés dans le dashboard GTM
+- Placeholder : `GTM-XXXXXXX`
+
+### Google Ads Conversion
+- Tag de conversion placé en INLINE sur `confirmation.html` uniquement
+- NE PAS passer par GTM pour le tag de conversion Google Ads (race condition)
+- Utiliser `gtag()` en script synchrone
+
+### Événements trackés
+- Pageview (via GTM/GA4) sur toutes les pages
+- Clic CTA (via GTM, event listener)
+- Conversion achat (inline sur confirmation.html)
+
+---
+
 ## Conventions de code
 
 ### HTML
 - `lang="fr"` obligatoire
 - Meta viewport et description toujours présents
-- Nommage des classes : BEM simplifié (`.section-element`, pas de double underscore)
-- Commentaires de séparation entre sections : `<!-- ───── NOM SECTION ───── -->`
+- Nommage des classes : BEM simplifié (`.section-element`)
+- Commentaires de séparation : `<!-- ───── NOM SECTION ───── -->`
 - Commentaires CSS de séparation : `/* ───── NOM SECTION ───── */`
-- Sémantique : `<section>`, `<footer>`, `<nav>` quand pertinent
+- Commentaires pour les placeholders : `<!-- STRIPE_LINK: ... -->`, `<!-- PODIA_LINK: ... -->`, `<!-- CONVERSION: ... -->`
+- Sémantique : `<section>`, `<footer>`, `<nav>`
 
 ### CSS
 - Variables CSS dans `:root` (pas de valeurs magiques en dur)
-- Mobile-first n'est PAS la convention actuelle → desktop-first avec `@media (max-width: XXpx)` pour les breakpoints
-- Breakpoints utilisés : `600px`, `540px`, `680px` (pas de système rigide, adapter au contenu)
+- Desktop-first avec `@media (max-width: XXpx)` pour les breakpoints
+- Breakpoints : adapter au contenu (540px, 600px, 680px)
 - Pas de `!important` sauf cas extrême
-- Utiliser `clamp()` pour les tailles de titres
+- `clamp()` pour les tailles de titres
 - Transitions : `all 0.2s` pour les hovers, `0.35s ease` pour les accordéons
 
 ### JavaScript
-- Vanilla JS uniquement, en bas du fichier dans une balise `<script>`
-- Pattern FAQ : toggle de classe `.open` sur click
-- Pattern sticky CTA : `IntersectionObserver` sur le hero
+- Vanilla JS uniquement, dans `<script>` en bas du fichier
+- FAQ : toggle de classe `.open` sur click
+- Sticky CTA : `IntersectionObserver` sur le hero
 - Pas de jQuery, pas de librairies externes
-- Event listeners avec `addEventListener`, pas de `onclick` inline
+- `addEventListener`, pas de `onclick` inline
 
 ---
 
 ## Règles de copywriting
 
-### Ton & voix
+### Ton et voix
 - **Tutoiement** systématique (sauf formation couples = vouvoiement)
 - Ton chaleureux, déculpabilisant, bienveillant
 - Phrases courtes, ponctuation standard
 - Métaphores accessibles (boussole, photo, lampe torche)
 
 ### Interdits absolus
-- ❌ Jamais "Satisfait ou remboursé" (décision business)
-- ❌ Jamais de témoignages fictifs
-- ❌ Pas de tirets cadratins (—), pas de caractères décoratifs IA
-- ❌ Pas de tics IA : "il est essentiel", "dans un monde où", "en conclusion", "n'hésitez pas"
-- ❌ Pas de manipulation par la peur, pas de faux urgence, pas de guru marketing
-- ❌ Pas d'emoji dans le copywriting (sauf icônes de cards en HTML)
+- Jamais "Satisfait ou remboursé" (décision business)
+- Jamais de témoignages fictifs
+- Pas de tirets cadratins, pas de caractères décoratifs IA
+- Pas de tics IA : "il est essentiel", "dans un monde où", "en conclusion", "n'hésitez pas"
+- Pas de manipulation par la peur, pas de fausse urgence
+- Pas d'emoji dans le copywriting (sauf icônes de cards en HTML)
 
 ### Structure du message
 - Hook émotionnel en première ligne du hero
-- Structure : **Message → Bénéfice → Solution**
+- Structure : Message → Bénéfice → Solution
 - 1 page = 1 produit = 1 action souhaitée
 - CTA clair et actionnable ("Je reprends mon budget en main", pas "En savoir plus")
 
 ---
 
-## Produits & pages existantes
+## Produits et pages
 
-| Page                         | Produit                   | Prix                            | Cible        |
-| ---------------------------- | ------------------------- | ------------------------------- | ------------ |
-| `guide-express-landing.html` | Guide Express MBS         | 49€ (promo 39€ code MBS-DEPART) | Généralistes |
-| (à créer)                    | Formation "Budget à deux" | 69€                             | Couples      |
-| (à créer)                    | Pack Freelance            | 97€                             | Freelances   |
+| Page | Produit | Prix | Cible | Stripe Link | Podia Link |
+|---|---|---|---|---|---|
+| `guide-express.html` | Guide Express MBS | 49€ (promo 39€ code MBS-DEPART) | Généralistes | TODO | TODO |
+| `budget-a-deux.html` | Formation "Budget à deux" | 69€ | Couples | TODO | TODO |
+| `pack-freelance.html` | Pack Freelance | 97€ | Freelances | TODO | TODO |
+| `confirmation.html` | Page post-paiement | — | Tous | — | TODO |
 
-### URLs de destination (Podia)
-- Guide Express : `/reprendre-son-budget` (49€) ou `/reprendre-son-budget-promo` (39€)
-- Formation couples : `/mon-budget-a-deux-simplement`
-- Pack freelance : `/budget-freelance-serein`
-- Lead magnet couples : `https://tally.so/r/nWGyMR`
+---
+
+## Déploiement
+
+- **Plateforme** : Netlify
+- **Domaine** : `go.monbudgetsimple.fr` (CNAME sur Hostinger → Netlify)
+- **SSL** : automatique via Netlify (Let's Encrypt)
+- **Deploy** : push sur `main` → déploiement automatique
+- **Config** : `netlify.toml` à la racine
 
 ---
 
 ## Responsive
 
 - Desktop-first
-- Le contenu est lisible et utilisable sur mobile (testé à 375px)
-- Grids passent en single-column sous 540px–680px
-- Les CTA sont assez gros pour être tapables au pouce (min 48px de hauteur)
-- Sticky CTA mobile obligatoire (apparaît après scroll passé le hero)
+- Contenu lisible et utilisable sur mobile (testé à 375px)
+- Grids passent en single-column sous 540px-680px
+- CTA assez gros pour le pouce (min 48px de hauteur)
+- Sticky CTA mobile obligatoire
 
 ---
 
 ## Performance
 
-- Pas d'images lourdes → emojis ou SVG inline pour les icônes
-- Google Fonts chargées avec `preconnect`
-- Pas de JS externe
-- Fichier unique = 0 requête HTTP supplémentaire (hors fonts)
-- Objectif : < 50 KB par page (hors fonts)
+- Pas d'images lourdes → emojis ou SVG inline
+- Google Fonts avec `preconnect`
+- Seul JS externe : GTM (chargé async, ne bloque pas le rendu)
+- Fichier unique = 0 requête HTTP supplémentaire (hors fonts + GTM)
+- Objectif : < 50 KB par page (hors fonts et GTM)
 
 ---
 
 ## Workflow
 
 ### Créer une nouvelle landing page
-1. Copier `guide-express-landing.html` comme template
-2. Adapter le contenu (hero, problème, solution, pricing, FAQ)
-3. Vérifier les variables CSS (ne pas en ajouter de nouvelles sans raison)
-4. Tester responsive à 375px, 768px, 1440px
-5. Vérifier tous les liens (CTA → bonne URL Podia)
-6. Valider le copywriting (relire les interdits ci-dessus)
+1. Copier `_template.html` et renommer (ex: `guide-express.html`)
+2. Remplacer le contenu placeholder (hero, problème, solution, pricing, FAQ)
+3. Remplacer `<!-- STRIPE_LINK -->` par le vrai Stripe Payment Link
+4. Mettre à jour `confirmation.html` si besoin (nouveau lien Podia, nouveau prix de conversion)
+5. Vérifier les variables CSS (ne pas en ajouter de nouvelles sans raison)
+6. Tester responsive à 375px, 768px, 1440px
+7. Vérifier tous les liens (CTA → bon Stripe Payment Link)
+8. Valider le copywriting (relire les interdits)
+9. Push sur `main` → déploiement Netlify automatique
 
 ### Modifier une page existante
 1. Lire le fichier complet avant de modifier
@@ -245,42 +301,45 @@ L'ordre peut varier mais le Hero + Final CTA sont obligatoires.
 - Produire du HTML valide et accessible
 - Inclure les meta tags (title, description, viewport, charset)
 - Garder tout inline (CSS + JS dans le même fichier HTML)
-- Tester mentalement le responsive (les grids doivent passer en 1 colonne sur mobile)
+- Tester mentalement le responsive
+- Mettre des commentaires placeholder pour les liens Stripe et Podia
 
 ## Ce que Claude ne doit JAMAIS faire
 
 - Ajouter un framework CSS ou JS
-- Utiliser des images externes (sauf Google Fonts)
+- Utiliser des scripts externes (sauf GTM et gtag.js sur confirmation.html)
 - Écrire "Satisfait ou remboursé" ou inventer des témoignages
 - Utiliser des tirets cadratins ou du langage "IA"
-- Créer des fichiers séparés (CSS, JS) — tout reste dans le HTML
+- Créer des fichiers CSS ou JS séparés
 - Modifier la palette de couleurs sans demander
+- Mettre le tag de conversion Google Ads dans GTM (doit rester inline)
 
 ---
 
 ## SoloCraft
 
 ### stack
-HTML5 single-page files (tout inline : CSS + JS), custom properties CSS (pas de framework), vanilla JS, Google Fonts (DM Serif Display, Inter), hébergé sur Podia. Pas de build step, pas de bundler, pas de npm.
+HTML5 single-page files (tout inline : CSS + JS), custom properties CSS, vanilla JS, Google Fonts (DM Serif Display, Inter), GTM pour le tracking, Stripe Payment Links, Netlify pour le déploiement. Pas de build step, pas de bundler, pas de npm.
 
 ### target
-B2C éducation financière en français. Produits digitaux (guides, formations) vendus sur Podia, prix 39-97€. Cible : particuliers francophones (généralistes, couples, freelances). Stade : lancement, 1 produit live + 2 à créer.
+B2C éducation financière en français. Produits digitaux (formations complètes) hébergés sur Podia, vendus via Stripe Payment Links, prix 39-97€. Cible : particuliers francophones. Stade : lancement, 0 client.
 
 ### constraints
-- Pas de framework CSS ou JS (pas de Tailwind, React, jQuery, etc.)
-- Pas de dépendances externes (sauf Google Fonts)
-- Tout reste inline dans un seul fichier HTML par page (CSS + JS)
-- Utiliser les variables CSS existantes dans :root, jamais de couleurs en dur
+- Pas de framework CSS ou JS
+- Pas de dépendances externes (sauf Google Fonts + GTM)
+- Tout inline dans un seul fichier HTML par page
+- Variables CSS existantes dans :root, jamais de couleurs en dur
 - Pas de nouvelles variables CSS sans raison explicite
-- Jamais écrire "Satisfait ou remboursé" ni inventer de témoignages
-- Respecter le tutoiement (sauf formation couples = vouvoiement)
-- Pas de tirets cadratins, pas de langage "IA", pas d'emoji dans le copywriting
+- Jamais "Satisfait ou remboursé" ni témoignages fictifs
+- Tutoiement (sauf formation couples = vouvoiement)
+- Pas de tirets cadratins, pas de langage "IA"
+- Tag de conversion Google Ads inline sur confirmation.html, jamais dans GTM
 
 ### high-risk-zones
-- guide-express-landing.html (quand il existera) — page de vente live, toute casse = perte de revenus directs
-- Variables CSS :root dans chaque fichier HTML — cascade sur tout le design system, une modification impacte toute la page
-- URLs Podia dans les CTA — mauvais lien = conversion perdue, vérifier chaque href
+- confirmation.html — page post-paiement, conversion tracking Google Ads, lien Podia. Toute casse = perte de conversions trackées
+- Variables CSS :root — cascade sur tout le design, une modification impacte toutes les pages
+- Liens Stripe Payment Links dans les CTA — mauvais lien = conversion perdue
+- netlify.toml — config de déploiement et headers sécurité
 
 ### decisions-dir
 docs/decisions/
-
