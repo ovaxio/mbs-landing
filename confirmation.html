@@ -26,15 +26,23 @@
   </script>
 
   <!-- Google Ads Conversion Tracking — DO NOT move to GTM -->
+  <!-- Le prix est déterminé dynamiquement via ?product=xxx dans l'URL -->
   <script>
+    var PRODUCTS = {
+      'guide-express':  { price: 49, name: 'Guide Express' },
+      'budget-a-deux':  { price: 69, name: 'Budget à deux' },
+      'pack-freelance': { price: 97, name: 'Pack Freelance' }
+    };
+
     (function() {
-      // Read optional transaction_id from URL params (e.g. ?order_id=xxx)
       var params = new URLSearchParams(window.location.search);
-      var transactionId = params.get('order_id') || params.get('transaction_id') || '';
+      var productId = params.get('product') || '';
+      var transactionId = params.get('order_id') || params.get('transaction_id') || params.get('session_id') || '';
+      var product = PRODUCTS[productId] || { price: 0, name: '' };
 
       gtag('event', 'conversion', {
         'send_to': 'AW-17671506300/BoBtCMW0jpYcEPySt-pB',
-        'value': 49, // Replace with product price (e.g. 49)
+        'value': product.price,
         'currency': 'EUR',
         'transaction_id': transactionId
       });
@@ -254,8 +262,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="confirmation-text">
         Ton accès est prêt. Tu peux commencer dès maintenant — tout est disponible en ligne, depuis ton ordinateur ou ton téléphone.
       </p>
-      <!-- PODIA_LINK: Replace with your Podia course enrollment link -->
-      <a href="#PODIA_LINK" class="cta-primary">Accéder à ma formation →</a>
+      <!-- Le lien Podia est déterminé dynamiquement via ?product=xxx dans l'URL -->
+      <a href="#" id="podia-link" class="cta-primary">Accéder à ma formation →</a>
       <p class="micro-copy">Tu vas aussi recevoir un email avec ton accès.</p>
     </div>
   </div>
@@ -265,14 +273,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <footer class="footer">
   <div class="container">
     <div class="footer-links">
-      <a href="#">Mentions légales</a>
-      <a href="#">Politique de confidentialité</a>
-      <a href="#">CGV</a>
-      <a href="mailto:contact@monbudgetsimple.fr">Contact</a>
+      <a href="https://www.monbudgetsimple.fr/mentions-legales">Mentions légales</a>
+      <a href="https://www.monbudgetsimple.fr/privacy">Politique de confidentialité</a>
+      <a href="https://www.monbudgetsimple.fr/terms">CGV</a>
+      <a href="https://www.monbudgetsimple.fr/contact-mbs">Contact</a>
     </div>
     <p class="footer-copy">© 2026 Mon Budget Simple — Tous droits réservés</p>
   </div>
 </footer>
+
+<script>
+  // ───── DYNAMIC PRODUCT ROUTING ─────
+  // Lit ?product=xxx dans l'URL et met à jour le lien Podia + le nom du produit
+  (function() {
+    var PODIA_LINKS = {
+      'guide-express':  'https://monbudgetsimple.fr/reprendre-son-budget/buy',
+      'budget-a-deux':  '#TODO',
+      'pack-freelance': '#TODO'
+    };
+
+    var params = new URLSearchParams(window.location.search);
+    var productId = params.get('product') || '';
+    var product = window.PRODUCTS ? window.PRODUCTS[productId] : null;
+    var podiaLink = PODIA_LINKS[productId] || 'https://www.monbudgetsimple.fr';
+
+    var linkEl = document.getElementById('podia-link');
+    if (linkEl) {
+      linkEl.href = podiaLink;
+    }
+  })();
+</script>
 
 </body>
 </html>
