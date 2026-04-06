@@ -39,14 +39,16 @@
       var params = new URLSearchParams(window.location.search);
       var productId = params.get('product') || '';
       var transactionId = params.get('order_id') || params.get('transaction_id') || params.get('session_id') || '';
-      var product = PRODUCTS[productId] || { price: 0, name: '' };
+      var product = PRODUCTS[productId];
 
-      gtag('event', 'conversion', {
-        'send_to': 'AW-17671506300/BoBtCMW0jpYcEPySt-pB',
-        'value': product.price,
-        'currency': 'EUR',
-        'transaction_id': transactionId
-      });
+      if (product && product.price > 0) {
+        gtag('event', 'conversion', {
+          'send_to': 'AW-17671506300/BoBtCMW0jpYcEPySt-pB',
+          'value': product.price,
+          'currency': 'EUR',
+          'transaction_id': transactionId
+        });
+      }
     })();
   </script>
 
@@ -85,7 +87,7 @@
     }
 
     .confirmation .confirmation-text {
-      font-size: 1.05rem;
+      font-size: 1rem;
       color: var(--text-secondary);
       max-width: 520px;
       margin: 0 auto 36px;
@@ -100,6 +102,15 @@
       font-size: 0.85rem;
       color: var(--text-tertiary);
       margin-top: 4px;
+    }
+
+    .confirmation .micro-copy a {
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+
+    .confirmation .micro-copy a:hover {
+      color: var(--terracotta);
     }
 
     .confirmation-card {
@@ -122,7 +133,7 @@
       }
 
       .cta-primary {
-        padding: 16px 28px;
+        padding: 16px 32px;
         font-size: 1rem;
         width: 100%;
         text-align: center;
@@ -149,13 +160,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="confirmation-card">
       <span class="confirmation-icon">🎉</span>
-      <h1>Merci pour ton achat !</h1>
+      <h1 id="confirmation-title">Merci pour ton achat !</h1>
       <p class="confirmation-text">
         Ton accès est prêt. Tu peux commencer dès maintenant — tout est disponible en ligne, depuis ton ordinateur ou ton téléphone.
       </p>
       <!-- Le lien Podia est déterminé dynamiquement via ?product=xxx dans l'URL -->
       <a href="#" id="podia-link" class="cta-primary">Accéder à mon guide →</a>
       <p class="micro-copy">Tu vas aussi recevoir un email avec ton accès.</p>
+      <p class="micro-copy"><a href="mailto:guillaume@monbudgetsimple.fr">Un problème avec ton accès ?</a></p>
     </div>
   </div>
 </section>
@@ -187,6 +199,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     var productId = params.get('product') || '';
     var product = window.PRODUCTS ? window.PRODUCTS[productId] : null;
     var podiaLink = PODIA_LINKS[productId] || 'https://www.monbudgetsimple.fr';
+
+    // Personnalise le titre avec le nom du produit
+    var titleEl = document.getElementById('confirmation-title');
+    if (titleEl && product && product.name) {
+      titleEl.textContent = 'Merci pour ton achat du ' + product.name + ' !';
+    }
 
     var linkEl = document.getElementById('podia-link');
     if (linkEl) {
