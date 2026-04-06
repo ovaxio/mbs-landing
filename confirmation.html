@@ -74,8 +74,10 @@
       --soft-bg: #FAF7F3;
     }
 
-    html {
-      scroll-behavior: smooth;
+    @media (prefers-reduced-motion: no-preference) {
+      html {
+        scroll-behavior: smooth;
+      }
     }
 
     body {
@@ -104,6 +106,35 @@
     a {
       color: inherit;
       text-decoration: none;
+    }
+
+    /* ───── ACCESSIBILITY ───── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 16px;
+      background: var(--brown);
+      color: var(--white);
+      padding: 12px 24px;
+      border-radius: 0 0 8px 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      z-index: 200;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--terracotta);
+      outline-offset: 3px;
+    }
+
+    .cta-primary:focus-visible {
+      outline-color: var(--brown);
+      outline-offset: 4px;
     }
 
     /* ───── LAYOUT ───── */
@@ -249,13 +280,15 @@
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
+<a href="#main" class="skip-link">Aller au contenu</a>
+
 <!-- ───── TOPBAR ───── -->
 <div class="topbar">
   🔒 Paiement 100% sécurisé · Mon Budget Simple
 </div>
 
 <!-- ───── CONFIRMATION ───── -->
-<section class="confirmation">
+<section class="confirmation" id="main">
   <div class="container">
     <div class="confirmation-card">
       <span class="confirmation-icon">🎉</span>
@@ -300,7 +333,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     var linkEl = document.getElementById('podia-link');
     if (linkEl) {
-      linkEl.href = podiaLink;
+      if (podiaLink.indexOf('#TODO') === 0) {
+        linkEl.href = 'https://www.monbudgetsimple.fr';
+        linkEl.textContent = 'Accéder à Mon Budget Simple →';
+      } else {
+        linkEl.href = podiaLink;
+      }
     }
   })();
 </script>

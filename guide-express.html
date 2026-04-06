@@ -42,8 +42,10 @@
       --soft-bg: #FAF7F3;
     }
 
-    html {
-      scroll-behavior: smooth;
+    @media (prefers-reduced-motion: no-preference) {
+      html {
+        scroll-behavior: smooth;
+      }
     }
 
     body {
@@ -70,6 +72,40 @@
     a {
       color: inherit;
       text-decoration: none;
+    }
+
+    /* ───── ACCESSIBILITY ───── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 16px;
+      background: var(--brown);
+      color: var(--white);
+      padding: 12px 24px;
+      border-radius: 0 0 8px 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      z-index: 200;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--terracotta);
+      outline-offset: 3px;
+    }
+
+    .cta-primary:focus-visible {
+      outline-color: var(--brown);
+      outline-offset: 4px;
+    }
+
+    .faq-question:focus-visible {
+      outline-offset: -2px;
+      border-radius: 12px;
     }
 
     /* ───── LAYOUT ───── */
@@ -568,6 +604,17 @@
       margin-bottom: 12px;
     }
 
+    .creator-text blockquote {
+      background: var(--soft-bg);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin-top: 8px;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: #5C4A3A;
+    }
+
     /* ───── FOR WHO ───── */
     .for-who {
       background: var(--soft-bg);
@@ -1000,6 +1047,8 @@
     style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
+<a href="#hero" class="skip-link">Aller au contenu</a>
+
 <!-- ───── TOPBAR ───── -->
 <div class="topbar">
   Paiement sécurisé · Accès immédiat · 49€ une seule fois
@@ -1231,7 +1280,7 @@
       <p>
         Mon Budget Simple, c'est ce système. Pas de jargon financier, pas de leçon de morale. Juste un outil clair, créé par quelqu'un qui a vécu le problème et qui a trouvé ce qui marche.
       </p>
-      <quote>"Le jour où j'ai découvert un découvert de 200€ alors que je venais de recevoir mon salaire, j'ai compris que le problème n'était pas combien je gagnais, mais comment je gérais."</quote>
+      <blockquote>"Le jour où j'ai découvert un découvert de 200€ alors que je venais de recevoir mon salaire, j'ai compris que le problème n'était pas combien je gagnais, mais comment je gérais."</blockquote>
     </div>
   </div>
 </section>
@@ -1303,98 +1352,98 @@
 <section class="faq">
   <div class="container">
     <h2>Questions fréquentes</h2>
-    <div class="faq-list">
+    <div class="faq-list" role="list">
 
-      <div class="faq-item">
-        <button class="faq-question">
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-1">
           C'est quoi exactement ? Un PDF, une formation vidéo ?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer">
+        <div class="faq-answer" id="faq-1" role="region">
           <div class="faq-answer-inner">
             C'est un parcours structuré en 10 étapes, hébergé sur Notion. Tu dupliques la page dans ton espace Notion et tu avances à ton rythme. Il y a du texte pédagogique, des templates interactifs et des outils prêts à l'emploi. Pas de vidéo, pas de PDF.
           </div>
         </div>
       </div>
 
-      <div class="faq-item">
-        <button class="faq-question">
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-2">
           Je ne connais pas Notion, c'est un problème ?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer">
+        <div class="faq-answer" id="faq-2" role="region">
           <div class="faq-answer-inner">
             Pas du tout. Notion est gratuit et le template est déjà configuré pour toi. Tu cliques sur "Dupliquer", et c'est prêt. Pas besoin de savoir utiliser Notion : tu remplis les champs, tu coches les étapes, c'est tout. Si tu sais utiliser un navigateur web, tu sais utiliser ce guide.
           </div>
         </div>
       </div>
 
-      <div class="faq-item">
-        <button class="faq-question">
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-3">
           49€ pour un guide, c'est pas un peu cher ?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer">
+        <div class="faq-answer" id="faq-3" role="region">
           <div class="faq-answer-inner">
             La plupart des personnes qui suivent le guide identifient entre 30 et 80€ d'économies par mois. À 40€/mois d'économies, le guide est rentabilisé en 5 semaines. Après, ce sont des économies chaque mois, à vie. Et avec le code MBS-DEPART, c'est 39€ au lieu de 49€.
           </div>
         </div>
       </div>
 
-      <div class="faq-item">
-        <button class="faq-question">
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-4">
           C'est un abonnement ?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer">
+        <div class="faq-answer" id="faq-4" role="region">
           <div class="faq-answer-inner">
             Non. C'est un paiement unique de 49€ (ou 39€ avec le code MBS-DEPART). Tu paies une fois, tu accèdes à vie. Pas de frais cachés, pas de renouvellement automatique.
           </div>
         </div>
       </div>
 
-      <div class="faq-item">
-        <button class="faq-question">
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-5">
           Ça marche si j'ai des revenus irréguliers ?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer">
+        <div class="faq-answer" id="faq-5" role="region">
           <div class="faq-answer-inner">
             Oui. La méthode est pensée pour s'adapter aux revenus qui bougent (freelances, CDD, commissions, intérimaires). L'étape sur le reste à vivre et le budget mensuel prend en compte cette réalité.
           </div>
         </div>
       </div>
 
-      <div class="faq-item">
-        <button class="faq-question">
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-6">
           J'ai déjà essayé de faire un budget, ça n'a jamais marché
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer">
+        <div class="faq-answer" id="faq-6" role="region">
           <div class="faq-answer-inner">
             Normal. La plupart des méthodes sautent l'essentiel : ta relation à l'argent. Le Guide Express commence par le mindset (étape 0) avant de passer aux chiffres. Ce n'est pas juste un tableau de plus. C'est un système complet qui part de tes habitudes, avec une checklist mensuelle pour que ça tienne dans le temps.
           </div>
         </div>
       </div>
 
-      <div class="faq-item">
-        <button class="faq-question">
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-7">
           Combien de temps ça prend ?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer">
+        <div class="faq-answer" id="faq-7" role="region">
           <div class="faq-answer-inner">
             Le setup initial prend environ 1 heure. Après, c'est 5 à 10 minutes par semaine pour maintenir ton budget. Les premiers résultats (clarté sur tes dépenses) arrivent dès la première semaine. Les économies concrètes, en 2 à 4 semaines.
           </div>
         </div>
       </div>
 
-      <div class="faq-item">
-        <button class="faq-question">
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-8">
           Je peux le partager avec mon/ma conjoint(e) ?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer">
+        <div class="faq-answer" id="faq-8" role="region">
           <div class="faq-answer-inner">
             Le guide est prévu pour un usage individuel, mais le partage en couple est tout à fait possible. Si tu veux une méthode pensée spécifiquement pour gérer un budget à deux, regarde la formation "Budget à deux" qui est faite pour ça.
           </div>
@@ -1420,7 +1469,7 @@
   <div class="container">
     <div class="footer-links">
       <a href="https://www.monbudgetsimple.fr/mentions-legales">Mentions légales</a>
-      <a href="https://www.monbudgetsimple.fr/politique-de-confidentialite">Politique de confidentialite</a>
+      <a href="https://www.monbudgetsimple.fr/politique-de-confidentialite">Politique de confidentialité</a>
       <a href="https://www.monbudgetsimple.fr/cgv">CGV</a>
       <a href="mailto:contact@monbudgetsimple.fr">Contact</a>
     </div>
@@ -1441,9 +1490,11 @@
       var isOpen = item.classList.contains('open');
       document.querySelectorAll('.faq-item').forEach(function(el) {
         el.classList.remove('open');
+        el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
       });
       if (!isOpen) {
         item.classList.add('open');
+        this.setAttribute('aria-expanded', 'true');
       }
     });
   });
