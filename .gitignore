@@ -1,4 +1,7 @@
 solocraft
 .claude
+/.agents
 .DS_Store
 .netlify/
+skills-lock.json
+.impeccable.md
