@@ -115,7 +115,7 @@ section {
   border-radius: 8px;
   text-decoration: none;
   box-shadow: 0 4px 14px rgba(196, 97, 74, 0.25);
-  transition: all 0.2s;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
   border: none;
 }
@@ -222,6 +222,7 @@ section {
   color: var(--terracotta);
   line-height: 1;
   margin-bottom: 4px;
+  white-space: nowrap;
 }
 
 .proof-item .proof-label {
@@ -340,6 +341,11 @@ section {
   font-size: 1.8rem;
   color: var(--gold);
   text-align: center;
+  line-height: 1;
+}
+
+.ba-arrow-v {
+  display: none;
 }
 
 /* ───── SOLUTION ───── */
@@ -722,7 +728,7 @@ section {
   font-size: 1rem;
   font-weight: 600;
   color: var(--brown);
-  transition: all 0.2s;
+  transition: color 0.2s;
 }
 
 .faq-question:hover {
@@ -856,12 +862,16 @@ section {
   background: var(--terracotta-dark);
 }
 
-.sticky-cta.visible {
-  display: block;
-}
-
 /* ───── RESPONSIVE ───── */
 @media (max-width: 680px) {
+  .sticky-cta.visible {
+    display: block;
+  }
+
+  .footer {
+    padding-bottom: 72px;
+  }
+
   .steps-grid {
     grid-template-columns: 1fr;
   }
@@ -879,8 +889,19 @@ section {
   }
 
   .ba-arrow {
-    transform: rotate(90deg);
     font-size: 1.5rem;
+  }
+
+  .ba-arrow-h {
+    display: none;
+  }
+
+  .ba-arrow-v {
+    display: inline;
+  }
+
+  .ba-col {
+    padding: 22px 20px;
   }
 
   .creator .container {

@@ -104,6 +104,59 @@
       margin-top: 2px;
     }
 
+    /* ───── STEPS ACCORDION ───── */
+    .steps-collapsed {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.4s ease;
+    }
+
+    .steps-collapsed > .steps-list {
+      overflow: hidden;
+    }
+
+    .steps-collapsed.open {
+      grid-template-rows: 1fr;
+    }
+
+    .steps-bonuses {
+      margin-top: 14px;
+    }
+
+    .steps-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      margin-top: 14px;
+      padding: 14px 24px;
+      background: none;
+      border: 1px dashed var(--gold);
+      border-radius: 12px;
+      color: var(--gold);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .steps-toggle:hover {
+      color: var(--terracotta);
+      border-color: var(--terracotta);
+    }
+
+    .steps-toggle-icon {
+      font-size: 1.1rem;
+      font-weight: 700;
+      transition: transform 0.3s ease;
+    }
+
+    .steps-toggle[aria-expanded="true"] .steps-toggle-icon {
+      transform: rotate(45deg);
+    }
+
     /* ───── ROI ───── */
     .roi-box {
       background: var(--beige);
@@ -148,10 +201,10 @@
     <span class="badge">Guide Express</span>
     <h1>Ton argent file sans que tu saches où ? <span>Ça s'arrête ici.</span></h1>
     <p class="subtitle">
-      10 étapes pour reprendre le contrôle de ton budget, voir clair dans tes finances et arrêter de stresser en fin de mois. Mise en place en 1 heure, maintien en 5 min par semaine.
+      10 étapes pour reprendre le contrôle de ton budget, voir clair dans tes finances et arrêter de stresser en fin de mois.
     </p>
     <a href="https://buy.stripe.com/8x2cN5gSzerH5731w404800" class="cta-primary">Je reprends mon budget en main</a>
-    <p class="micro-copy">Accès immédiat sur Notion · 49€ paiement unique · Accès à vie</p>
+    <p class="micro-copy">Accès immédiat sur Notion · 49€ paiement unique · Code MBS-DEPART : 39€</p>
   </div>
 </section>
 
@@ -159,16 +212,16 @@
 <div class="proof-bar">
   <div class="container">
     <div class="proof-item">
-      <span class="proof-number">180+</span>
-      <span class="proof-label">personnes dans la communauté MBS</span>
-    </div>
-    <div class="proof-item">
-      <span class="proof-number">37</span>
-      <span class="proof-label">articles publiés sur le blog</span>
+      <span class="proof-number">1 heure</span>
+      <span class="proof-label">pour mettre en place ton système</span>
     </div>
     <div class="proof-item">
       <span class="proof-number">5 min</span>
       <span class="proof-label">par semaine pour maintenir ton budget</span>
+    </div>
+    <div class="proof-item">
+      <span class="proof-number">30-80€</span>
+      <span class="proof-label">d'économies identifiées par mois</span>
     </div>
   </div>
 </div>
@@ -178,12 +231,10 @@
   <div class="container">
     <h2>Tu te reconnais ?</h2>
     <ul class="problem-list">
-      <li>Tu regardes ton solde bancaire avec une boule au ventre à chaque fin de mois</li>
       <li>Tu gagnes correctement ta vie, mais tu ne sais pas où passe ton argent</li>
-      <li>Tu as déjà essayé un tableur Excel ou une appli budget, et tu as abandonné au bout de 2 semaines</li>
+      <li>Tu as déjà essayé un tableur ou une appli budget, et tu as abandonné au bout de 2 semaines</li>
       <li>Tu te dis "le mois prochain je gère"... depuis 6 mois</li>
-      <li>Le moindre imprévu (panne, facture, réparation) te met dans le rouge</li>
-      <li>Tu penses à l'argent tout le temps, sans jamais vraiment régler le problème</li>
+      <li>Le moindre imprévu te met dans le rouge et te ramène au stress</li>
     </ul>
     <div class="problem-outro">
       Ce n'est pas un problème de volonté. Tu n'as pas besoin de te "motiver" à mieux gérer. Tu as besoin d'un système simple qui fait le travail à ta place.
@@ -200,21 +251,19 @@
         <p class="ba-label">Avant</p>
         <ul>
           <li>Flou total sur tes dépenses</li>
-          <li>Stress à chaque fin de mois</li>
-          <li>Tableurs abandonnés en 2 semaines</li>
           <li>Culpabilité à chaque achat plaisir</li>
+          <li>Tableurs abandonnés en 2 semaines</li>
           <li>Zéro épargne, zéro filet de sécurité</li>
           <li>Projets repoussés indéfiniment</li>
         </ul>
       </div>
-      <div class="ba-arrow">→</div>
+      <div class="ba-arrow" aria-hidden="true"><span class="ba-arrow-h">→</span><span class="ba-arrow-v">↓</span></div>
       <div class="ba-col ba-after">
         <p class="ba-label">Après</p>
         <ul>
           <li>Tu sais où va chaque euro</li>
-          <li>Tu ouvres ton appli bancaire sereinement</li>
-          <li>Un système qui tient en 5 min/semaine</li>
           <li>Tu dépenses sans culpabilité</li>
+          <li>Un système qui tient en 5 min/semaine</li>
           <li>50 à 200€ d'économies identifiées par mois</li>
           <li>Tes projets de vie avancent enfin</li>
         </ul>
@@ -291,48 +340,63 @@
           <p>Voir clair dans tes habitudes, sans culpabilité. Savoir où part ton argent change tout.</p>
         </div>
       </div>
-      <div class="step-detail">
-        <div class="step-num">4</div>
-        <div>
-          <h3>Calculer ton reste à vivre</h3>
-          <p>Ce qui te reste vraiment chaque mois, une fois l'essentiel payé. Le chiffre le plus important de ton budget.</p>
+    </div>
+
+    <!-- Collapsed steps 4-9 -->
+    <div class="steps-collapsed" id="steps-collapsed">
+      <div class="steps-list">
+        <div class="step-detail">
+          <div class="step-num">4</div>
+          <div>
+            <h3>Calculer ton reste à vivre</h3>
+            <p>Ce qui te reste vraiment chaque mois, une fois l'essentiel payé. Le chiffre le plus important de ton budget.</p>
+          </div>
+        </div>
+        <div class="step-detail">
+          <div class="step-num">5</div>
+          <div>
+            <h3>Construire ton budget mensuel</h3>
+            <p>Ton budget simple, souple, et réaliste. Inspiré de la méthode 50/30/20, adapté à la vraie vie.</p>
+          </div>
+        </div>
+        <div class="step-detail">
+          <div class="step-num">6</div>
+          <div>
+            <h3>Organiser tes comptes bancaires</h3>
+            <p>Un système clair pour ne plus t'y perdre. Chaque compte a un rôle, chaque euro a une destination.</p>
+          </div>
+        </div>
+        <div class="step-detail">
+          <div class="step-num">7</div>
+          <div>
+            <h3>Ton tableau de budget Notion</h3>
+            <p>Un modèle interactif prêt à l'emploi. Tu dupliques, tu remplis, tu suis ton budget en quelques clics.</p>
+          </div>
+        </div>
+        <div class="step-detail">
+          <div class="step-num">8</div>
+          <div>
+            <h3>Checklist mensuelle</h3>
+            <p>Ce que tu fais chaque début de mois pour garder le cap. 5 minutes, pas plus.</p>
+          </div>
+        </div>
+        <div class="step-detail">
+          <div class="step-num">9</div>
+          <div>
+            <h3>Conclusion et prochaines étapes</h3>
+            <p>Bravo, tu as ton système. Maintenant, on le fait vivre.</p>
+          </div>
         </div>
       </div>
-      <div class="step-detail">
-        <div class="step-num">5</div>
-        <div>
-          <h3>Construire ton budget mensuel</h3>
-          <p>Ton budget simple, souple, et réaliste. Inspiré de la méthode 50/30/20, adapté à la vraie vie.</p>
-        </div>
-      </div>
-      <div class="step-detail">
-        <div class="step-num">6</div>
-        <div>
-          <h3>Organiser tes comptes bancaires</h3>
-          <p>Un système clair pour ne plus t'y perdre. Chaque compte a un rôle, chaque euro a une destination.</p>
-        </div>
-      </div>
-      <div class="step-detail">
-        <div class="step-num">7</div>
-        <div>
-          <h3>Ton tableau de budget Notion</h3>
-          <p>Un modèle interactif prêt à l'emploi. Tu dupliques, tu remplis, tu suis ton budget en quelques clics.</p>
-        </div>
-      </div>
-      <div class="step-detail">
-        <div class="step-num">8</div>
-        <div>
-          <h3>Checklist mensuelle</h3>
-          <p>Ce que tu fais chaque début de mois pour garder le cap. 5 minutes, pas plus.</p>
-        </div>
-      </div>
-      <div class="step-detail">
-        <div class="step-num">9</div>
-        <div>
-          <h3>Conclusion et prochaines étapes</h3>
-          <p>Bravo, tu as ton système. Maintenant, on le fait vivre.</p>
-        </div>
-      </div>
+    </div>
+
+    <button class="steps-toggle" id="steps-toggle" aria-expanded="false" aria-controls="steps-collapsed">
+      <span class="steps-toggle-text">Voir les 10 étapes</span>
+      <span class="steps-toggle-icon">+</span>
+    </button>
+
+    <!-- Bonuses always visible -->
+    <div class="steps-list steps-bonuses">
       <div class="step-detail">
         <div class="bonus-tag">+</div>
         <div>
@@ -354,7 +418,7 @@
 <!-- ───── CREATOR ───── -->
 <section class="creator" id="createur">
   <div class="container">
-    <div class="creator-avatar"><img src="./public/img/moi.png" alt="Guillaume, fondateur de Mon Budget Simple"
+    <div class="creator-avatar"><img src="./public/img/moi.png" alt="Guillaume, fondateur de Mon Budget Simple" loading="lazy"
       style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
     <div class="creator-text">
       <p class="eyebrow">Qui suis-je</p>
@@ -381,12 +445,11 @@
       <div class="for-who-col for-yes">
         <h3>Oui, si tu...</h3>
         <ul>
-          <li>Veux enfin savoir où passe ton argent chaque mois</li>
-          <li>En as marre du stress en fin de mois</li>
-          <li>Cherches une méthode simple qui tient dans la durée</li>
-          <li>Veux épargner sans te priver de tout</li>
-          <li>Préfères agir maintenant plutôt qu'attendre "le bon moment"</li>
-          <li>As des revenus réguliers ou irréguliers (la méthode s'adapte)</li>
+          <li>As des revenus (réguliers ou irréguliers) mais pas de système pour les gérer</li>
+          <li>As 1 heure devant toi cette semaine pour la mise en place</li>
+          <li>Utilises déjà Notion ou tu es prêt à l'essayer (c'est gratuit)</li>
+          <li>Préfères un cadre structuré plutôt que des conseils vagues</li>
+          <li>Veux un outil concret, pas une formation de plus à regarder sans agir</li>
         </ul>
       </div>
       <div class="for-who-col for-no">
@@ -394,7 +457,7 @@
         <ul>
           <li>Cherches des conseils en bourse ou en investissement</li>
           <li>Veux déléguer ta gestion à un conseiller</li>
-          <li>N'es pas prêt à consacrer 1 heure au setup initial</li>
+          <li>N'es pas prêt à consacrer 1 heure à la mise en place</li>
           <li>Attends une solution magique sans aucun effort</li>
           <li>Gères déjà ton budget efficacement et épargnes chaque mois</li>
         </ul>
@@ -407,15 +470,16 @@
 <section class="pricing" id="acheter">
   <div class="container">
     <h2>Un investissement qui se rentabilise en quelques semaines</h2>
-    <p class="section-intro">Les personnes qui suivent le Guide Express identifient en moyenne 30 à 80€ d'économies par mois. Le guide se rembourse en 2 à 4 semaines.</p>
     <div class="pricing-card">
-      <span class="badge pricing-badge">Guide Express MBS</span>
+      <span class="badge pricing-badge">Guide Express</span>
       <p class="pricing-name">10 étapes pour reprendre ton budget en main</p>
       <div class="pricing-price">
         <span class="pricing-currency">€</span><span class="pricing-amount">49</span>
         <p class="pricing-note">paiement unique · accès à vie</p>
         <p class="pricing-promo">Code MBS-DEPART : 39€ au lieu de 49€</p>
       </div>
+      <a href="https://buy.stripe.com/8x2cN5gSzerH5731w404800" class="cta-primary" style="width: 100%; text-align: center;">Je reprends mon budget en main</a>
+      <p class="pricing-guarantee">Paiement sécurisé par Stripe</p>
       <ul class="pricing-features">
         <li>Le parcours complet en 10 étapes sur Notion</li>
         <li>Templates Notion prêts à l'emploi (duplique et remplis)</li>
@@ -426,8 +490,6 @@
         <li>Mises à jour incluses à vie</li>
         <li>Accès immédiat après paiement</li>
       </ul>
-      <a href="https://buy.stripe.com/8x2cN5gSzerH5731w404800" class="cta-primary" style="width: 100%; text-align: center;">Je reprends mon budget en main</a>
-      <p class="pricing-guarantee">Paiement sécurisé par Stripe</p>
       <div class="roi-box">
         <h3>Le calcul est simple</h3>
         <p>Si tu identifies ne serait-ce que 40€ d'économies par mois (la moyenne est entre 30 et 80€), le guide est rentabilisé en 5 semaines. Après, c'est du bonus chaque mois.</p>
@@ -480,22 +542,10 @@
 
       <div class="faq-item" role="listitem">
         <button class="faq-question" aria-expanded="false" aria-controls="faq-4">
-          C'est un abonnement ?
-          <span class="faq-icon" aria-hidden="true">+</span>
-        </button>
-        <div class="faq-answer" id="faq-4" role="region">
-          <div class="faq-answer-inner">
-            Non. C'est un paiement unique de 49€ (ou 39€ avec le code MBS-DEPART). Tu paies une fois, tu accèdes à vie. Pas de frais cachés, pas de renouvellement automatique.
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item" role="listitem">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq-5">
           Ça marche si j'ai des revenus irréguliers ?
           <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer" id="faq-5" role="region">
+        <div class="faq-answer" id="faq-4" role="region">
           <div class="faq-answer-inner">
             Oui. La méthode est pensée pour s'adapter aux revenus qui bougent (freelances, CDD, commissions, intérimaires). L'étape sur le reste à vivre et le budget mensuel prend en compte cette réalité.
           </div>
@@ -503,11 +553,11 @@
       </div>
 
       <div class="faq-item" role="listitem">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq-6">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-5">
           J'ai déjà essayé de faire un budget, ça n'a jamais marché
           <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer" id="faq-6" role="region">
+        <div class="faq-answer" id="faq-5" role="region">
           <div class="faq-answer-inner">
             Normal. La plupart des méthodes sautent l'essentiel : ta relation à l'argent. Le Guide Express commence par le mindset (étape 0) avant de passer aux chiffres. Ce n'est pas juste un tableau de plus. C'est un système complet qui part de tes habitudes, avec une checklist mensuelle pour que ça tienne dans le temps.
           </div>
@@ -515,23 +565,11 @@
       </div>
 
       <div class="faq-item" role="listitem">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq-7">
-          Combien de temps ça prend ?
-          <span class="faq-icon" aria-hidden="true">+</span>
-        </button>
-        <div class="faq-answer" id="faq-7" role="region">
-          <div class="faq-answer-inner">
-            Le setup initial prend environ 1 heure. Après, c'est 5 à 10 minutes par semaine pour maintenir ton budget. Les premiers résultats (clarté sur tes dépenses) arrivent dès la première semaine. Les économies concrètes, en 2 à 4 semaines.
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item" role="listitem">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq-8">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-6">
           Je peux le partager avec mon/ma conjoint(e) ?
           <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer" id="faq-8" role="region">
+        <div class="faq-answer" id="faq-6" role="region">
           <div class="faq-answer-inner">
             Le guide est prévu pour un usage individuel, mais le partage en couple est tout à fait possible. Si tu veux une méthode pensée spécifiquement pour gérer un budget à deux, regarde la formation "Budget à deux" qui est faite pour ça.
           </div>
@@ -546,7 +584,7 @@
 <section class="final-cta">
   <div class="container">
     <h2>Le meilleur moment pour commencer, c'est maintenant</h2>
-    <p>Tu n'as pas besoin d'attendre d'être dans une meilleure situation. Le Guide Express est là pour t'aider à y arriver, pas après. 1 heure de setup, et tu reprends le contrôle.</p>
+    <p>Tu n'as pas besoin d'attendre d'être dans une meilleure situation. Le Guide Express est là pour t'aider à y arriver, pas après. 1 heure de mise en place, et tu reprends le contrôle.</p>
     <a href="https://buy.stripe.com/8x2cN5gSzerH5731w404800" class="cta-primary">Je reprends mon budget en main</a>
     <p class="micro-copy">49€ · Accès immédiat · Paiement unique</p>
   </div>
@@ -571,6 +609,18 @@
 </div>
 
 <script>
+  // ───── STEPS DETAIL TOGGLE ─────
+  var stepsToggle = document.getElementById('steps-toggle');
+  var stepsCollapsed = document.getElementById('steps-collapsed');
+  if (stepsToggle && stepsCollapsed) {
+    stepsToggle.addEventListener('click', function() {
+      var isOpen = stepsCollapsed.classList.contains('open');
+      stepsCollapsed.classList.toggle('open');
+      stepsToggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+      stepsToggle.querySelector('.steps-toggle-text').textContent = isOpen ? 'Voir les 10 étapes' : 'Réduire';
+    });
+  }
+
   // ───── FAQ ACCORDION ─────
   document.querySelectorAll('.faq-question').forEach(function(btn) {
     btn.addEventListener('click', function() {
