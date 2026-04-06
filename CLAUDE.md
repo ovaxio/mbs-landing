@@ -33,8 +33,8 @@ Quand le volume dépasse 50 ventes/mois, automatiser via Make.com (Stripe webhoo
 
 ## Stack technique
 
-- **HTML5** — fichiers single-page, tout inline (style + script dans le même fichier)
-- **CSS** — custom properties (variables CSS), pas de framework CSS
+- **HTML5** — fichiers single-page, JS inline, CSS partagé dans `styles.css` + styles page-spécifiques inline
+- **CSS** — `styles.css` (design system partagé) + `<style>` inline pour les styles propres à chaque page. Custom properties (variables CSS), pas de framework CSS
 - **JS** — vanilla uniquement, pas de dépendances, pas de bundler
 - **Fonts** — Google Fonts via CDN : `DM Serif Display` (titres), `Inter` (body)
 - **Tracking** — GTM + gtag.js (seuls scripts externes autorisés) + Google Ads conversion tag inline sur confirmation.html
@@ -58,6 +58,10 @@ Quand le volume dépasse 50 ventes/mois, automatiser via Make.com (Stripe webhoo
   --white: #FFFFFF;
   --light-gold: #D4BFA0;
   --soft-bg: #FAF7F3;
+  --text-secondary: #5C4A3A;
+  --text-tertiary: #8A7565;
+  --before-bg: #FDF3F1;
+  --muted: #D4C4B8;
 }
 ```
 
@@ -66,13 +70,15 @@ Quand le volume dépasse 50 ventes/mois, automatiser via Make.com (Stripe webhoo
 | Rôle | Variable | Usage |
 |---|---|---|
 | Texte principal | `--brown` | Titres, corps de texte |
-| Texte secondaire | `#5C4A3A` | Sous-titres, descriptions |
-| Texte tertiaire | `#8A7565` | Micro-copy, légendes, prix barrés |
+| Texte secondaire | `--text-secondary` | Sous-titres, descriptions, paragraphes |
+| Texte tertiaire | `--text-tertiary` | Micro-copy, légendes, prix barrés |
 | Accent primaire | `--terracotta` | CTA, highlights, chiffres clés |
-| Accent secondaire | `--gold` | Badges, décorations, séparateurs, FAQ toggles |
+| Accent secondaire | `--gold` | Badges, décorations, séparateurs, FAQ toggles, checkmarks positifs |
 | Fond clair | `--beige` | Hero, sections alternées |
-| Fond subtil | `--soft-bg` | Cards, sections alternées |
+| Fond subtil | `--soft-bg` | Cards, sections alternées, colonne "après" |
 | Fond sombre | `--brown` | Topbar, footer, section finale CTA |
+| Fond "avant" | `--before-bg` | Colonne "avant" dans les sections avant/après |
+| Élément muet | `--muted` | Bordures discrètes, section "pas pour toi" |
 
 ### Typographie
 
@@ -278,13 +284,14 @@ L'ordre peut varier mais le Hero + Final CTA sont obligatoires.
 ### Créer une nouvelle landing page
 1. Copier `_template.html` et renommer (ex: `guide-express.html`)
 2. Remplacer le contenu placeholder (hero, problème, solution, pricing, FAQ)
-3. Remplacer `<!-- STRIPE_LINK -->` par le vrai Stripe Payment Link
-4. Mettre à jour `confirmation.html` si besoin (nouveau lien Podia, nouveau prix de conversion)
-5. Vérifier les variables CSS (ne pas en ajouter de nouvelles sans raison)
-6. Tester responsive à 375px, 768px, 1440px
-7. Vérifier tous les liens (CTA → bon Stripe Payment Link)
-8. Valider le copywriting (relire les interdits)
-9. Push sur `main` → déploiement Netlify automatique
+3. Ajouter les styles page-spécifiques dans le `<style>` inline (les styles partagés sont dans `styles.css`)
+4. Remplacer `<!-- STRIPE_LINK -->` par le vrai Stripe Payment Link
+5. Mettre à jour `confirmation.html` si besoin (nouveau lien Podia, nouveau prix de conversion)
+6. Vérifier les variables CSS (ne pas en ajouter de nouvelles sans raison)
+7. Tester responsive à 375px, 768px, 1440px
+8. Vérifier tous les liens (CTA → bon Stripe Payment Link)
+9. Valider le copywriting (relire les interdits)
+10. Push sur `main` → déploiement Netlify automatique
 
 ### Modifier une page existante
 1. Lire le fichier complet avant de modifier
@@ -310,7 +317,8 @@ L'ordre peut varier mais le Hero + Final CTA sont obligatoires.
 - Utiliser des scripts externes (sauf GTM et gtag.js sur confirmation.html)
 - Écrire "Satisfait ou remboursé" ou inventer des témoignages
 - Utiliser des tirets cadratins ou du langage "IA"
-- Créer des fichiers CSS ou JS séparés
+- Créer des fichiers JS séparés (JS reste inline dans chaque HTML)
+- Créer de nouveaux fichiers CSS (le design system partagé est dans `styles.css`, les styles page-spécifiques restent inline)
 - Modifier la palette de couleurs sans demander
 - Mettre le tag de conversion Google Ads dans GTM (doit rester inline)
 
