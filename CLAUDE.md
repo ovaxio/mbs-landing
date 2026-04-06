@@ -242,7 +242,7 @@ L'ordre peut varier mais le Hero + Final CTA sont obligatoires.
 
 | Page | Produit | Prix | Cible | Stripe Link | Podia Link |
 |---|---|---|---|---|---|
-| `guide-express.html` | Guide Express MBS | 49€ (promo 39€ code MBS-DEPART) | Généralistes | TODO | TODO |
+| `guide-express.html` | Guide Express MBS | 39€ (prix barré 49€, coupon MBS-DEPART pré-appliqué via Stripe) | Généralistes | TODO | TODO |
 | `budget-a-deux.html` | Formation "Budget à deux" | 69€ | Couples | TODO | TODO |
 | `pack-freelance.html` | Pack Freelance | 97€ | Freelances | TODO | TODO |
 | `confirmation.html` | Page post-paiement | — | Tous | — | TODO |
