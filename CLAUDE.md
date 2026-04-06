@@ -55,7 +55,7 @@ Quand le volume dépasse 50 ventes/mois, automatiser via Make.com (Stripe webhoo
   --gold: #C4A882;
   --terracotta: #C4614A;
   --terracotta-dark: #A8503D;
-  --white: #FFFFFF;
+  --white: #FEFCF9;
   --light-gold: #D4BFA0;
   --soft-bg: #FAF7F3;
   --text-secondary: #5C4A3A;
@@ -84,9 +84,9 @@ Quand le volume dépasse 50 ventes/mois, automatiser via Make.com (Stripe webhoo
 
 - **Titres** (h1, h2, h3) : `'DM Serif Display', serif` — font-weight: 400, line-height: 1.25
 - **Corps** : `'Inter', -apple-system, sans-serif` — font-size: 17px, line-height: 1.7
-- **H1** : `clamp(2rem, 5.5vw, 3.2rem)`
+- **H1** : `clamp(2.2rem, 6.5vw, 3.6rem)`
 - **H2** : `clamp(1.6rem, 4vw, 2.2rem)`
-- **Micro-copy** : 0.78rem–0.88rem
+- **Échelle body** : 0.78rem (micro) → 0.85rem (small) → 0.95rem (secondary) → 1rem (body) → 1.1rem (emphasis)
 
 ### Composants récurrents
 
@@ -96,13 +96,13 @@ Quand le volume dépasse 50 ventes/mois, automatiser via Make.com (Stripe webhoo
   display: inline-block;
   background: var(--terracotta);
   color: var(--white);
-  font-size: 1.08rem;
+  font-size: 1.1rem;
   font-weight: 600;
   padding: 18px 44px;
   border-radius: 8px;
   text-decoration: none;
   box-shadow: 0 4px 14px rgba(196,97,74,0.25);
-  transition: all 0.2s;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 .cta-primary:hover {
   background: var(--terracotta-dark);
@@ -116,7 +116,7 @@ Quand le volume dépasse 50 ventes/mois, automatiser via Make.com (Stripe webhoo
 .badge {
   display: inline-block;
   background: var(--gold);
-  color: var(--white);
+  color: var(--brown);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;

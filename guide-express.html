@@ -86,7 +86,7 @@
     }
 
     .step-detail p {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--text-secondary);
     }
 
@@ -175,7 +175,7 @@
     }
 
     .roi-box p {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--text-secondary);
     }
 
@@ -227,7 +227,7 @@
 </div>
 
 <!-- ───── PROBLEM ───── -->
-<section class="problem">
+<section class="problem reveal">
   <div class="container">
     <h2>Tu te reconnais ?</h2>
     <ul class="problem-list">
@@ -243,7 +243,7 @@
 </section>
 
 <!-- ───── BEFORE/AFTER ───── -->
-<section class="before-after">
+<section class="before-after reveal">
   <div class="container">
     <h2>Avant et après le Guide Express</h2>
     <div class="ba-grid">
@@ -273,7 +273,7 @@
 </section>
 
 <!-- ───── SOLUTION ───── -->
-<section class="solution" id="solution">
+<section class="solution reveal" id="solution">
   <div class="container">
     <h2>La méthode en 3 temps</h2>
     <p class="section-intro">Pas besoin d'être un expert en finances. Le Guide Express te prend par la main, de A à Z.</p>
@@ -307,7 +307,7 @@
 </section>
 
 <!-- ───── CONTENT (10 steps detail) ───── -->
-<section class="steps-detail" id="contenu">
+<section class="steps-detail reveal" id="contenu">
   <div class="container">
     <h2>Le parcours complet en 10 étapes</h2>
     <p class="section-intro">Tu dupliques la page Notion, tu avances à ton rythme. Tout est là.</p>
@@ -416,10 +416,9 @@
 </section>
 
 <!-- ───── CREATOR ───── -->
-<section class="creator" id="createur">
+<section class="creator reveal" id="createur">
   <div class="container">
-    <div class="creator-avatar"><img src="./public/img/moi.png" alt="Guillaume, fondateur de Mon Budget Simple" loading="lazy"
-      style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+    <div class="creator-avatar"><img src="./public/img/moi.png" alt="Guillaume, fondateur de Mon Budget Simple" loading="lazy"></div>
     <div class="creator-text">
       <p class="eyebrow">Qui suis-je</p>
       <h2>Guillaume</h2>
@@ -438,7 +437,7 @@
 </section>
 
 <!-- ───── FOR WHO / NOT FOR WHO ───── -->
-<section class="for-who">
+<section class="for-who reveal">
   <div class="container">
     <h2>C'est fait pour toi ?</h2>
     <div class="for-who-grid">
@@ -467,7 +466,7 @@
 </section>
 
 <!-- ───── PRICING ───── -->
-<section class="pricing" id="acheter">
+<section class="pricing reveal" id="acheter">
   <div class="container">
     <h2>Un investissement qui se rentabilise en quelques semaines</h2>
     <div class="pricing-card">
@@ -478,7 +477,7 @@
         <p class="pricing-note">paiement unique · accès à vie</p>
         <p class="pricing-promo">Code MBS-DEPART : 39€ au lieu de 49€</p>
       </div>
-      <a href="https://buy.stripe.com/8x2cN5gSzerH5731w404800" class="cta-primary" style="width: 100%; text-align: center;">Je reprends mon budget en main</a>
+      <a href="https://buy.stripe.com/8x2cN5gSzerH5731w404800" class="cta-primary pricing-cta">Je reprends mon budget en main</a>
       <p class="pricing-guarantee">Paiement sécurisé par Stripe</p>
       <ul class="pricing-features">
         <li>Le parcours complet en 10 étapes sur Notion</li>
@@ -499,7 +498,7 @@
 </section>
 
 <!-- ───── FAQ ───── -->
-<section class="faq">
+<section class="faq reveal">
   <div class="container">
     <h2>Questions fréquentes</h2>
     <div class="faq-list" role="list">
@@ -609,6 +608,21 @@
 </div>
 
 <script>
+  // ───── SCROLL REVEAL ─────
+  if ('IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      revealObserver.observe(el);
+    });
+  }
+
   // ───── STEPS DETAIL TOGGLE ─────
   var stepsToggle = document.getElementById('steps-toggle');
   var stepsCollapsed = document.getElementById('steps-collapsed');
