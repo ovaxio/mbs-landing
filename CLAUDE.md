@@ -317,8 +317,8 @@ L'ordre peut varier mais le Hero + Final CTA sont obligatoires.
 - Utiliser des scripts externes (sauf GTM et gtag.js sur confirmation.html)
 - Écrire "Satisfait ou remboursé" ou inventer des témoignages
 - Utiliser des tirets cadratins ou du langage "IA"
-- Créer des fichiers JS séparés (JS reste inline dans chaque HTML)
-- Créer de nouveaux fichiers CSS (le design system partagé est dans `styles.css`, les styles page-spécifiques restent inline)
+- Créer des fichiers JS séparés pour du code page-spécifique (JS de page reste inline dans chaque HTML). Exception : les scripts partagés entre plusieurs pages (ex: `consent.js`, `gtm-init.js`) peuvent être extraits dans un fichier JS dédié chargé via `<script src="...">` dans le `<head>`.
+- Créer de nouveaux fichiers CSS (le design system partagé est dans `styles.css`, les styles page-spécifiques restent inline). Exception : les styles partagés entre plusieurs pages peuvent être mutualisés dans `styles.css`.
 - Modifier la palette de couleurs sans demander
 - Mettre le tag de conversion Google Ads dans GTM (doit rester inline)
 
@@ -335,7 +335,7 @@ B2C éducation financière en français. Produits digitaux (formations complète
 ### constraints
 - Pas de framework CSS ou JS
 - Pas de dépendances externes (sauf Google Fonts + GTM)
-- Tout inline dans un seul fichier HTML par page
+- Code page-spécifique inline dans chaque HTML. Code partagé entre plusieurs pages : CSS dans `styles.css`, JS dans un fichier partagé dédié (ex: `consent.js`)
 - Variables CSS existantes dans :root, jamais de couleurs en dur
 - Pas de nouvelles variables CSS sans raison explicite
 - Jamais "Satisfait ou remboursé" ni témoignages fictifs

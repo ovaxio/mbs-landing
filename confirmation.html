@@ -30,6 +30,8 @@
   })(window,document,'script','dataLayer','GTM-WTHZ6HHK');</script>
   <!-- End Google Tag Manager -->
 
+  <script src="consent.js"></script>
+
   <!-- Google Ads conversion — gtag.js loader (required for inline conversion tag below)
        Exception documentée : gtag.js est le second script externe autorisé (en plus de GTM),
        nécessaire pour le tracking de conversion Google Ads inline. Voir ADR-002. -->
@@ -154,61 +156,6 @@
         text-align: center;
       }
     }
-    /* ───── BANDEAU CONSENTEMENT ───── */
-    #consent-banner {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 9999;
-      background: var(--brown);
-      color: var(--light-gold);
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-      flex-wrap: wrap;
-      font-size: 0.88rem;
-      line-height: 1.5;
-      box-shadow: 0 -2px 12px rgba(44,31,20,0.18);
-    }
-    #consent-banner p {
-      margin: 0;
-      max-width: 560px;
-      flex: 1 1 260px;
-    }
-    #consent-banner a {
-      color: var(--gold);
-      text-decoration: underline;
-    }
-    .consent-actions {
-      display: flex;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-    .consent-btn {
-      padding: 10px 22px;
-      border-radius: 6px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: all 0.2s;
-    }
-    .consent-btn-accept {
-      background: var(--terracotta);
-      color: var(--white);
-    }
-    .consent-btn-accept:hover { background: var(--terracotta-dark); }
-    .consent-btn-refuse {
-      background: transparent;
-      color: var(--light-gold);
-      border: 1px solid #5C4A3A;
-    }
-    .consent-btn-refuse:hover { border-color: var(--gold); color: var(--gold); }
-    #consent-banner.hidden { display: none; }
-
   </style>
 </head>
 <body>
@@ -256,50 +203,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 <script>
-  // ───── CONSENT MODE ─────
-  (function() {
-    var COOKIE = 'mbs_consent';
-    var EXPIRY = 365; // jours
-
-    function getCookie(name) {
-      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-      return match ? match[2] : null;
-    }
-
-    function setCookie(name, value, days) {
-      var d = new Date();
-      d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
-      document.cookie = name + '=' + value + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
-    }
-
-    function applyConsent(granted) {
-      var state = granted ? 'granted' : 'denied';
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('consent', 'update', {
-        analytics_storage: state,
-        ad_storage: state,
-        ad_user_data: state,
-        ad_personalization: state
-      });
-    }
-
-    window.setConsent = function(granted) {
-      setCookie(COOKIE, granted ? '1' : '0', EXPIRY);
-      applyConsent(granted);
-      document.getElementById('consent-banner').classList.add('hidden');
-    };
-
-    var saved = getCookie(COOKIE);
-    if (saved === null) {
-      document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('consent-banner').classList.remove('hidden');
-      });
-    } else {
-      applyConsent(saved === '1');
-    }
-  })();
-
   // ───── DYNAMIC PRODUCT ROUTING ─────
   // Lit ?product=xxx dans l'URL et met à jour le lien Podia + le nom du produit
   (function() {
