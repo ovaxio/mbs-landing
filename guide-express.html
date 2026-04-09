@@ -7,6 +7,21 @@
   <meta name="robots" content="noindex, nofollow">
   <title>Guide Express MBS : reprends ton budget en main</title>
 
+<!-- Consent Mode init — doit être AVANT GTM -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  var _mc = (document.cookie.match(/(^|;\s*)mbs_consent=([^;]*)/) || [])[2];
+  var _cs = _mc === '1' ? 'granted' : 'denied';
+  gtag('consent', 'default', {
+    analytics_storage: _cs,
+    ad_storage: _cs,
+    ad_user_data: _cs,
+    ad_personalization: _cs,
+    wait_for_update: 500
+  });
+</script>
+
 <!-- Google Tag Manager -->
 <script>(function (w, d, s, l, i) {
     w[l] = w[l] || []; w[l].push({
