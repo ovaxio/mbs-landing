@@ -79,20 +79,6 @@
       align-items: flex-start;
     }
 
-    .step-detail .step-num {
-      flex-shrink: 0;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--terracotta);
-      color: var(--white);
-      font-family: 'DM Serif Display', serif;
-      font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 2px;
-    }
 
     .step-detail h3 {
       font-family: 'Inter', sans-serif;
@@ -222,6 +208,31 @@
     </p>
     <a href="https://buy.stripe.com/8x2cN5gSzerH5731w404800?prefilled_promo_code=MBS-DEPART" class="cta-primary">Je reprends mon budget en main</a>
     <p class="micro-copy">Accès immédiat sur Notion · 39€ paiement unique · Accès à vie</p>
+    <div class="browser-frame">
+      <div class="browser-chrome">
+        <div class="browser-top">
+          <div class="browser-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+          </div>
+          <div class="browser-url-bar">notion.so/mon-budget-simple</div>
+        </div>
+        <div class="browser-tabs">
+          <div class="browser-tab">
+            <div class="browser-tab-favicon">M</div>
+            Guide Express — Mon Budget Simple
+          </div>
+        </div>
+      </div>
+      <div class="browser-content">
+        <video autoplay loop muted playsinline poster="./public/img/guide-express-poster.jpg"
+          aria-label="Aperçu du Guide Express MBS sur Notion — parcours en 10 étapes avec templates prêts à remplir">
+          <source src="./public/video/guide-express-demo.webm" type="video/webm">
+          <source src="./public/video/guide-express-demo.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -330,28 +341,52 @@
     <p class="section-intro">Tu dupliques la page Notion, tu avances à ton rythme. Tout est là.</p>
     <div class="steps-list">
       <div class="step-detail">
-        <div class="step-num">0</div>
+        <div class="step-image-container">
+          <picture>
+            <source srcset="./public/img/1.webp" type="image/webp">
+            <img src="./public/img/1.png" alt="Étape 0 : Mindset et psychologie de l'argent" class="step-preview" loading="lazy" width="360" height="360">
+          </picture>
+          <span class="step-number-overlay">0</span>
+        </div>
         <div>
           <h3>Mindset et psychologie de l'argent</h3>
           <p>Comprendre tes habitudes avant de vouloir tout changer. C'est là que la plupart des méthodes échouent : elles sautent cette étape.</p>
         </div>
       </div>
       <div class="step-detail">
-        <div class="step-num">1</div>
+        <div class="step-image-container">
+          <picture>
+            <source srcset="./public/img/2.webp" type="image/webp">
+            <img src="./public/img/2.png" alt="Étape 1 : Définir tes projets de vie" class="step-preview" loading="lazy" width="360" height="360">
+          </picture>
+          <span class="step-number-overlay">1</span>
+        </div>
         <div>
           <h3>Définir tes projets de vie</h3>
           <p>Ce que tu veux vraiment, avant même de parler d'argent. Ton budget doit servir ta vie, pas l'inverse.</p>
         </div>
       </div>
       <div class="step-detail">
-        <div class="step-num">2</div>
+        <div class="step-image-container">
+          <picture>
+            <source srcset="./public/img/3.webp" type="image/webp">
+            <img src="./public/img/3.png" alt="Étape 2 : Faire ton état des lieux financier" class="step-preview" loading="lazy" width="360" height="360">
+          </picture>
+          <span class="step-number-overlay">2</span>
+        </div>
         <div>
           <h3>Faire ton état des lieux financier</h3>
           <p>Poser les bases : ce que tu gagnes, ce que tu dépenses, et où tu en es. Une photo claire de ta situation.</p>
         </div>
       </div>
       <div class="step-detail">
-        <div class="step-num">3</div>
+        <div class="step-image-container">
+          <picture>
+            <source srcset="./public/img/4.webp" type="image/webp">
+            <img src="./public/img/4.png" alt="Étape 3 : Catégoriser tes dépenses" class="step-preview" loading="lazy" width="360" height="360">
+          </picture>
+          <span class="step-number-overlay">3</span>
+        </div>
         <div>
           <h3>Catégoriser tes dépenses</h3>
           <p>Voir clair dans tes habitudes, sans culpabilité. Savoir où part ton argent change tout.</p>
@@ -363,42 +398,78 @@
     <div class="steps-collapsed" id="steps-collapsed">
       <div class="steps-list">
         <div class="step-detail">
-          <div class="step-num">4</div>
+          <div class="step-image-container">
+            <picture>
+              <source srcset="./public/img/5.webp" type="image/webp">
+              <img src="./public/img/5.png" alt="Étape 4 : Calculer ton reste à vivre" class="step-preview" loading="lazy" width="360" height="360">
+            </picture>
+            <span class="step-number-overlay">4</span>
+          </div>
           <div>
             <h3>Calculer ton reste à vivre</h3>
             <p>Ce qui te reste vraiment chaque mois, une fois l'essentiel payé. Le chiffre le plus important de ton budget.</p>
           </div>
         </div>
         <div class="step-detail">
-          <div class="step-num">5</div>
+          <div class="step-image-container">
+            <picture>
+              <source srcset="./public/img/6.webp" type="image/webp">
+              <img src="./public/img/6.png" alt="Étape 5 : Construire ton budget mensuel" class="step-preview" loading="lazy" width="360" height="360">
+            </picture>
+            <span class="step-number-overlay">5</span>
+          </div>
           <div>
             <h3>Construire ton budget mensuel</h3>
             <p>Ton budget simple, souple, et réaliste. Inspiré de la méthode 50/30/20, adapté à la vraie vie.</p>
           </div>
         </div>
         <div class="step-detail">
-          <div class="step-num">6</div>
+          <div class="step-image-container">
+            <picture>
+              <source srcset="./public/img/7.webp" type="image/webp">
+              <img src="./public/img/7.png" alt="Étape 6 : Organiser tes comptes bancaires" class="step-preview" loading="lazy" width="360" height="360">
+            </picture>
+            <span class="step-number-overlay">6</span>
+          </div>
           <div>
             <h3>Organiser tes comptes bancaires</h3>
             <p>Un système clair pour ne plus t'y perdre. Chaque compte a un rôle, chaque euro a une destination.</p>
           </div>
         </div>
         <div class="step-detail">
-          <div class="step-num">7</div>
+          <div class="step-image-container">
+            <picture>
+              <source srcset="./public/img/8.webp" type="image/webp">
+              <img src="./public/img/8.png" alt="Étape 7 : Ton tableau de budget Notion" class="step-preview" loading="lazy" width="360" height="360">
+            </picture>
+            <span class="step-number-overlay">7</span>
+          </div>
           <div>
             <h3>Ton tableau de budget Notion</h3>
             <p>Un modèle interactif prêt à l'emploi. Tu dupliques, tu remplis, tu suis ton budget en quelques clics.</p>
           </div>
         </div>
         <div class="step-detail">
-          <div class="step-num">8</div>
+          <div class="step-image-container">
+            <picture>
+              <source srcset="./public/img/9.webp" type="image/webp">
+              <img src="./public/img/9.png" alt="Étape 8 : Checklist mensuelle" class="step-preview" loading="lazy" width="360" height="360">
+            </picture>
+            <span class="step-number-overlay">8</span>
+          </div>
           <div>
             <h3>Checklist mensuelle</h3>
             <p>Ce que tu fais chaque début de mois pour garder le cap. 5 minutes, pas plus.</p>
           </div>
         </div>
         <div class="step-detail">
-          <div class="step-num">9</div>
+          <div class="step-image-container">
+            <picture>
+              <source srcset="./public/img/10.webp" type="image/webp">
+              <img src="./public/img/10.png" alt="Étape 9 : Conclusion et prochaines étapes" class="step-preview" loading="lazy" width="360" height="360">
+            </picture>
+            <span class="step-number-overlay">9</span>
+          </div>
           <div>
             <h3>Conclusion et prochaines étapes</h3>
             <p>Bravo, tu as ton système. Maintenant, on le fait vivre.</p>
@@ -486,6 +557,9 @@
 <section class="pricing reveal" id="acheter">
   <div class="container">
     <h2>Un investissement qui se rentabilise en quelques semaines</h2>
+    <div class="pricing-product-mockup">
+      <img src="./public/img/produit.png" alt="Aperçu du Guide Express MBS sur Notion" loading="lazy" width="400" height="300">
+    </div>
     <div class="pricing-card">
       <span class="badge pricing-badge">Guide Express</span>
       <p class="pricing-name">10 étapes pour reprendre ton budget en main</p>
