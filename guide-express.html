@@ -10,15 +10,29 @@
 <!-- Consent Mode init — doit être AVANT GTM -->
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() { dataLayer.push(arguments); }
+
   var _mc = (document.cookie.match(/(^|;\s*)mbs_consent=([^;]*)/) || [])[2];
   var _cs = _mc === '1' ? 'granted' : 'denied';
+
+  // EEE + UK + CH : consentement requis
   gtag('consent', 'default', {
+    region: ['AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE',
+      'GR', 'HU', 'IS', 'IE', 'IT', 'LV', 'LI', 'LT', 'LU', 'MT', 'NL',
+      'NO', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'GB', 'CH'],
     analytics_storage: _cs,
     ad_storage: _cs,
     ad_user_data: _cs,
     ad_personalization: _cs,
-    wait_for_update: 500
+    wait_for_update: 2000
+  });
+
+  // Hors EEE : granted directement, pas de bandeau nécessaire
+  gtag('consent', 'default', {
+    analytics_storage: 'granted',
+    ad_storage: 'granted',
+    ad_user_data: 'granted',
+    ad_personalization: 'granted'
   });
 </script>
 

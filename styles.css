@@ -1185,7 +1185,7 @@ section {
   right: 0;
   z-index: 9999;
   background: var(--brown);
-  color: var(--light-gold);
+  color: var(--white);
   padding: 16px 24px;
   display: flex;
   align-items: center;
