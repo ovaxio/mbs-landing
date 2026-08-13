@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="7 jours pour que ton argent arrête de disparaître. Gratuit, par email. 1 décision par jour, 15 minutes.">
+  <meta name="robots" content="noindex, nofollow">
+  <title>MBS Runway · 7 jours pour stopper l'hémorragie</title>
+
+<!-- Consent Mode init -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+
+  var _mc = (document.cookie.match(/(^|;\s*)mbs_consent=([^;]*)/) || [])[2];
+  var _cs = _mc === '1' ? 'granted' : 'denied';
+
+  gtag('consent', 'default', {
+    region: ['AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE',
+      'GR', 'HU', 'IS', 'IE', 'IT', 'LV', 'LI', 'LT', 'LU', 'MT', 'NL',
+      'NO', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'GB', 'CH'],
+    analytics_storage: _cs,
+    ad_storage: _cs,
+    ad_user_data: _cs,
+    ad_personalization: _cs,
+    wait_for_update: 2000
+  });
+
+  gtag('consent', 'default', {
+    analytics_storage: 'granted',
+    ad_storage: 'granted',
+    ad_user_data: 'granted',
+    ad_personalization: 'granted'
+  });
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function (w, d, s, l, i) {
+    w[l] = w[l] || []; w[l].push({
+      'gtm.start':
+        new Date().getTime(), event: 'gtm.js'
+    }); var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+  })(window, document, 'script', 'dataLayer', 'GTM-WTHZ6HHK');</script>
+<!-- End Google Tag Manager -->
+
+  <script src="consent.js?v=1"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css?v=1">
+
+  <style>
+    /* ───── RUNWAY PAGE-SPECIFIC ───── */
+
+    .runway-hero {
+      background: var(--beige);
+      padding: 80px 24px 72px;
+      text-align: center;
+    }
+
+    .runway-hero h1 {
+      max-width: 640px;
+      margin: 0 auto 16px;
+    }
+
+    .runway-hero h1 span {
+      color: var(--terracotta);
+      background: linear-gradient(to top, rgba(196,97,74,0.12) 35%, transparent 35%);
+      padding: 0 4px;
+    }
+
+    .runway-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto 32px;
+    }
+
+    .runway-form {
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .runway-form .ac-form {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .runway-form input[type="email"] {
+      flex: 1;
+      min-width: 0;
+      padding: 16px 18px;
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      color: var(--brown);
+      background: var(--white);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .runway-form input[type="email"]:focus {
+      border-color: var(--terracotta);
+      box-shadow: 0 0 0 3px rgba(196,97,74,0.15);
+    }
+
+    .runway-form input[type="email"]::placeholder {
+      color: var(--text-tertiary);
+    }
+
+    .runway-form .cta-primary {
+      flex-shrink: 0;
+      padding: 16px 32px;
+      font-size: 1rem;
+    }
+
+    .runway-micro {
+      margin-top: 12px;
+      font-size: 0.82rem;
+      color: var(--text-tertiary);
+    }
+
+    .form-feedback {
+      margin-top: 12px;
+      font-size: 0.95rem;
+    }
+
+    .form-error {
+      color: #b3402f;
+    }
+
+    .form-success {
+      color: #2e7d32;
+      font-weight: 600;
+    }
+
+    .runway-final .form-error {
+      color: #f2b8ac;
+    }
+
+    .runway-final .form-success {
+      color: #aedbb0;
+    }
+
+    /* ───── DECISIONS SECTION ───── */
+    .decisions {
+      background: var(--white);
+      padding: 80px 24px;
+    }
+
+    .decisions h2 {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .decisions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .decision-card {
+      background: var(--soft-bg);
+      border-radius: 12px;
+      padding: 22px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .decision-j {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    .decision-card h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--brown);
+      margin-bottom: 3px;
+    }
+
+    .decision-card p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+    }
+
+    /* ───── FINAL CTA ───── */
+    .runway-final {
+      background: var(--brown);
+      text-align: center;
+      padding: 80px 24px;
+    }
+
+    .runway-final h2 {
+      color: var(--white);
+      margin-bottom: 28px;
+    }
+
+    .runway-final .runway-form {
+      margin-bottom: 12px;
+    }
+
+    .runway-final .runway-micro {
+      color: var(--gold);
+    }
+
+    /* ───── RESPONSIVE ───── */
+    @media (max-width: 680px) {
+      .decisions-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .runway-form .ac-form {
+        flex-direction: column;
+      }
+
+      .runway-form input[type="email"] {
+        width: 100%;
+      }
+
+      .runway-form .cta-primary {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .runway-hero {
+        padding: 56px 20px 48px;
+      }
+
+      .decisions {
+        padding: 56px 20px;
+      }
+
+      .runway-final {
+        padding: 56px 20px;
+      }
+
+      .decision-card {
+        padding: 18px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WTHZ6HHK" height="0" width="0"
+    style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<a href="#hero" class="skip-link">Aller au contenu</a>
+
+<!-- ───── TOPBAR ───── -->
+<div class="topbar">
+  Gratuit · 7 jours · 1 action par jour
+</div>
+
+<!-- ───── HERO ───── -->
+<section class="runway-hero" id="hero">
+  <div class="container">
+    <span class="badge">Gratuit</span>
+    <h1>Ton argent disparaît. <span>Pas parce que tu dépenses trop.</span></h1>
+    <p class="runway-subtitle">7 jours. 1 email par jour. 1 décision par jour. 15 minutes.</p>
+    <div class="runway-form">
+      <form class="ac-form ac-runway-form" method="post">
+        <input type="hidden" name="u" value="1">
+        <input type="hidden" name="f" value="1">
+        <input type="hidden" name="s" value="">
+        <input type="hidden" name="c" value="0">
+        <input type="hidden" name="m" value="0">
+        <input type="hidden" name="act" value="sub">
+        <input type="hidden" name="v" value="2">
+        <input type="email" name="email" placeholder="ton@email.com" required autocomplete="email">
+        <button type="submit" class="cta-primary">Je commence</button>
+      </form>
+      <p class="runway-micro">Gratuit. Désinscription en 1 clic. Jamais de spam.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ───── CE QUE TU VAS DECIDER ───── -->
+<section class="decisions">
+  <div class="container">
+    <h2>Ce que tu vas décider</h2>
+    <div class="decisions-grid">
+      <div class="decision-card">
+        <span class="decision-j">J1</span>
+        <div>
+          <h3>Sépare tes comptes</h3>
+          <p>3 personnes, 3 comptes</p>
+        </div>
+      </div>
+      <div class="decision-card">
+        <span class="decision-j">J2</span>
+        <div>
+          <h3>Calcule ton runway</h3>
+          <p>Combien de mois tu tiens sans rien</p>
+        </div>
+      </div>
+      <div class="decision-card">
+        <span class="decision-j">J3</span>
+        <div>
+          <h3>Automatise ton épargne</h3>
+          <p>Elle part en premier, pas en dernier</p>
+        </div>
+      </div>
+      <div class="decision-card">
+        <span class="decision-j">J4</span>
+        <div>
+          <h3>Fixe ton salaire</h3>
+          <p>Le même montant, peu importe le mois</p>
+        </div>
+      </div>
+      <div class="decision-card">
+        <span class="decision-j">J5</span>
+        <div>
+          <h3>Identifie ton piège</h3>
+          <p>Le spend-first trap</p>
+        </div>
+      </div>
+      <div class="decision-card">
+        <span class="decision-j">J6</span>
+        <div>
+          <h3>Les 3 signaux d'alerte</h3>
+          <p>Quand le système menace de lâcher</p>
+        </div>
+      </div>
+      <div class="decision-card">
+        <span class="decision-j">J7</span>
+        <div>
+          <h3>Ton système sur 1 page</h3>
+          <p>Pas un tableur, une page</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── FINAL CTA ───── -->
+<section class="runway-final">
+  <div class="container">
+    <h2>Entre ton email. J1 arrive dans 2 minutes.</h2>
+    <div class="runway-form">
+      <form class="ac-form ac-runway-form" method="post">
+        <input type="hidden" name="u" value="1">
+        <input type="hidden" name="f" value="1">
+        <input type="hidden" name="s" value="">
+        <input type="hidden" name="c" value="0">
+        <input type="hidden" name="m" value="0">
+        <input type="hidden" name="act" value="sub">
+        <input type="hidden" name="v" value="2">
+        <input type="email" name="email" placeholder="ton@email.com" required autocomplete="email">
+        <button type="submit" class="cta-primary">Je commence</button>
+      </form>
+      <p class="runway-micro">Gratuit. Désinscription en 1 clic. Jamais de spam.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ───── FOOTER ───── -->
+<footer class="footer">
+  <div class="container">
+    <p class="footer-copy">Mon Budget Simple · Guillaume Chambard</p>
+  </div>
+</footer>
+
+<!-- ───── BANDEAU CONSENTEMENT ───── -->
+<div id="consent-banner" class="hidden">
+  <p>Ce site utilise des cookies pour mesurer les visites et améliorer ton expérience. Aucune donnée personnelle n'est vendue.</p>
+  <div class="consent-actions">
+    <button class="consent-btn consent-btn-refuse" onclick="setConsent(false)">Refuser</button>
+    <button class="consent-btn consent-btn-accept" onclick="setConsent(true)">Accepter</button>
+  </div>
+</div>
+
+<script>
+  // ───── SCROLL REVEAL ─────
+  if ('IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      revealObserver.observe(el);
+    });
+  }
+  // ───── AC FORMS SUBMIT ─────
+  var AC_ENDPOINT = 'https://monbudgetsimplefr.activehosted.com/proc.php?jsonp=true';
+
+  document.querySelectorAll('.ac-runway-form').forEach(function (form) {
+    var feedback = document.createElement('p');
+    feedback.className = 'form-feedback';
+    feedback.setAttribute('role', 'status');
+    form.parentNode.insertBefore(feedback, form.nextSibling);
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var email = form.querySelector('input[name="email"]').value.trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+        feedback.textContent = 'Entre un email valide.';
+        feedback.className = 'form-feedback form-error';
+        return;
+      }
+
+      var btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Envoi…';
+      feedback.textContent = '';
+
+      fetch(AC_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      }).then(function (res) {
+        if (!res.ok) { throw new Error('http ' + res.status); }
+        form.style.display = 'none';
+        var micro = form.parentNode.querySelector('.runway-micro');
+        if (micro) { micro.style.display = 'none'; }
+        feedback.textContent = "C'est parti. Regarde ta boîte mail, J1 arrive dans 2 minutes.";
+        feedback.className = 'form-feedback form-success';
+      }).catch(function () {
+        btn.disabled = false;
+        btn.textContent = 'Je commence';
+        feedback.textContent = "L'envoi a échoué. Réessaie dans quelques secondes.";
+        feedback.className = 'form-feedback form-error';
+      });
+    });
+  });
+
+</script>
+
+</body>
+</html>
