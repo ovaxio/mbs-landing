@@ -129,7 +129,7 @@
 {% set product = productsBySlug[productSlug] %}
 <main id="main">
   <div class="topbar">
-    Paiement sécurisé · Accès immédiat · Prix de lancement {{ product.priceLaunch }}€
+    {% if stripeReady %}Paiement sécurisé · Accès immédiat · {{ product.priceLaunch }}€ avec le code {{ product.promoCode }}{% else %}Phase de lancement · Accès immédiat · Gratuit pour le moment{% endif %}
   </div>
 
   {% block productHero %}{% endblock %}

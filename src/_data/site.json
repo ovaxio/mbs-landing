@@ -41,10 +41,11 @@
       "title": "Guide Express MBS : arrête de finir le mois à zéro",
       "tagline": "Tu gagnes assez. Tu finis quand même à zéro.",
       "priceLaunch": 39,
-      "priceRegular": 59,
-      "dateLimit": "15 octobre 2026",
-      "stripeLink": "https://buy.stripe.com/__REMPLACE_PAR_LIEN_39__",
-      "podiaLink": "https://www.monbudgetsimple.fr/guide-express-notion/buy",
+      "priceRegular": 49,
+      "promoCode": "MBS-DEPART",
+      "dateLimit": "",
+      "stripeLink": "https://buy.stripe.com/8x2cN5gSzerH5731w404800?prefilled_promo_code=MBS-DEPART",
+      "podiaLink": "https://www.monbudgetsimple.fr/guide-express-notion/buy?offer_id=5622212",
       "publishPage": true
     },
     {

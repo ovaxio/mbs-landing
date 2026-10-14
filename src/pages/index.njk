@@ -114,10 +114,10 @@ description: "Mon Budget Simple : arrête de finir le mois à zéro. Une méthod
       <strong>se payer d'abord</strong>. Sans culpabilité, sans jargon, sans te prendre pour un expert financier.
     </p>
     <div class="home-cta-row">
-      <a href="/guide-express.html" class="cta-primary" data-track="cta_click" data-track-props='{"position":"home-hero"}'>Découvrir le {{ product.name }} : {{ product.priceLaunch }}€</a>
-      <a href="https://learn.monbudgetsimple.fr/blog" class="home-cta-secondary">Lire les conseils sur le blog</a>
+      <a href="/guide-express.html" class="cta-primary" data-track="cta_click" data-track-props='{"position":"home-hero"}'>Découvrir le {{ product.name }}</a>
+      <a href="/blog" class="home-cta-secondary">Lire les conseils sur le blog</a>
     </div>
-    <p class="micro-copy">Paiement sécurisé · Accès immédiat · Prix de lancement {{ product.priceLaunch }}€</p>
+    <p class="micro-copy">Accès immédiat · 1 heure pour poser le système</p>
   </div>
 </section>
 
@@ -149,8 +149,12 @@ description: "Mon Budget Simple : arrête de finir le mois à zéro. Une méthod
   <div class="container">
     <h2>Prêt à voir ton épargne remonter ?</h2>
     <p>1 heure pour poser le système. Dès le premier mois, tu le vois dans le template : ton épargne arrête de descendre.</p>
-    <a href="/guide-express.html" class="cta-primary" data-track="cta_click" data-track-props='{"position":"home-final"}'>Découvrir le {{ product.name }} : {{ product.priceLaunch }}€</a>
-    <p class="micro-copy">Prix de lancement {{ product.priceLaunch }}€ · Paiement unique · Accès à vie</p>
+    <a href="/guide-express.html" class="cta-primary" data-track="cta_click" data-track-props='{"position":"home-final"}'>Découvrir le {{ product.name }}</a>
+    {% if stripeReady %}
+    <p class="micro-copy">{{ product.priceLaunch }}€ avec le code {{ product.promoCode }} · Paiement unique</p>
+    {% else %}
+    <p class="micro-copy">Gratuit pendant la phase de lancement · Accès immédiat</p>
+    {% endif %}
   </div>
 </section>
 {% endblock %}

@@ -3,7 +3,7 @@ productSlug: guide-express
 eleventyComputed:
   title: "{{ productsBySlug[productSlug].title }}"
   ogTitle: "{{ productsBySlug[productSlug].title }}"
-  description: "Tu gagnes assez, tu finis quand même à zéro. Le Guide Express t'aide à inverser le sens de ton épargne dès le premier mois, grâce à la méthode se payer d'abord. {{ productsBySlug[productSlug].priceLaunch }}€, accès à vie."
+  description: "Tu gagnes assez, tu finis quand même à zéro. Le Guide Express t'aide à inverser le sens de ton épargne dès le premier mois, grâce à la méthode se payer d'abord. {{ productsBySlug[productSlug].priceLaunch }}€ avec le code {{ productsBySlug[productSlug].promoCode }}."
 ogImage: "https://www.monbudgetsimple.fr/public/img/notion-guide-hero.webp"
 ---
 {% extends "../_layouts/product.njk" %}
@@ -30,7 +30,7 @@ ogImage: "https://www.monbudgetsimple.fr/public/img/notion-guide-hero.webp"
 {% set product = productsBySlug[productSlug] %}
 <section class="hero" id="hero">
   <div class="container">
-    <span class="badge">{{ product.name }} · {{ product.priceLaunch }}€ de lancement</span>
+    {% if stripeReady %}<span class="badge">{{ product.name }} · {{ product.priceLaunch }}€ avec le code {{ product.promoCode }} (prérempli)</span>{% else %}<span class="badge">{{ product.name }} · gratuit pendant la phase de lancement</span>{% endif %}
     <h1>Tu gagnes assez. <span>Tu finis quand même à zéro.</span></h1>
     <p class="subtitle">
       Tu as déjà essayé une app, un tableur, une bonne résolution. Ça tient deux semaines.
@@ -255,7 +255,7 @@ ogImage: "https://www.monbudgetsimple.fr/public/img/notion-guide-hero.webp"
       <div class="step-detail">
         <div class="bonus-tag">3</div>
         <div>
-          <h3>Les mises à jour gratuites à vie</h3>
+          <h3>Les mises à jour gratuites, pendant toute la durée de commercialisation (au moins 3 ans)</h3>
           <p>Le système évolue, tu reçois tout. Ton budget, tes revenus, ta vie : tout est prévu.</p>
         </div>
       </div>
@@ -335,7 +335,11 @@ ogImage: "https://www.monbudgetsimple.fr/public/img/notion-guide-hero.webp"
 
 <section class="pricing reveal" id="acheter">
   <div class="container">
-    <h2>{{ product.priceLaunch }}€ jusqu'au {{ product.dateLimit }}, ensuite {{ product.priceRegular }}€</h2>
+    {% if stripeReady %}
+    <h2>{{ product.priceLaunch }}€ avec le code {{ product.promoCode }} (déjà appliqué), {{ product.priceRegular }}€ sans code</h2>
+    {% else %}
+    <h2>Gratuit pendant la phase de lancement</h2>
+    {% endif %}
     <div class="pricing-product-mockup">
       <picture>
         <source srcset="/public/img/notion-guide-budget.webp" type="image/webp">
@@ -343,28 +347,46 @@ ogImage: "https://www.monbudgetsimple.fr/public/img/notion-guide-hero.webp"
       </picture>
     </div>
     <div class="pricing-card">
+      {% if stripeReady %}
       <span class="badge pricing-badge">Prix de lancement</span>
+      {% else %}
+      <span class="badge pricing-badge">Phase de lancement</span>
+      {% endif %}
       <p class="pricing-name">{{ product.name }} · méthode se payer d'abord</p>
       <div class="pricing-price">
+        {% if stripeReady %}
         <span class="pricing-currency">€</span><span class="pricing-amount">{{ product.priceLaunch }}</span>
-        <p class="pricing-note">paiement unique · accès à vie · jusqu'au {{ product.dateLimit }}, ensuite {{ product.priceRegular }}€</p>
+        <p class="pricing-note">paiement unique · le code {{ product.promoCode }} est prérempli au paiement, {{ product.priceRegular }}€ sans code · accès pendant toute la durée de commercialisation (au moins 3 ans), mises à jour incluses</p>
+        {% else %}
+        <span class="pricing-currency">€</span><span class="pricing-amount">0</span>
+        <p class="pricing-note">gratuit pendant la phase de lancement · ensuite en vente au prix de lancement ({{ product.priceLaunch }}€ avec le code {{ product.promoCode }}, {{ product.priceRegular }}€ sans code) · accès pendant toute la durée de commercialisation (au moins 3 ans), mises à jour incluses</p>
+        {% endif %}
       </div>
       <ul class="pricing-features">
         <li>Le parcours complet en 10 étapes sur Notion</li>
         <li>Le modèle de tableau de budget, prêt à remplir</li>
         <li>La méthode se payer d'abord (3 comptes + virement auto)</li>
         <li>Bonus : la Checklist des 40 décisions</li>
-        <li>Les mises à jour gratuites à vie</li>
-        <li>Accès immédiat après paiement</li>
+        <li>Les mises à jour gratuites, pendant toute la durée de commercialisation (au moins 3 ans)</li>
+        <li>Accès immédiat{% if stripeReady %} après paiement{% endif %}</li>
       </ul>
+      {% if stripeReady %}
       <div class="roi-box">
         <h3>Pourquoi ce prix de lancement ?</h3>
         <p>Parce que je cherche mes premiers clients. Leurs retours vaudront plus que {{ product.priceRegular - product.priceLaunch }}€ de différence. Une fois ces retours collectés, le prix passe à {{ product.priceRegular }}€.</p>
         <p style="margin-top:8px">Sur un an : si le système te fait épargner 100€ par mois, c'est 1200€ de côté. Le guide ne coûte pas {{ product.priceLaunch }}€, il en fait revenir bien plus. Le montant exact dépend de ta situation. Le système, lui, tient.</p>
       </div>
+      {% else %}
+      <div class="roi-box">
+        <h3>Pourquoi c'est gratuit maintenant ?</h3>
+        <p>Parce que je cherche mes premiers utilisateurs. En échange du guide, j'espère tes retours : ce qui marche, ce qui coince. C'est le seul prix pour le moment.</p>
+      </div>
+      {% endif %}
       {% cta product, 'pricing', 'Je pose enfin un budget simple' %}
+      {% if stripeReady %}
       <p class="pricing-guarantee">Paiement sécurisé par Stripe</p>
       <p class="pricing-guarantee">Rétractation 14 jours : exercice en ligne en un clic, <a href="/retractation.html#renoncer">Renoncer au contrat ici</a>.</p>
+      {% endif %}
     </div>
   </div>
 </section>
@@ -372,11 +394,13 @@ ogImage: "https://www.monbudgetsimple.fr/public/img/notion-guide-hero.webp"
 <section class="guarantee-section reveal" style="padding:60px 0">
   <div class="container">
     <div class="guarantee-box">
+      {% if stripeReady %}
       <h3>14 jours pour changer d'avis. C'est la loi, c'est sans condition.</h3>
       <p>Tu accèdes au guide, tu regardes, et si ça ne te convient pas : tu écris, je rembourse. Aucune question. Tu peux le faire en un clic : <a href="/retractation.html#renoncer">renoncer au contrat ici</a>.</p>
       <h3 style="margin-top:16px">Au-delà des 14 jours : 30 jours pour poser le système et voir le résultat.</h3>
       <p>Si tu suis les 10 étapes, que tu poses tes 3 comptes et ton virement automatique, et que ton mois ne change pas : écris-moi, je te rembourse.</p>
       <p>Cette garantie-là, je peux la faire parce que le système tient. Pas parce que je te promets un miracle. Parce que je sais que la structure marche.</p>
+      {% endif %}
     </div>
   </div>
 </section>
@@ -422,6 +446,7 @@ ogImage: "https://www.monbudgetsimple.fr/public/img/notion-guide-hero.webp"
         </div>
       </div>
 
+      {% if stripeReady %}
       <div class="faq-item" role="listitem">
         <button class="faq-question" aria-expanded="false" aria-controls="faq-4">
           Pourquoi {{ product.priceLaunch }}€ et pas gratuit ?
@@ -445,6 +470,7 @@ ogImage: "https://www.monbudgetsimple.fr/public/img/notion-guide-hero.webp"
           </div>
         </div>
       </div>
+      {% endif %}
 
       <div class="faq-item" role="listitem">
         <button class="faq-question" aria-expanded="false" aria-controls="faq-6">
@@ -453,7 +479,7 @@ ogImage: "https://www.monbudgetsimple.fr/public/img/notion-guide-hero.webp"
         </button>
         <div class="faq-answer" id="faq-6" role="region">
           <div class="faq-answer-inner">
-            À vie. Paiement unique, accès illimité, mises à jour gratuites.
+            Pendant toute la durée de commercialisation du guide, au moins 3 ans. Paiement unique{% if stripeReady %}, mises à jour gratuites incluses{% endif %}.
           </div>
         </div>
       </div>
@@ -465,7 +491,7 @@ ogImage: "https://www.monbudgetsimple.fr/public/img/notion-guide-hero.webp"
         </button>
         <div class="faq-answer" id="faq-7" role="region">
           <div class="faq-answer-inner">
-            Oui. {{ product.priceLaunch }}€ jusqu'au {{ product.dateLimit }}, ensuite {{ product.priceRegular }}€. C'est un prix de lancement pour collecter les premiers retours clients.
+            {% if stripeReady %}Oui. Le prix de lancement ({{ product.priceLaunch }}€ avec le code {{ product.promoCode }}) existe pour collecter les premiers retours clients. Une fois ces retours collectés, il passe à {{ product.priceRegular }}€.{% else %}Probablement. Le guide est gratuit pendant la phase de lancement, ensuite il passera en vente au prix de lancement : {{ product.priceLaunch }}€ avec le code {{ product.promoCode }}, {{ product.priceRegular }}€ sans code.{% endif %}
           </div>
         </div>
       </div>
@@ -477,10 +503,14 @@ ogImage: "https://www.monbudgetsimple.fr/public/img/notion-guide-hero.webp"
 <section class="final-cta">
   <div class="container">
     <h2>Le meilleur moment, c'est maintenant</h2>
-    <p>1 heure pour le poser. 5 minutes par semaine. Dès le premier mois, tu le vois dans le template : ton épargne arrête de descendre. Le prix passe à {{ product.priceRegular }}€ après le {{ product.dateLimit }}. Pas pour punir, pour être honnête : {{ product.priceLaunch }}€ c'est un prix de lancement, il a une date de fin.</p>
+    <p>1 heure pour le poser. 5 minutes par semaine. Dès le premier mois, tu le vois dans le template : ton épargne arrête de descendre.</p>
     <p style="margin-top:12px">Dans un an, deux scénarios. Tu n'as rien changé : même appréhension le 25, même culpabilité, l'épargne qui fond. Ou tu as posé le système : l'épargne part toute seule, un imprévu ne fait plus tout s'effondrer. La différence, ce n'est pas la volonté. C'est le système. Et il se pose en une heure, aujourd'hui.</p>
     {% cta product, 'final', 'Je commence' %}
-    <p class="micro-copy">{{ product.priceLaunch }}€ · jusqu'au {{ product.dateLimit }} · Paiement unique · Paiement sécurisé par Stripe</p>
+    {% if stripeReady %}
+    <p class="micro-copy">{{ product.priceLaunch }}€ avec le code {{ product.promoCode }} · Paiement unique · Paiement sécurisé par Stripe</p>
+    {% else %}
+    <p class="micro-copy">Gratuit pendant la phase de lancement · Accès immédiat</p>
+    {% endif %}
   </div>
 </section>
 {% endblock %}

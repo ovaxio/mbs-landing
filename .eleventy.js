@@ -13,19 +13,21 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ public: "public" });
 
   // ── Shortcode CTA : seule porte vers Stripe ──
-  // Rend un <span> désactivé tant que le lien Stripe n'est pas résolu,
-  // un <a> tracké sinon. Le prix vient TOUJOURS de site.json.
+  // STRIPE_READY=true + lien résolu → <a> tracké vers Stripe (vente).
+  // Sinon → <a> vers l'inscription gratuite Podia (mode Phase 0 : capture email,
+  // pas de bouton mort). Le prix vient TOUJOURS de site.json.
   eleventyConfig.addShortcode("cta", function (product, position, label) {
     const ready = isStripeReady(product.stripeLink, process.env.STRIPE_READY);
-    const text = `${label || "Je commence"} : ${product.priceLaunch}€`;
     const track = `data-track="cta_click" data-track-props='${JSON.stringify({
       product: product.slug,
       position,
     })}'`;
     if (!ready) {
-      return `<span class="cta-primary cta-disabled" aria-disabled="true">${text}</span>`;
+      const fallbackLabel = label || "Accéder gratuitement au guide";
+      return `<a href="${product.podiaLink}" class="cta-primary" ${track} rel="noopener">${fallbackLabel}</a>`;
     }
-    return `<a href="${product.stripeLink}" class="cta-primary" ${track}>${text}</a>`;
+    const text = `${label || "Je commence"} : ${product.priceLaunch}€`;
+    return `<a href="${product.stripeLink}" class="cta-primary" ${track} rel="noopener">${text}</a>`;
   });
 
   // Année courante pour le footer (pas de drift annuel).
@@ -47,6 +49,12 @@ module.exports = function (eleventyConfig) {
   // Produits indexés par slug, pour les layouts/pages : productsBySlug['guide-express'].
   eleventyConfig.addGlobalData("productsBySlug", () =>
     Object.fromEntries(site.products.map((p) => [p.slug, p]))
+  );
+
+  // Vente activée ? (un seul produit publié : guide-express). Utilisé par les
+  // templates pour adapter pricing + micro-copys au mode Phase 0 / vente.
+  eleventyConfig.addGlobalData("stripeReady", () =>
+    isStripeReady(site.products[0].stripeLink, process.env.STRIPE_READY)
   );
 
   return {

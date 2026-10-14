@@ -40,11 +40,15 @@ describe("invariants de config (site.json)", () => {
     }
   });
 
-  test("dateLimit non vide pour les produits avec page publiée", () => {
+  test("dateLimit : vide autorisé (pas de deadline affichée), jamais de texte de deadline en dur", () => {
     for (const p of site.products) {
-      if (p.publishPage) {
-        expect(p.dateLimit.length).toBeGreaterThan(0);
-      }
+      expect(typeof p.dateLimit).toBe("string");
+    }
+    // Invariant anti-régression : le copy n'affiche une deadline que si
+    // site.json en porte une (fin des fausses urgences datées, audit §3.8).
+    const landing = require("fs").readFileSync("dist/guide-express.html", "utf8");
+    if (!site.products[0].dateLimit) {
+      expect(landing).not.toMatch(/jusqu'au\s*(<[^>]+>)*\s*(15|16)\s*octobre/);
     }
   });
 

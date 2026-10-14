@@ -6,6 +6,21 @@
   publish = "dist"
 
 # ─────────────────────────────────────────────────────────────
+# ENV BUILD
+# STRIPE_READY = "false" → mode Phase 0 : CTA = inscription gratuite Podia
+#   (capture email, pas de vente publique).
+# STRIPE_READY = "true" → vente activée : CTA = Stripe Payment Link.
+#   ⚠️ Avant de passer à true : adhésion médiateur de la consommation
+#   (obligation L612-1, sanction L641-1) + téléphone LCEN + date reprise EI
+#   dans src/_data/site.json.
+# ─────────────────────────────────────────────────────────────
+[context.production.environment]
+  STRIPE_READY = "false"
+
+[context.deploy-preview.environment]
+  STRIPE_READY = "true"
+
+# ─────────────────────────────────────────────────────────────
 # CONFIG GLOBALE
 # ─────────────────────────────────────────────────────────────
 

@@ -96,11 +96,13 @@ describe("pages générées", () => {
         expect(html).not.toContain("cta-disabled");
       });
     } else {
-      test("état transitoire : CTA désactivé, jamais de lien cliquable vers le placeholder", () => {
+      test("état transitoire : CTA cliquable vers l'inscription gratuite Podia, jamais vers le placeholder Stripe", () => {
         const html = read("guide-express.html");
-        expect(html).toContain("cta-disabled");
+        expect(html).not.toContain("cta-disabled");
+        expect(html).toContain(`href="${product.podiaLink}"`);
         expect(html).not.toMatch(/<a[^>]+href="[^"]*__REMPLACE/);
         expect(html).not.toContain(`href="${product.stripeLink}"`);
+        expect(html).toContain("Gratuit pendant la phase de lancement");
       });
     }
   });
@@ -173,9 +175,14 @@ describe("conformité légale (audit multifractal 2026-09-02)", () => {
     expect(html).toContain("médiateur");
   });
 
-  test("landing : annonce existence + emplacement fonctionnalité rétractation", () => {
+  test("landing : fonctionnalité rétractation présente en mode vente, absente en mode gratuit", () => {
     const html = read("guide-express.html");
-    expect(html).toContain("/retractation.html#renoncer");
+    if (stripeReady) {
+      expect(html).toContain("/retractation.html#renoncer");
+    } else {
+      // Mode Phase 0 : pas de vente, pas de rétractation à exercer.
+      expect(html).not.toContain("/retractation.html#renoncer");
+    }
   });
 
   test("confidentialité : bases légales, destinataires nommés, transferts, durées", () => {
