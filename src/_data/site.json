@@ -5,9 +5,9 @@
     "contactEmail": "guillaume@monbudgetsimple.fr"
   },
   "tracking": {
-    "umamiId": "9ddbd906-f59d-4d0f-8fcc-42e3ae7f4f31",
-    "umamiSrc": "https://cloud.umami.is/script.js",
-    "umamiRegion": ""
+    "umamiId": "a3d2f000-1883-437b-9c2b-f8af2057d05a",
+    "umamiSrc": "https://umami.hub.codeblend.fr/script.js",
+    "umamiRegion": "UE (auto-hébergé VPS hub-codeblend, docker /opt/workspace/umami)"
   },
   "legal": {
     "company": "Codeblend",
