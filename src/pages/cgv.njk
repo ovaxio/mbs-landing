@@ -1,0 +1,190 @@
+---
+permalink: /cgv.html
+title: "Conditions Générales de Vente — Mon Budget Simple"
+description: "Conditions Générales de Vente de Mon Budget Simple"
+---
+{% extends "../_layouts/legal.njk" %}
+{% block legalContent %}
+{% set product = productsBySlug['guide-express'] %}
+<h1>Conditions Générales de Vente</h1>
+<p class="legal-updated">Dernière mise à jour : 3 septembre 2026</p>
+
+<h2>1. Objet</h2>
+<p>
+  Les présentes Conditions Générales de Vente (CGV) régissent la vente de contenus numériques par {{ site.brand.name }},
+  édité par {{ site.legal.company }}, {{ site.legal.form }} au capital de {{ site.legal.capital }}, immatriculée au {{ site.legal.rcs }},
+  siège social {{ site.legal.address }}{% if site.legal.vat %}, n° de TVA intracommunautaire {{ site.legal.vat }}{% endif %},
+  auprès des consommateurs sur le site {{ site.brand.domain }}.
+  {% if site.legal.phone %}Téléphone : {{ site.legal.phone }}.{% endif %}
+  Contact : {{ site.brand.contactEmail }}.
+</p>
+<p>
+  Codeblend EURL poursuit l'exploitation de Mon Budget Simple dans le cadre d'une reprise de l'activité d'édition
+  auparavant exercée par Guillaume Chambard en entreprise individuelle.
+  {% if site.legal.eiSuccessionDate %}Codeblend EURL vient aux droits de l'entreprise individuelle Guillaume Chambard pour les contrats conclus avant le {{ site.legal.eiSuccessionDate }}.{% endif %}
+</p>
+
+<h2>2. Produits</h2>
+<p>
+  Le vendeur commercialise des contenus numériques (guides et formations en ligne), décrits sur leur page de présentation
+  du site {{ site.brand.domain }}. Chaque produit est livré par accès en ligne après achat.
+</p>
+<ul>
+  {% for p in site.products %}
+  <li>{{ p.name }} : prix de lancement {{ p.priceLaunch }},00 € TTC{% if p.dateLimit %} (jusqu'au {{ p.dateLimit }}){% endif %}, puis {{ p.priceRegular }},00 € TTC.</li>
+  {% endfor %}
+</ul>
+
+<h2>3. Prix</h2>
+<p>
+  Prix de lancement du {{ product.name }} : {{ product.priceLaunch }},00 € TTC, paiement unique, jusqu'au {{ product.dateLimit }} inclus.
+  À compter du lendemain de cette date, le prix sera de {{ product.priceRegular }},00 € TTC.
+</p>
+<p>Le prix applicable est celui affiché au moment de l'achat. Le paiement est sécurisé par Stripe.</p>
+
+<h2>4. Commande et paiement</h2>
+<p>
+  La commande est validée après paiement. Le paiement est effectué via Stripe, qui gère les transactions de manière sécurisée.
+  À l'issue du paiement, le client accède au produit via le lien fourni sur la page de confirmation.
+</p>
+<p>
+  Une note ou facture est délivrée pour chaque commande. Elle peut être demandée à tout moment à {{ site.brand.contactEmail }}.
+</p>
+<p>
+  <strong>Rétractation en ligne</strong> : une fonctionnalité permettant d'exercer gratuitement votre droit de rétractation
+  est disponible en ligne, en un clic, sur la page <a href="/retractation.html#renoncer">rétractation (« Renoncer au contrat ici »)</a>,
+  pendant toute la durée du délai légal.
+</p>
+
+<h2>5. Droit de rétractation (14 jours)</h2>
+<p>
+  Conformément à l'article L221-18 du Code de la consommation, le consommateur dispose d'un délai de 14 jours pour
+  exercer son droit de rétractation, sans avoir à motiver sa décision et sans frais.
+</p>
+<p>
+  Vous pouvez exercer ce droit :
+</p>
+<ul>
+  <li>via la fonctionnalité en ligne disponible sur la page <a href="/retractation.html#renoncer">rétractation (« Renoncer au contrat ici »)</a> ;</li>
+  <li>ou par toute déclaration claire adressée à {{ site.brand.contactEmail }}.</li>
+</ul>
+<p>
+  En cas de rétractation, le remboursement intervient dans les 14 jours à compter du jour où le professionnel est informé
+  de votre décision, par le même moyen de paiement que celui utilisé pour la transaction.
+</p>
+
+<h2>6. Garantie légale de conformité (contenus numériques)</h2>
+<div style="border:1px solid var(--muted); border-radius:8px; padding:20px 24px; background:var(--soft-bg); margin-top:12px">
+<p>
+Le consommateur a droit à la mise en œuvre de la garantie légale de conformité en cas d'apparition d'un défaut de conformité durant un délai de {{ site.legal.guaranteeDigitalPeriod }} à compter de la fourniture du contenu numérique ou du service numérique. Durant ce délai, le consommateur n'est tenu d'établir que l'existence du défaut de conformité et non la date d'apparition de celui-ci.
+</p>
+<p>
+La garantie légale de conformité emporte obligation de fournir toutes les mises à jour nécessaires au maintien de la conformité du contenu numérique ou du service numérique durant {{ site.legal.guaranteeDigitalPeriod }}.
+</p>
+<p>
+La garantie légale de conformité donne au consommateur droit à la mise en conformité du contenu numérique ou du service numérique sans retard injustifié suivant sa demande, sans frais et sans inconvénient majeur pour lui.
+</p>
+<p>
+Le consommateur peut obtenir une réduction du prix en conservant le contenu numérique ou le service numérique, ou il peut mettre fin au contrat en se faisant rembourser intégralement contre renoncement au contenu numérique ou au service numérique, si :
+</p>
+<ol style="padding-left:20px">
+<li>Le professionnel refuse de mettre le contenu numérique ou le service numérique en conformité ;</li>
+<li>La mise en conformité du contenu numérique ou du service numérique est retardée de manière injustifiée ;</li>
+<li>La mise en conformité du contenu numérique ou du service numérique ne peut intervenir sans frais imposés au consommateur ;</li>
+<li>La mise en conformité du contenu numérique ou du service numérique occasionne un inconvénient majeur pour le consommateur ;</li>
+<li>La non-conformité du contenu numérique ou du service numérique persiste en dépit de la tentative de mise en conformité du professionnel restée infructueuse.</li>
+</ol>
+<p>
+Le consommateur a également droit à une réduction du prix ou à la résolution du contrat lorsque le défaut de conformité est si grave qu'il justifie que la réduction du prix ou la résolution du contrat soit immédiate. Le consommateur n'est alors pas tenu de demander la mise en conformité du contenu numérique ou du service numérique au préalable.
+</p>
+<p>
+Dans les cas où le défaut de conformité est mineur, le consommateur n'a droit à l'annulation du contrat que si le contrat ne prévoit pas le paiement d'un prix.
+</p>
+<p>
+Toute période d'indisponibilité du contenu numérique ou du service numérique en vue de sa remise en conformité suspend la garantie qui restait à courir jusqu'à la fourniture du contenu numérique ou du service numérique de nouveau conforme.
+</p>
+<p>
+Ces droits résultent de l'application des articles L. 224-25-1 à L. 224-25-31 du code de la consommation.
+</p>
+<p>
+Le professionnel qui fait obstacle de mauvaise foi à la mise en œuvre de la garantie légale de conformité encourt une amende civile d'un montant maximal de 300 000 euros, qui peut être porté jusqu'à 10 % du chiffre d'affaires moyen annuel (article L. 242-18-1 du code de la consommation).
+</p>
+<p>
+Le consommateur bénéficie également de la garantie légale des vices cachés en application des articles 1641 à 1649 du code civil, pendant une durée de deux ans à compter de la découverte du défaut. Cette garantie donne droit à une réduction de prix si le contenu numérique ou le service numérique est conservé, ou à un remboursement intégral contre renonciation au contenu numérique ou au service numérique.
+</p>
+</div>
+
+<h2>7. Garantie commerciale (30 jours conditionnelle)</h2>
+<p>
+  En complément du droit légal de rétractation et de la garantie légale de conformité, qui s'appliquent en tout état de cause,
+  Mon Budget Simple offre une garantie commerciale de 30 jours : si le client suit les 10 étapes du guide, pose ses 3 comptes
+  et son virement automatique, et que son mois ne change pas, le prix lui est remboursé sur simple demande par email à
+  {{ site.brand.contactEmail }}.
+</p>
+<p>
+  Cette garantie est offerte volontairement par le vendeur et ne remplace pas les droits légaux du consommateur.
+  Sa communication vaut engagement irrévocable du vendeur, dont le contenu, les modalités de mise en œuvre, la durée (30 jours)
+  et le garant ({{ site.legal.company }}) sont précisés dans les présentes CGV.
+</p>
+
+<h2>8. Propriété intellectuelle et obligations du client</h2>
+<p>
+  Les contenus vendus sont destinés à un usage personnel et non commercial. Toute reproduction, redistribution ou revente
+  du contenu est interdite sans autorisation écrite préalable.
+</p>
+<p>
+  Les accès aux contenus sont nominatifs. Le client s'engage à ne pas partager ses identifiants d'accès avec des tiers.
+  Le partage d'un compte peut entraîner la suspension de l'accès, sans remboursement.
+</p>
+
+<h2>9. Service client et réclamations</h2>
+<p>
+  Pour toute question, réclamation ou demande, contacter : {{ site.brand.contactEmail }}{% if site.legal.phone %} ou {{ site.legal.phone }}{% endif %}.
+  Le vendeur s'efforce de répondre sous 48h ouvrées.
+</p>
+
+<h2>10. Médiation de la consommation</h2>
+{% if site.legal.mediator.name %}
+<p>
+  Conformément à l'article L616-1 du Code de la consommation, en cas de litige non résolu avec le service client,
+  le consommateur peut recourir gratuitement au médiateur de la consommation dont le vendeur relève :
+</p>
+<ul>
+  <li>{{ site.legal.mediator.name }}</li>
+  <li>Adresse : {{ site.legal.mediator.address }}</li>
+  <li>Site : <a href="{{ site.legal.mediator.website }}" rel="nofollow">{{ site.legal.mediator.website }}</a></li>
+</ul>
+{% else %}
+<p>
+  En cas de litige non résolu avec le service client, le consommateur peut recourir à un médiateur de la consommation.
+  Les coordonnées du médiateur de la consommation retenu par le vendeur seront indiquées sur cette page dès leur désignation.
+</p>
+{% endif %}
+
+<h2>11. Données personnelles</h2>
+<p>
+  Le traitement des données personnelles est décrit dans la <a href="/confidentialite.html">politique de confidentialité</a>.
+</p>
+
+<h2>12. Force majeure</h2>
+<p>
+  Le vendeur n'est tenu responsable de la non-exécution de ses obligations qu'en cas de survenance d'un événement
+  à caractère de force majeure au sens de l'article 1218 du Code civil. La partie affectée informe l'autre partie
+  promptement de l'impossibilité d'exécuter ses obligations et des moyens qu'elle y consacre.
+</p>
+
+<h2>13. Langue, modification des CGV</h2>
+<p>
+  Le présent contrat est rédigé en langue française. Les présentes CGV sont datées et peuvent être modifiées.
+  Les CGV applicables sont celles en vigueur au jour de la commande ; leurs modifications ultérieures ne s'appliquent
+  pas aux commandes déjà passées.
+</p>
+
+<h2>14. Droit applicable et litiges</h2>
+<p>
+  Les présentes CGV sont soumises au droit français, sous réserve des dispositions impératives plus protectrices
+  de l'État de résidence du consommateur. En cas de litige, et à défaut de résolution amiable (y compris par
+  la médiation visée à la section 10), le consommateur peut saisir la juridiction du lieu de son domicile ou
+  les tribunaux français compétents.
+</p>
+{% endblock %}

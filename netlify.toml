@@ -1,35 +1,164 @@
-# Netlify configuration for go.monbudgetsimple.fr
+# Netlify configuration for www.monbudgetsimple.fr
+# (migration depuis go.monbudgetsimple.fr, 2026-09-01)
 
-# Redirect root to main website
+[build]
+  command = "npm ci && npx eleventy && npx jest"
+  publish = "dist"
+
+# ─────────────────────────────────────────────────────────────
+# CONFIG GLOBALE
+# ─────────────────────────────────────────────────────────────
+
 [[redirects]]
   from = "/"
-  to = "https://www.monbudgetsimple.fr"
-  status = 302
+  to = "/index.html"
+  status = 200
+
+# ─────────────────────────────────────────────────────────────
+# REDIRECTIONS POST-PROD (à activer au moment du switch DNS)
+# ─────────────────────────────────────────────────────────────
+
+# Blog SEO → Podia (learn.)
+[[redirects]]
+  from = "/blog/*"
+  to = "https://learn.monbudgetsimple.fr/blog/:splat"
+  status = 301
   force = true
 
-# Security headers
+# Anciennes landing pages Podia → nouvelle landing Netlify
+[[redirects]]
+  from = "/reprendre-son-budget"
+  to = "/guide-express.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/reprendre-son-budget-promo"
+  to = "/guide-express.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/reprendre-son-budget/buy"
+  to = "https://learn.monbudgetsimple.fr/guide-express-notion/buy"
+  status = 301
+  force = true
+
+# Cours Podia → learn.
+[[redirects]]
+  from = "/guide-express-notion/*"
+  to = "https://learn.monbudgetsimple.fr/guide-express-notion/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/mon-budget-a-deux-simplement/*"
+  to = "https://learn.monbudgetsimple.fr/mon-budget-a-deux-simplement/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pack-tresorerie-freelance/*"
+  to = "https://learn.monbudgetsimple.fr/pack-tresorerie-freelance/:splat"
+  status = 301
+  force = true
+
+# Personas archivés / pages vitrine Podia → homepage Netlify
+[[redirects]]
+  from = "/parcours-mbs"
+  to = "/index.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/budget-freelance-serein"
+  to = "/index.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/budget-parent-solo"
+  to = "/index.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/budget-jeune-actif"
+  to = "/index.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/nouvelle-vie-financiere"
+  to = "/index.html"
+  status = 301
+  force = true
+
+# Pages légales → nouvelle version Netlify
+[[redirects]]
+  from = "/mentions-legales"
+  to = "/mentions-legales.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacy"
+  to = "/confidentialite.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/terms"
+  to = "/cgv.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact-mbs"
+  to = "mailto:guillaume@monbudgetsimple.fr"
+  status = 301
+  force = true
+
+# Pages hors build MVP → Podia / homepage (évite 404)
+[[redirects]]
+  from = "/budget-a-deux.html"
+  to = "https://learn.monbudgetsimple.fr/mon-budget-a-deux-simplement"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/runway.html"
+  to = "https://www.monbudgetsimple.fr/"
+  status = 301
+  force = true
+
+# Page 404
+[[redirects]]
+  from = "/404"
+  to = "/404.html"
+  status = 200
+
+# ─────────────────────────────────────────────────────────────
+# HEADERS SÉCURITÉ (valeurs EXACTES)
+# ─────────────────────────────────────────────────────────────
+
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "DENY"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://cloud.umami.is 'unsafe-inline'; connect-src 'self' https://cloud.umami.is https://api.umami.is; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://www.monbudgetsimple.fr; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
 
-# HTML: always revalidate
+# HTML : toujours revalider
 [[headers]]
   for = "/*.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# CSS: cache with revalidation
+# Assets : cache immutable
 [[headers]]
-  for = "/*.css"
+  for = "/public/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
-
-# 404 page
-[[redirects]]
-  from = "/*"
-  to = "https://www.monbudgetsimple.fr"
-  status = 302

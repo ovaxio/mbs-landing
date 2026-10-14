@@ -1,0 +1,41 @@
+{
+  "$description": "Charte MBS — valeurs canoniques. SOURCE = ce fichier vault. Format W3C DTCG 2025.10, écrit à la main, aucun outillage requis. La prose vit dans BRAND.md. Synchronisé vers ~/CascadeProjects/mbs/ via _meta/lib/sync-mbs-brand.sh.",
+  "color": {
+    "beige":           { "$value": "#F2EBE0", "$type": "color", "$description": "Fond principal" },
+    "soft-bg":         { "$value": "#FAF7F3", "$type": "color", "$description": "Fond secondaire, surfaces posées" },
+    "white":           { "$value": "#FEFCF9", "$type": "color", "$description": "Surface haute, blanc tiédi" },
+    "brown":           { "$value": "#2C1F14", "$type": "color", "$description": "Texte principal, traits, contours" },
+    "text-secondary":  { "$value": "#5C4A3A", "$type": "color" },
+    "text-tertiary":   { "$value": "#8A7565", "$type": "color", "$description": "Légendes, labels" },
+    "terracotta":      { "$value": "#C4614A", "$type": "color", "$description": "Accent de marque. Jamais de texte blanc en taille courante" },
+    "terracotta-dark": { "$value": "#A8503D", "$type": "color", "$description": "Couleur d'action. Blanc dessus = 5,41:1" },
+    "gold":            { "$value": "#C4A882", "$type": "color", "$description": "Décoratif uniquement. Jamais de texte" },
+    "light-gold":      { "$value": "#D4BFA0", "$type": "color", "$description": "Décoratif, surfaces" },
+    "muted":           { "$value": "#D4C4B8", "$type": "color", "$description": "Séparateurs, états inactifs" },
+    "before-bg":       { "$value": "#FDF3F1", "$type": "color", "$description": "Fond des blocs avant/problème" }
+  },
+  "semantic": {
+    "action":       { "$value": "{color.terracotta-dark}", "$type": "color" },
+    "accent":       { "$value": "{color.terracotta}", "$type": "color" },
+    "text":         { "$value": "{color.brown}", "$type": "color" },
+    "surface":      { "$value": "{color.beige}", "$type": "color" },
+    "on-action":    { "$value": "#FFFFFF", "$type": "color" }
+  },
+  "font": {
+    "display": { "$value": "DM Serif Display", "$type": "fontFamily", "$description": "Titres. Graisse 400 uniquement" },
+    "body":    { "$value": "Inter", "$type": "fontFamily", "$description": "Corps. 400 / 500 / 600" }
+  },
+  "size": {
+    "micro":     { "$value": "0.78rem", "$type": "dimension" },
+    "small":     { "$value": "0.85rem", "$type": "dimension" },
+    "secondary": { "$value": "0.95rem", "$type": "dimension" },
+    "body":      { "$value": "1rem",    "$type": "dimension" },
+    "emphasis":  { "$value": "1.1rem",  "$type": "dimension" }
+  },
+  "rule": {
+    "contrast-text":     { "$value": 4.5, "$type": "number", "$description": "Minimum pour tout texte fonctionnel" },
+    "contrast-adjacent": { "$value": 3.0, "$type": "number", "$description": "Minimum entre deux aplats qui se touchent, sinon contour brown" },
+    "cta-min-height":    { "$value": "48px", "$type": "dimension" },
+    "body-min-mobile":   { "$value": "16px", "$type": "dimension" }
+  }
+}

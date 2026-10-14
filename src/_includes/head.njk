@@ -1,0 +1,31 @@
+{# <head> unique : meta, OG, favicon, fonts, Umami, CSS. Variables attendues : title, description, robots, ogTitle, ogDescription, ogImage, umami (booléen). canonicalUrl dérivé de page.url. #}
+{% set canonicalUrl = 'https://' + site.brand.domain + page.url %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% if description %}<meta name="description" content="{{ description }}">{% endif %}
+<meta name="robots" content="{{ robots or 'index, follow' }}">
+<title>{{ title }}</title>
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+{% if ogTitle %}
+<meta property="og:title" content="{{ ogTitle }}">
+<meta property="og:description" content="{{ ogDescription }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ canonicalUrl }}">
+{% if ogImage %}<meta property="og:image" content="{{ ogImage }}">{% endif %}
+<meta property="og:locale" content="fr_FR">
+{% endif %}
+{% if canonicalUrl %}<link rel="canonical" href="{{ canonicalUrl }}">{% endif %}
+
+{% if umami is not defined or umami %}
+<!-- Umami (zéro cookie, pas de bandeau RGPD) -->
+<script defer src="{{ site.tracking.umamiSrc }}" data-website-id="{{ site.tracking.umamiId }}"></script>
+{% endif %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/styles.css">

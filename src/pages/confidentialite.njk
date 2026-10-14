@@ -1,0 +1,124 @@
+---
+permalink: /confidentialite.html
+title: "Politique de confidentialité — Mon Budget Simple"
+description: "Politique de confidentialité de Mon Budget Simple"
+---
+{% extends "../_layouts/legal.njk" %}
+{% block legalContent %}
+<h1>Politique de confidentialité</h1>
+<p class="legal-updated">Dernière mise à jour : 3 septembre 2026</p>
+
+<h2>1. Responsable du traitement</h2>
+<p>
+  Le responsable du traitement des données est {{ site.legal.company }} {{ site.legal.form }}, {{ site.legal.address }}.
+  Contact : {{ site.brand.contactEmail }}.
+  Aucun Délégué à la Protection des Données (DPO) n'est désigné, cette désignation n'étant pas obligatoire au sens de
+  l'article 37.1 du RGPD ; toute demande peut être adressée directement au contact ci-dessus.
+</p>
+
+<h2>2. Données collectées</h2>
+<p>Nous collectons uniquement les données nécessaires au fonctionnement du service :</p>
+<ul>
+  <li><strong>Données de paiement</strong> : traitées exclusivement par Stripe (nom, email, coordonnées de paiement). Nous ne stockons jamais les données bancaires.</li>
+  <li><strong>Données d'accès</strong> : l'email fourni lors de la création du compte sur la plateforme d'hébergement des formations.</li>
+  <li><strong>Données de contact</strong> : l'email que vous laissez volontairement (newsletter, guides gratuits, formulaires).</li>
+  <li><strong>Données d'audience</strong> : données de navigation pseudonymisées, collectées sans cookie ni identifiant personnel.</li>
+</ul>
+
+<h2>3. Finalités et bases légales</h2>
+<p>Chaque traitement repose sur une base légale prévue par le RGPD (article 6) :</p>
+<ul>
+  <li><strong>Exécution de la commande et accès au produit</strong> : exécution du contrat (art. 6.1.b).</li>
+  <li><strong>Facturation et obligations comptables</strong> : obligation légale (art. 6.1.c).</li>
+  <li><strong>Mesure d'audience</strong> : intérêt légitime (art. 6.1.f).</li>
+  <li><strong>Newsletter et guides gratuits contre email</strong> : consentement (art. 6.1.a).</li>
+  <li><strong>Séquences promotionnelles adressées aux clients</strong> : intérêt légitime, dans les conditions de l'article L34-5 du Code des postes et des communications électroniques (produits analogues).</li>
+  <li><strong>Témoignages clients publiés</strong> : consentement écrit et daté (art. 6.1.a).</li>
+</ul>
+
+<h2>4. Prospection commerciale par email</h2>
+<ul>
+  <li>La <strong>newsletter</strong> et l'envoi de <strong>guides gratuits contre email</strong> ne sont réalisés qu'après recueil de votre <strong>consentement exprès</strong>, conservé avec la preuve de sa collecte (horodatage, libellé, formulaire d'origine).</li>
+  <li>Les <strong>emails promotionnels adressés à nos clients</strong>, portant sur des produits ou services analogues, reposent sur l'exception de l'article L34-5 du CPCE : votre email a été recueilli directement, à l'occasion d'une vente, et chaque message vous offre un moyen de vous opposer gratuitement. La simple création d'un compte sans achat n'ouvre pas cette exception.</li>
+  <li>Vous pouvez vous opposer à tout moment, gratuitement, via le lien de désinscription présent dans chaque email ou en écrivant à {{ site.brand.contactEmail }}.</li>
+</ul>
+
+<h2>5. Traceurs dans les emails</h2>
+<p>
+  Conformément à la recommandation de la CNIL du 12 mars 2026 sur les pixels de suivi dans les courriels :
+</p>
+<ul>
+  <li>Les emails de prospection envoyés sur le fondement de l'exception client (sans consentement préalable) ne contiennent <strong>aucun traceur d'ouverture</strong>.</li>
+  <li>Sur les emails auxquels vous avez expressément souscrit (newsletter), la mesure est limitée à la <strong>date de dernière ouverture</strong>, à des fins de délivrabilité (identification des adresses inactives). Aucun taux d'ouverture individuel ni aucune personnalisation fondée sur vos ouvertures n'est exploité.</li>
+</ul>
+<p>
+  Vous pouvez retirer votre consentement à tout moment via le lien de désinscription présent dans chaque email.
+</p>
+
+<h2>6. Mesure d'audience (Umami)</h2>
+<p>
+  Ce site utilise Umami Cloud (éditeur : Umami Software, Inc., États-Unis) pour mesurer son audience. D'après notre
+  auto-évaluation au regard des critères de la CNIL, cette mesure relève du régime de l'intérêt légitime sans
+  recueil préalable du consentement, car elle :
+</p>
+<ul>
+  <li>Ne dépose <strong>aucun cookie</strong> sur le terminal de l'utilisateur</li>
+  <li>Collecte des données <strong>pseudonymisées</strong> (pages vues, source de trafic, appareil), sans identifiant permettant de relier les visites à une personne</li>
+  <li>Ne permet pas, par conception, de ré-identifier un utilisateur</li>
+</ul>
+<p>
+  Malgré cette exemption, vous disposez d'un <strong>droit d'opposition effectif</strong> :
+</p>
+<p style="text-align:center; margin:20px 0">
+  <button type="button" class="cta-primary" id="umami-optout">Refuser la mesure d'audience sur ce navigateur</button>
+</p>
+<p class="legal-updated" id="umami-optout-confirm" style="display:none">
+  Votre opposition a été enregistrée sur ce navigateur. Umami ne collectera plus aucune donnée de navigation sur celui-ci.
+</p>
+
+<h2>7. Sous-traitants et transferts hors Union européenne</h2>
+<p>Nous faisons appel aux prestataires suivants pour le traitement des données :</p>
+<ul>
+  <li><strong>Stripe</strong> (Stripe Payments Europe, Ltd, Irlande) : traitement des paiements.</li>
+  <li><strong>Podia Labs, Inc.</strong> (États-Unis) : hébergement des formations, création de compte et accès aux contenus.</li>
+  <li><strong>Netlify, Inc.</strong> (États-Unis) : hébergement de ce site.</li>
+  <li><strong>Umami Software, Inc.</strong> (États-Unis) : mesure d'audience (données pseudonymisées).</li>
+</ul>
+<p>
+  Ces prestataires ont leur siège ou leurs serveurs hors Union européenne. Les transferts sont encadrés par :
+</p>
+<ul>
+  <li>la décision d'adéquation européenne <strong>EU-US Data Privacy Framework</strong> du 10 juillet 2023 (Netlify, Stripe et Umami déclarent y être certifiés) ; et</li>
+  <li>en alternative, les <strong>clauses contractuelles types</strong> de la décision 2021/914 (garantie de l'article 46.2 du RGPD). Une copie de ces garanties peut être obtenue sur simple demande à {{ site.brand.contactEmail }}.</li>
+</ul>
+
+<h2>8. Durées de conservation</h2>
+<ul>
+  <li><strong>Prospects non clients</strong> : 3 ans à compter du dernier contact émanant du prospect.</li>
+  <li><strong>Clients</strong> : durée de la relation commerciale, puis 3 ans pour la prospection.</li>
+  <li><strong>Facturation et comptabilité</strong> : 10 ans à compter de la clôture de l'exercice (art. L123-22 du Code de commerce).</li>
+  <li><strong>Données de mesure d'audience</strong> : 25 mois maximum.</li>
+  <li><strong>Liste d'opposition à la prospection</strong> : 3 ans minimum.</li>
+</ul>
+
+<h2>9. Vos droits</h2>
+<p>
+  Conformément au RGPD, vous disposez des droits suivants sur vos données personnelles : accès, rectification, effacement,
+  limitation, portabilité, opposition. Vous disposez également du droit de <strong>retirer votre consentement</strong> à tout
+  moment, lorsque un traitement repose sur celui-ci, sans affecter la licéité du traitement antérieur.
+</p>
+<p>
+  Vous pouvez exercer ces droits en écrivant à {{ site.brand.contactEmail }}. Vous pouvez également introduire une réclamation
+  auprès de la CNIL (www.cnil.fr).
+</p>
+<ul>
+  <li><strong>Caractère obligatoire ou facultatif</strong> : les données marquées comme obligatoires lors de la commande sont nécessaires à son exécution ; leur absence empêche la conclusion du contrat. Les données de prospection (newsletter) sont facultatives ; leur absence n'a aucune conséquence sur l'accès au produit.</li>
+  <li><strong>Décisions automatisées et profilage</strong> : aucun traitement n'implique de décision individuelle automatisée au sens de l'article 22 du RGPD, ni de profilage.</li>
+  <li><strong>Directives post-mortem</strong> : vous pouvez définir des directives relatives à la conservation, à l'effacement et à la communication de vos données après votre décès (art. 85 de la loi Informatique et Libertés), en les adressant à {{ site.brand.contactEmail }}.</li>
+</ul>
+
+<h2>10. Sécurité</h2>
+<p>
+  Les données sont transmises de manière sécurisée (HTTPS). Le paiement est géré par Stripe, certifié PCI-DSS.
+</p>
+{% endblock %}

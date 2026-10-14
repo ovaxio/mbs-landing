@@ -1,0 +1,75 @@
+{
+  "brand": {
+    "name": "Mon Budget Simple",
+    "domain": "www.monbudgetsimple.fr",
+    "contactEmail": "guillaume@monbudgetsimple.fr"
+  },
+  "tracking": {
+    "umamiId": "9ddbd906-f59d-4d0f-8fcc-42e3ae7f4f31",
+    "umamiSrc": "https://cloud.umami.is/script.js",
+    "umamiRegion": ""
+  },
+  "legal": {
+    "company": "Codeblend",
+    "form": "EURL",
+    "capital": "1 000,00 €",
+    "address": "9 rue Gabriel Fauré, 69380 Chazay d'Azergues, France",
+    "siren": "999 389 471",
+    "siret": "99938947100023",
+    "rcs": "RCS Villefranche-Tarare n° 999 389 471",
+    "director": "Guillaume Chambard",
+    "phone": "",
+    "vat": "FR81 999389471",
+    "host": {
+      "name": "Netlify, Inc.",
+      "address": "101 2nd Street, Suite 300, San Francisco, CA 94105, États-Unis",
+      "url": "https://www.netlify.com",
+      "contact": "assistance en ligne via www.netlify.com (aucun numéro de téléphone publié par l'hébergeur)"
+    },
+    "mediator": {
+      "name": "",
+      "address": "",
+      "website": ""
+    },
+    "eiSuccessionDate": "",
+    "guaranteeDigitalPeriod": "toute la durée pendant laquelle le contenu numérique reste accessible au client"
+  },
+  "products": [
+    {
+      "slug": "guide-express",
+      "name": "Guide Express",
+      "title": "Guide Express MBS : arrête de finir le mois à zéro",
+      "tagline": "Tu gagnes assez. Tu finis quand même à zéro.",
+      "priceLaunch": 39,
+      "priceRegular": 59,
+      "dateLimit": "15 octobre 2026",
+      "stripeLink": "https://buy.stripe.com/__REMPLACE_PAR_LIEN_39__",
+      "podiaLink": "https://www.monbudgetsimple.fr/guide-express-notion/buy",
+      "publishPage": true
+    },
+    {
+      "slug": "budget-a-deux",
+      "name": "Budget à Deux Simplement",
+      "title": "Budget à Deux Simplement : gérer l'argent à deux sans tensions",
+      "tagline": "Le reste à vivre identique, la méthode qui apaise les couples.",
+      "priceLaunch": 69,
+      "priceRegular": 79,
+      "dateLimit": "",
+      "stripeLink": "https://buy.stripe.com/__REMPLACE_PAR_LIEN_69__",
+      "podiaLink": "https://www.monbudgetsimple.fr/mon-budget-a-deux-simplement/buy",
+      "publishPage": false
+    },
+    {
+      "slug": "pack-freelance",
+      "name": "Pack Freelance",
+      "title": "Pack Freelance : un salaire stable avec des revenus variables",
+      "tagline": "Se payer un salaire stable, même avec des revenus irréguliers.",
+      "priceLaunch": 97,
+      "priceRegular": 117,
+      "dateLimit": "",
+      "stripeLink": "https://buy.stripe.com/__REMPLACE_PAR_LIEN_97__",
+      "podiaLink": "https://www.monbudgetsimple.fr/pack-tresorerie-freelance/buy",
+      "publishPage": false
+    }
+  ]
+}

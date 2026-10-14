@@ -1,0 +1,98 @@
+---
+title: "Confirmation de commande — Mon Budget Simple"
+description: "Merci pour ton achat — Mon Budget Simple"
+robots: "noindex, nofollow"
+---
+{% extends "../_layouts/base.njk" %}
+{% block headExtra %}
+<style>
+  /* ───── PAGE-SPECIFIC: Confirmation ───── */
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .confirmation {
+    background: var(--beige);
+    flex: 1;
+    padding: 80px 24px;
+    text-align: center;
+  }
+  .confirmation-icon {
+    font-size: 4rem;
+    line-height: 1;
+    margin-bottom: 24px;
+    display: block;
+  }
+  .confirmation h1 {
+    margin-bottom: 20px;
+  }
+  .confirmation .confirmation-text {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 520px;
+    margin: 0 auto 36px;
+  }
+  .confirmation .cta-primary {
+    display: inline-block;
+    margin-bottom: 16px;
+  }
+  .confirmation .micro-copy {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    margin-top: 4px;
+  }
+  .confirmation .micro-copy a {
+    text-decoration: underline;
+    transition: color 0.2s;
+  }
+  .confirmation .micro-copy a:hover {
+    color: var(--terracotta);
+  }
+  .confirmation-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 48px 40px;
+    max-width: 560px;
+    margin: 0 auto;
+    box-shadow: 0 4px 24px rgba(44, 31, 20, 0.07);
+  }
+  @media (max-width: 600px) {
+    .confirmation {
+      padding: 56px 20px;
+    }
+    .confirmation-card {
+      padding: 32px 24px;
+    }
+    .cta-primary {
+      padding: 16px 32px;
+      font-size: 1rem;
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
+<script>
+  /* Routing confirmation : map générée depuis products[] au build (site.json).
+     La logique vit dans /js/main.js, garde session_id anti faux positifs incluse. */
+  window.__MBS_CHECKOUT__ = {
+    products: {{ productsMap | dump | safe }}
+  };
+</script>
+{% endblock %}
+{% block content %}
+<section class="confirmation" id="main">
+  <div class="container">
+    <div class="confirmation-card">
+      <span class="confirmation-icon">🎉</span>
+      <h1 id="confirmation-title">Merci pour ton achat !</h1>
+      <p class="confirmation-text">
+        Ton accès est prêt. Tu peux commencer dès maintenant : tout est disponible en ligne, depuis ton ordinateur ou ton téléphone.
+      </p>
+      <a href="#" id="podia-link" class="cta-primary">Accéder à mon guide →</a>
+      <p class="micro-copy">Tu vas aussi recevoir un email avec ton accès.</p>
+      <p class="micro-copy"><a href="mailto:{{ site.brand.contactEmail }}">Un problème avec ton accès ?</a></p>
+    </div>
+  </div>
+</section>
+{% endblock %}

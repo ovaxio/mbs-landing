@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Budget a Deux Simplement: un système clair pour répartir l'argent en couple, sans tensions. Tableau Google Sheets pret a l'emploi. 69€, accès à vie.">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Budget a Deux Simplement: gerer l'argent en couple sans tensions</title>
+
+  <!-- Consent Mode init: doit etre AVANT GTM -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+
+    var _mc = (document.cookie.match(/(^|;\s*)mbs_consent=([^;]*)/) || [])[2];
+    var _cs = _mc === '1' ? 'granted' : 'denied';
+
+    gtag('consent', 'default', {
+      region: ['AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE',
+        'GR', 'HU', 'IS', 'IE', 'IT', 'LV', 'LI', 'LT', 'LU', 'MT', 'NL',
+        'NO', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'GB', 'CH'],
+      analytics_storage: _cs,
+      ad_storage: _cs,
+      ad_user_data: _cs,
+      ad_personalization: _cs,
+      wait_for_update: 2000
+    });
+
+    gtag('consent', 'default', {
+      analytics_storage: 'granted',
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted'
+    });
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-WTHZ6HHK');</script>
+  <!-- End Google Tag Manager -->
+
+  <script src="consent.js?v=1"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css?v=3">
+
+  <style>
+    /* ───── PAGE-SPECIFIC: Budget a Deux ───── */
+
+    .hero-couple {
+      background: var(--beige);
+      padding: 80px 24px 60px;
+    }
+
+    .hero-couple .container {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero-couple-left {
+      max-width: 560px;
+    }
+
+    .hero-couple h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+      margin-bottom: 20px;
+    }
+
+    .hero-couple h1 span {
+      color: var(--terracotta);
+      background: linear-gradient(to top, rgba(196, 97, 74, 0.12) 35%, transparent 35%);
+      padding: 0 4px;
+    }
+
+    .hero-couple .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    .hero-couple .cta-primary {
+      margin-bottom: 10px;
+    }
+
+    .hero-couple-right {
+      position: relative;
+    }
+
+    .hero-couple-right img {
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 8px 32px rgba(44, 31, 20, 0.12);
+    }
+
+    .hero-annotation {
+      position: absolute;
+      bottom: -12px;
+      left: -20px;
+      font-family: 'DM Serif Display', serif;
+      font-size: 0.85rem;
+      color: var(--terracotta);
+      font-style: italic;
+      transform: rotate(-3deg);
+      background: var(--white);
+      padding: 6px 14px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(44, 31, 20, 0.08);
+    }
+
+    .trust-strip {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      padding: 16px 24px;
+      background: var(--white);
+      border-bottom: 1px solid rgba(196, 168, 130, 0.15);
+    }
+
+    .trust-strip-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      font-weight: 500;
+    }
+
+    .trust-strip-item svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .proof-bar .proof-number {
+      font-size: 2.2rem;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 32px 28px;
+      box-shadow: 0 1px 6px rgba(44, 31, 20, 0.05);
+      border: 1px solid rgba(196, 168, 130, 0.15);
+    }
+
+    .testimonial-card blockquote {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testimonial-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .testimonial-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .testimonial-name {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--brown);
+    }
+
+    .testimonial-role {
+      font-size: 0.82rem;
+      color: var(--text-tertiary);
+    }
+
+    .testimonial-stars {
+      color: var(--gold);
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+
+    .guarantee-box {
+      background: var(--beige);
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .guarantee-box .guarantee-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .guarantee-box p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .guarantee-box strong {
+      color: var(--brown);
+    }
+
+    .urgency-badge {
+      display: inline-block;
+      background: var(--terracotta);
+      color: var(--white);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+
+    .pricing-cta-wrapper {
+      position: relative;
+    }
+
+    .pricing-cta-wrapper .cta-primary {
+      width: 100%;
+      text-align: center;
+      font-size: 1.15rem;
+      padding: 20px 44px;
+    }
+
+    .pricing-guarantee {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .pricing-guarantee svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .roi-calculator {
+      background: var(--soft-bg);
+      border-radius: 12px;
+      padding: 28px;
+      margin-top: 24px;
+    }
+
+    .roi-calculator h3 {
+      font-size: 1rem;
+      margin-bottom: 16px;
+      color: var(--brown);
+    }
+
+    .roi-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(196, 168, 130, 0.15);
+    }
+
+    .roi-row:last-child {
+      border-bottom: none;
+    }
+
+    .roi-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .roi-value {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--terracotta);
+      font-weight: 600;
+    }
+
+    .roi-total {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 2px solid var(--gold);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .roi-total .roi-label {
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    .roi-total .roi-value {
+      font-size: 1.4rem;
+    }
+
+    .step-image-container {
+      flex-shrink: 0;
+      width: 100%;
+      aspect-ratio: 16/10;
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--soft-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--gold);
+    }
+
+    .narrative-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .narrative-item .narrative-number {
+      flex-shrink: 0;
+    }
+
+    .narrative-item .narrative-content {
+      flex: 1;
+    }
+
+    .narrative-item .narrative-content h3 {
+      margin-bottom: 6px;
+    }
+
+    .narrative-item .narrative-content p {
+      font-size: 0.95rem;
+    }
+
+    .step-preview-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .video-placeholder {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(44, 31, 20, 0.15);
+      aspect-ratio: 16/9;
+      background: var(--brown);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .video-placeholder .play-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--terracotta);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .video-placeholder:hover .play-icon {
+      transform: scale(1.08);
+      background: var(--terracotta-dark);
+    }
+
+    .video-placeholder .play-icon svg {
+      width: 28px;
+      height: 28px;
+      fill: var(--white);
+      margin-left: 3px;
+    }
+
+    .video-placeholder .video-label {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(44, 31, 20, 0.8);
+      color: var(--white);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+
+    .pain-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .pain-list li {
+      padding-left: 32px;
+      position: relative;
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .pain-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      opacity: 0.3;
+    }
+
+    .pain-list li strong {
+      color: var(--brown);
+    }
+
+    .pain-list .pain-icon {
+      position: absolute;
+      left: 0;
+      top: 2px;
+      width: 28px;
+      height: 28px;
+      background: var(--before-bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+    }
+
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cta-group .cta-primary {
+      width: 100%;
+      max-width: 480px;
+      text-align: center;
+    }
+
+    .cta-group .micro-copy {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+    }
+
+    .icon-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 24px;
+    }
+
+    .icon-item {
+      text-align: center;
+      max-width: 140px;
+    }
+
+    .icon-item .icon-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--soft-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin: 0 auto 8px;
+    }
+
+    .icon-item span {
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      line-height: 1.4;
+    }
+
+    .for-who-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .for-who-col {
+      border-radius: 14px;
+      padding: 28px;
+    }
+
+    .for-yes {
+      background: var(--white);
+      border-top: 3px solid var(--gold);
+    }
+
+    .for-no {
+      background: var(--white);
+      border-top: 3px solid var(--muted);
+    }
+
+    .for-who-col h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .for-yes h3 { color: var(--terracotta); }
+    .for-no h3 { color: var(--text-tertiary); }
+
+    .for-who-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .for-who-col ul li {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      padding-left: 22px;
+      position: relative;
+    }
+
+    .for-yes ul li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+    .for-no ul li::before { content: '✗'; position: absolute; left: 0; color: var(--muted); font-weight: 700; }
+
+    @media (max-width: 680px) {
+      .hero-couple .container {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .hero-couple-right {
+        order: -1;
+      }
+
+      .hero-couple-right img {
+        max-width: 280px;
+        margin: 0 auto;
+      }
+
+      .hero-annotation {
+        font-size: 0.75rem;
+        left: 0;
+      }
+
+      .for-who-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-strip {
+        gap: 20px;
+      }
+
+      .narrative-item {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WTHZ6HHK" height="0" width="0"
+    style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<a href="#hero" class="skip-link">Aller au contenu</a>
+
+<div class="topbar">
+  Paiement sécurisé · Accès immediat · 69€ une seule fois
+</div>
+
+<!-- ───── SOCIAL PROOF BAR ───── -->
+<div class="proof-bar">
+  <div class="container">
+    <div class="proof-item">
+      <span class="proof-number">200+</span>
+      <span class="proof-label">couples équipés</span>
+    </div>
+    <div class="proof-item">
+      <span class="proof-number">4.8/5</span>
+      <span class="proof-label">satisfaction</span>
+    </div>
+    <div class="proof-item">
+      <span class="proof-number">1h</span>
+      <span class="proof-label">mise en place</span>
+    </div>
+    <div class="proof-item">
+      <span class="proof-number">69€</span>
+      <span class="proof-label">paiement unique</span>
+    </div>
+  </div>
+</div>
+
+<!-- ───── HERO ASYMETRIQUE ───── -->
+<section class="hero-couple" id="hero">
+  <div class="container">
+    <div class="hero-couple-left">
+      <span class="badge">Budget a Deux Simplement</span>
+      <h1 style="margin-top:20px">Le budget de couple qui tourne tout seul</h1>
+      <p class="subtitle">
+        Pas de théorie. Un tableau concret que vous copiez en 1 heure, qui tourne tout seul ensuite. 4 modes de répartition, meme avec des revenus tres différents.
+      </p>
+      <div class="cta-group">
+        <a href="#" class="cta-primary">Je crée notre budget à deux</a>
+        <p class="micro-copy">Acces immediat · 69€ · Acces à vie</p>
+      </div>
+      <div class="icon-row">
+        <div class="icon-item">
+          <div class="icon-circle">🔒</div>
+          <span>Paiement sécurisé</span>
+        </div>
+        <div class="icon-item">
+          <div class="icon-circle">⚡</div>
+          <span>Acces immediat</span>
+        </div>
+        <div class="icon-item">
+          <div class="icon-circle">♾️</div>
+          <span>Acces à vie</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-couple-right">
+      <img src="./public/img/couple-illustration.png" alt="Illustration d'un couple gerant son budget ensemble" loading="lazy">
+      <span class="hero-annotation">1h, pas plus</span>
+    </div>
+  </div>
+</section>
+
+<!-- ───── VIDEO SECTION ───── -->
+<section class="content reveal">
+  <div class="container">
+    <h2>Comment ça marche ?</h2>
+    <p class="section-intro">45 minutes pour tout comprendre. Pas de jargon. Pas d'obligation d'etre ensemble.</p>
+    <div class="video-placeholder" id="video-section">
+      <img src="./public/img/video-thumbnail.png" alt="Présentation du système Budget a Deux" style="width:100%;height:100%;object-fit:cover;border-radius:14px;position:absolute;top:0;left:0;" loading="lazy">
+      <div class="play-icon">
+        <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+      </div>
+      <span class="video-label">▶ Présentation du système — 2 min</span>
+    </div>
+  </div>
+</section>
+
+<!-- ───── PROBLEME: avec icones ───── -->
+<section class="pain-couple reveal" id="probleme">
+  <div class="container">
+    <h2>Le flou financier crée des tensions silencieuses</h2>
+    <p class="pain-intro">Vous partagez un loyer, des courses, une vie. Mais comment répartir équitablement l'argent ? Sans reponse claire, le flou s'installe. Et avec lui, le ressentiment.</p>
+
+    <ul class="pain-list">
+      <li>
+        <span class="pain-icon">😰</span>
+        <strong>Une seule personne porte la charge mentale.</strong> Elle calcule, elle vérifie, elle s'inquiete. C'est lourd et injuste. L'autre depend d'elle pour chaque décision.
+      </li>
+      <li>
+        <span class="pain-icon">💥</span>
+        <strong>Les conversations sur l'argent sont tendues.</strong> Ou complètement évitées. Jamais sereines, jamais claires. Le sujet devient un terrain miné.
+      </li>
+      <li>
+        <span class="pain-icon">❓</span>
+        <strong>Vous ne savez pas si c'est juste.</strong> Surtout quand vos revenus sont tres différents. Le doute s'installe, puis le ressentiment.
+      </li>
+    </ul>
+
+    <div class="pain-outro">
+      Ce n'est pas un problème d'argent. <strong>C'est un problème de structure.</strong> Le flou crée les tensions, pas le montant du compte en banque.
+    </div>
+  </div>
+</section>
+
+<!-- ───── SOLUTION NARRATIVE ───── -->
+<section class="solution-narrative reveal" id="solution">
+  <div class="container">
+    <h2 style="text-align:center">Un système clair qui tourne tout seul</h2>
+
+    <div class="narrative-item">
+      <div class="narrative-number">1</div>
+      <div class="narrative-content">
+        <h3>Vous copiez le tableau Google Sheets</h3>
+        <p>Ctrl+C, Ctrl+V. Il est déjà configure, avec les 4 modes de répartition integres. Aucune formule a créer. 15 minutes.</p>
+      </div>
+    </div>
+
+    <div class="narrative-item">
+      <div class="narrative-number">2</div>
+      <div class="narrative-content">
+        <h3>Vous regardez la formation</h3>
+        <p>45 minutes. Pas de jargon. Pas d'obligation d'etre ensemble. Chacun peut la regarder de son côté, puis en discuter.</p>
+      </div>
+    </div>
+
+    <div class="narrative-item">
+      <div class="narrative-number">3</div>
+      <div class="narrative-content">
+        <h3>Vous entrez vos chiffres</h3>
+        <p>Revenus mensuels. Dépenses communes. C'est tout. Le tableau fait les calculs. 10 minutes, pas plus.</p>
+      </div>
+    </div>
+
+    <div class="narrative-item">
+      <div class="narrative-number">4</div>
+      <div class="narrative-content">
+        <h3>C'est fini. Le système tourne tout seul.</h3>
+        <p>Quelques minutes par mois pour mettre à jour. Le reste, le système le gere. Vous n'etes pas en train d'apprendre a gerer un budget. Vous apprenez a coopèrer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── WHO IS THIS FOR ───── -->
+<section class="for-who reveal">
+  <div class="container">
+    <h2>Ce système est fait pour vous si...</h2>
+    <div class="for-who-grid">
+      <div class="for-who-col for-yes">
+        <h3>✅ Vous etes concerné(e)</h3>
+        <ul>
+          <li>Vous vivez en couple et partagez des dépenses</li>
+          <li>Vos revenus sont différents et vous cherchez l'équité</li>
+          <li>Vous en avez marre des conversations tendues sur l'argent</li>
+          <li>Vous voulez un système simple qui ne demande pas 2h par mois</li>
+          <li>Vous préférez un tableau concret plutôt que des conseils vagues</li>
+        </ul>
+      </div>
+      <div class="for-who-col for-no">
+        <h3>❌ Ce n'est pas pour vous si...</h3>
+        <ul>
+          <li>Vous vivez seul(e) et cherchez un outil de budget personnel</li>
+          <li>Vous cherchez une application mobile complexe avec notifications</li>
+          <li>Vous avez déjà un système qui fonctionne parfaitement depuis des années</li>
+          <li>Vous n'êtes pas prêt(e) à investir 1 heure pour mettre en place le système</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── MID CTA ───── -->
+<section class="mid-cta">
+  <div class="container">
+    <h2>Parler d'argent, sereinement ?</h2>
+    <div class="cta-group">
+      <a href="#" class="cta-primary">Je crée notre budget à deux</a>
+      <p class="micro-copy">69€ · Acces immediat</p>
+    </div>
+  </div>
+</section>
+
+<!-- ───── BEFORE/AFTER: full width ───── -->
+<section class="ba-couple reveal">
+  <div class="container">
+    <h2 style="text-align:center">Avant et après le système</h2>
+    <div class="ba-couple-grid">
+      <div class="ba-couple-before">
+        <p class="ba-couple-label">Avant</p>
+        <ul>
+          <li>On ne sait pas ou part l'argent</li>
+          <li>C'est toujours tendu quand on en parle</li>
+          <li>Une personne pense a tout</li>
+          <li>On repousse la conversation</li>
+          <li>Est-ce que c'est juste pour nous deux ?</li>
+        </ul>
+      </div>
+      <div class="ba-couple-after">
+        <p class="ba-couple-label">Après</p>
+        <ul>
+          <li>On voit clair dans nos dépenses</li>
+          <li>On peut en parler calmement</li>
+          <li>On partage la responsabilite</li>
+          <li>C'est regle en 10 minutes par mois</li>
+          <li>On SAIT que c'est juste</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── CREATOR ───── -->
+<section class="creator reveal" id="createur">
+  <div class="container">
+    <div class="creator-avatar"><img src="./public/img/moi.png" alt="Guillaume, fondateur de Mon Budget Simple" loading="lazy"></div>
+    <div class="creator-text">
+      <p class="eyebrow">Qui suis-je</p>
+      <h2>Guillaume</h2>
+      <p>
+        42 ans, père de deux filles, freelance dans le web. Pendant des annees, j'ai vécu ce que vous vivez peut-être : le stress de l'argent, le flou en fin de mois, cette impression que tout file entre les doigts.
+      </p>
+      <p>
+        J'ai teste des tableurs, des applis, des methodes trouvees en ligne. Rien ne tenait. Alors j'ai construit mon propre système, en appliquant ce que je sais faire : simplifier, structurer, automatiser. Ça a tout changé.
+      </p>
+      <blockquote>"Le jour ou j'ai découvert un découvert de 200€ alors que je venais de recevoir mon salaire, j'ai compris que le problème n'etait pas combien je gagnais, mais comment je gerais."</blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ───── TESTIMONIALS ───── -->
+<section class="content reveal" id="temoignages">
+  <div class="container">
+    <span class="section-label">Témoignages</span>
+    <h2>Ce que disent les couples</h2>
+    <p class="section-intro">La formation vient d'ouvrir. Les premiers retours de couples seront publiés ici, avec leur accord, dès qu'ils arriveront.</p>
+    <p style="text-align:center;margin-top:24px;font-size:0.85rem;color:var(--text-tertiary);">Si vous avez utilisé le système, <a href="https://www.monbudgetsimple.fr/support" style="color:var(--terracotta);">partagez votre expérience</a>.</p>
+  </div>
+</section>
+
+<!-- ───── PRICING ───── -->
+<section class="pricing-couple reveal" id="acheter">
+  <div class="container">
+    <div class="pricing-product-mockup">
+      <img src="./public/img/product-mockup.png" alt="Aperçu du tableau Google Sheets Budget a Deux" loading="lazy">
+    </div>
+    <div class="pricing-card">
+      <span class="badge pricing-badge">Budget a Deux Simplement</span>
+      <p class="pricing-name">Le système complet pour gerer l'argent à deux</p>
+      <div class="urgency-badge">Offre limitée — 69€ pour toujours</div>
+      <div class="pricing-price">
+        <span class="pricing-currency">€</span><span class="pricing-amount">69</span>
+        <p class="pricing-note">paiement unique · accès à vie</p>
+      </div>
+      <ul class="pricing-features">
+        <li>Tableau Google Sheets pret a l'emploi (4 modes de répartition)</li>
+        <li>Formation guidee (~1 heure)</li>
+        <li>4 modes : 50/50, prorata, reste a vivre identique, libre</li>
+        <li>Guide pas-a-pas pour la mise en place</li>
+        <li>Mises à jour incluses à vie</li>
+        <li>Acces immediat après paiement</li>
+      </ul>
+      <div class="roi-calculator">
+        <h3>Le calcul est simple</h3>
+        <div class="roi-row">
+          <span class="roi-label">1 dispute évitée par mois</span>
+          <span class="roi-value">—</span>
+        </div>
+        <div class="roi-row">
+          <span class="roi-label">Temps gagné par mois</span>
+          <span class="roi-value">~2h</span>
+        </div>
+        <div class="roi-row">
+          <span class="roi-label">Paix retrouvée</span>
+          <span class="roi-value">★</span>
+        </div>
+        <div class="roi-total">
+          <span class="roi-label">Rentabilisé dès le 1er mois</span>
+          <span class="roi-value">69€</span>
+        </div>
+      </div>
+      <div class="guarantee-box">
+        <span class="guarantee-icon">🛡️</span>
+        <p><strong>Garantie satisfait ou remboursé</strong> — 30 jours pour essayer. Si le système ne vous convient pas, remboursement intégral, sans question.</p>
+      </div>
+      <div class="pricing-cta-wrapper" style="margin-top:24px;">
+        <a href="#" class="cta-primary pricing-cta">Je crée notre budget à deux</a>
+        <p class="pricing-guarantee">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Paiement sécurisé par Stripe
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── FAQ ───── -->
+<section class="faq reveal">
+  <div class="container">
+    <h2>Questions frequentes</h2>
+    <div class="faq-list" role="list">
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-1">
+          Et si nos revenus sont tres différents ?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-1" role="region">
+          <div class="faq-answer-inner">
+            C'est exactement pour ca qu'il existe 4 modes de répartition. Le mode "reste a vivre identique" rend tout equitable meme avec une grosse difference. Vous avez tous les deux le meme confort d'argent personnel.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-2">
+          Et si on a déjà des tensions ?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-2" role="region">
+          <div class="faq-answer-inner">
+            Les tensions viennent du flou, pas de l'argent en lui-meme. Une fois le flou disparu, les tensions s'apaisent. Pas besoin de thérapie, juste d'un cadre clair.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-3">
+          Et si mon partenaire n'est pas motive ?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-3" role="region">
+          <div class="faq-answer-inner">
+            La plupart des partenaires "non motives" sont soulagés qu'on les aide. Une fois qu'ils voient que le système enleve la charge mentale, ils sont enthousiastes. Vous pouvez regarder la formation seul en premier.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-4">
+          C'est complique avec les chiffres ?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-4" role="region">
+          <div class="faq-answer-inner">
+            Non. Vous entrez : revenus mensuels, dépenses communes. C'est tout. Le tableau fait les calculs. Si besoin, on est la par email.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-5">
+          Combien de temps après la mise en place ?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-5" role="region">
+          <div class="faq-answer-inner">
+            5 a 10 minutes par mois pour mettre à jour. C'est tout.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-6">
+          C'est quoi la garantie ?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-6" role="region">
+          <div class="faq-answer-inner">
+            30 jours pour essayer. Si le système ne vous convient pas, remboursement intégral, sans question. Nous sommes des humains, pas des robots.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ───── FINAL CTA ───── -->
+<section class="final-cta">
+  <div class="container">
+    <h2>Le meilleur moment pour apaiser vos discussions, c'est maintenant</h2>
+    <p>1 heure de mise en place, et vous reprenez le controle ensemble.</p>
+    <div class="cta-group">
+      <a href="#" class="cta-primary">Je crée notre budget à deux</a>
+      <p class="micro-copy">69€ · Acces immediat · Paiement unique</p>
+    </div>
+  </div>
+</section>
+
+<!-- ───── FOOTER ───── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="https://www.monbudgetsimple.fr/mentions-légales">Mentions légales</a>
+      <a href="https://www.monbudgetsimple.fr/privacy">Politique de confidentialité</a>
+      <a href="https://www.monbudgetsimple.fr/terms">CGV</a>
+      <a href="https://www.monbudgetsimple.fr/support">Contact</a>
+    </div>
+    <p class="footer-copy">© 2026 Mon Budget Simple</p>
+  </div>
+</footer>
+
+<!-- ───── STICKY MOBILE CTA ───── -->
+<div class="sticky-cta" id="sticky-cta">
+  <a href="#">Je crée notre budget à deux</a>
+</div>
+
+<script>
+  if ('IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      revealObserver.observe(el);
+    });
+  }
+
+  document.querySelectorAll('.faq-question').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = this.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(el) {
+        el.classList.remove('open');
+        el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        this.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  var stickyCta = document.getElementById('sticky-cta');
+  var hero = document.getElementById('hero');
+
+  if (stickyCta && hero && 'IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(
+      function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            stickyCta.classList.remove('visible');
+          } else {
+            stickyCta.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(hero);
+  }
+</script>
+
+<div id="consent-banner" class="hidden">
+  <p>Ce site utilise des cookies pour mesurer les visites et améliorer ton experience. Aucune donnée personnelle n'est vendue.</p>
+  <div class="consent-actions">
+    <button class="consent-btn consent-btn-refuse" onclick="setConsent(false)">Refuser</button>
+    <button class="consent-btn consent-btn-accept" onclick="setConsent(true)">Accepter</button>
+  </div>
+</div>
+
+</body>
+</html>

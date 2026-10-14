@@ -1,0 +1,165 @@
+---
+permalink: /retractation.html
+title: "Rétractation — Mon Budget Simple"
+description: "Formulaire de rétractation — Mon Budget Simple"
+---
+{% extends "../_layouts/legal.njk" %}
+{% block legalContent %}
+<style>
+  /* Formulaire rétractation (page spécifique) */
+  .retractation-form {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: 28px;
+    box-shadow: 0 4px 24px rgba(44, 31, 20, 0.07);
+  }
+  .form-field {
+    margin-bottom: 20px;
+  }
+  .form-field label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--brown);
+    margin-bottom: 6px;
+  }
+  .form-field input, .form-field textarea, .form-field select {
+    width: 100%;
+    padding: 12px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: var(--brown);
+    background: var(--soft-bg);
+    border: 1px solid var(--muted);
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+  .form-field textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 600px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+  .form-actions {
+    margin-top: 24px;
+  }
+  .form-success {
+    display: none;
+    background: var(--beige);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: var(--brown);
+  }
+  .form-success.visible {
+    display: block;
+  }
+  .receipt-box {
+    background: var(--white);
+    border: 1px solid var(--muted);
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 16px;
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+    font-family: 'Inter', sans-serif;
+  }
+  .receipt-actions {
+    margin-top: 16px;
+  }
+</style>
+
+<h1>Droit de rétractation</h1>
+<p class="legal-updated">Dernière mise à jour : 3 septembre 2026</p>
+
+<h2>Votre droit</h2>
+<p>
+  Conformément à l'article L221-18 du Code de la consommation, vous disposez d'un délai de 14 jours à compter de la date
+  d'achat pour exercer votre droit de rétractation, sans avoir à motiver votre décision et sans frais.
+</p>
+<p>
+  Le remboursement intervient dans les 14 jours à compter du jour où nous sommes informés de votre décision, par le même
+  moyen de paiement que celui utilisé pour la transaction.
+</p>
+
+<h2>Exercer votre rétractation en ligne</h2>
+<p>
+  Conformément à l'article L221-21 du Code de la consommation, vous pouvez exercer votre droit de rétractation en un clic,
+  gratuitement, à tout moment pendant le délai légal :
+</p>
+<p style="text-align:center; margin:28px 0">
+  <a href="#renoncer" class="cta-primary">Renoncer au contrat ici</a>
+</p>
+<p>
+  Vous pouvez également nous envoyer une déclaration claire par email à {{ site.brand.contactEmail }}.
+  Une fois votre demande confirmée, vous recevrez un accusé de réception horodaté, que vous pouvez télécharger
+  et conserver (support durable).
+</p>
+
+<h2 id="renoncer">Déclaration de rétractation</h2>
+<form class="retractation-form" name="retractation" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+  <input type="hidden" name="form-name" value="retractation" />
+  <p style="display:none"><label>Ne pas remplir ce champ : <input name="bot-field" /></label></p>
+
+  <div class="form-row">
+    <div class="form-field">
+      <label for="nom">Votre nom</label>
+      <input type="text" id="nom" name="nom" required autocomplete="family-name">
+    </div>
+    <div class="form-field">
+      <label for="prenom">Votre prénom</label>
+      <input type="text" id="prenom" name="prenom" required autocomplete="given-name">
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label for="email">Votre email (moyen de réception de l'accusé de réception)</label>
+    <input type="email" id="email" name="email" required autocomplete="email" placeholder="votre@email.com">
+  </div>
+
+  <div class="form-field">
+    <label for="produit">Produit concerné</label>
+    <select id="produit" name="produit" required>
+      <option value="">Choisir un produit</option>
+      {# Boucle sur products[] : plus jamais de liste en dur #}
+      {% for p in site.products %}
+      <option value="{{ p.slug }}">{{ p.name }}</option>
+      {% endfor %}
+      <option value="autre">Autre</option>
+    </select>
+  </div>
+
+  <div class="form-field">
+    <label for="numero-commande">Numéro de commande (identification du contrat, si connu)</label>
+    <input type="text" id="numero-commande" name="numero_commande" placeholder="ex: 100000123456">
+  </div>
+
+  <div class="form-field">
+    <label for="motif">Motif (facultatif)</label>
+    <textarea id="motif" name="motif" placeholder="Décrivez votre demande (facultatif)"></textarea>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="cta-primary">Confirmer la rétractation</button>
+  </div>
+</form>
+
+<div class="form-success" id="form-success">
+  <strong>Votre déclaration de rétractation a bien été envoyée.</strong>
+  <div class="receipt-box" id="receipt-box"></div>
+  <div class="receipt-actions">
+    <button type="button" class="cta-primary" id="receipt-download">Télécharger l'accusé de réception</button>
+  </div>
+  <p style="margin-top:12px">Vous recevrez également un accusé de réception par email. Le remboursement interviendra dans les 14 jours suivant la réception de votre demande.</p>
+</div>
+{% endblock %}

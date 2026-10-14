@@ -1,0 +1,48 @@
+{# Layout pages légales : styles partagés + section .legal. Block : legalContent. #}
+{% extends "./base.njk" %}
+{% block headExtra %}
+<style>
+  .legal {
+    background: var(--beige);
+    padding: 80px 24px;
+  }
+  .legal .container {
+    max-width: 720px;
+  }
+  .legal h1 {
+    margin-bottom: 8px;
+  }
+  .legal .legal-updated {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    margin-bottom: 36px;
+  }
+  .legal h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--brown);
+    margin: 32px 0 12px;
+  }
+  .legal p, .legal li {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .legal ul {
+    padding-left: 20px;
+    margin: 8px 0;
+  }
+  .legal a {
+    color: var(--terracotta);
+    text-decoration: underline;
+  }
+</style>
+{% endblock %}
+{% block content %}
+<section class="legal" id="main">
+  <div class="container">
+    {% block legalContent %}{% endblock %}
+  </div>
+</section>
+{% endblock %}

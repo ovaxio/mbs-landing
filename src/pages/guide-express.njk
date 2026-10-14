@@ -1,0 +1,486 @@
+---
+productSlug: guide-express
+eleventyComputed:
+  title: "{{ productsBySlug[productSlug].title }}"
+  ogTitle: "{{ productsBySlug[productSlug].title }}"
+  description: "Tu gagnes assez, tu finis quand même à zéro. Le Guide Express t'aide à inverser le sens de ton épargne dès le premier mois, grâce à la méthode se payer d'abord. {{ productsBySlug[productSlug].priceLaunch }}€, accès à vie."
+ogImage: "https://www.monbudgetsimple.fr/public/img/notion-guide-hero.webp"
+---
+{% extends "../_layouts/product.njk" %}
+{% block productLd %}
+{% set product = productsBySlug[productSlug] %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{ product.name }} MBS",
+  "description": "Un parcours structuré sur Notion pour arrêter de finir le mois à zéro, grâce à la méthode se payer d'abord.",
+  "brand": { "@type": "Brand", "name": "{{ site.brand.name }}" },
+  "offers": {
+    "@type": "Offer",
+    "price": "{{ product.priceLaunch }}",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+{% endblock %}
+
+{% block productHero %}
+{% set product = productsBySlug[productSlug] %}
+<section class="hero" id="hero">
+  <div class="container">
+    <span class="badge">{{ product.name }} · {{ product.priceLaunch }}€ de lancement</span>
+    <h1>Tu gagnes assez. <span>Tu finis quand même à zéro.</span></h1>
+    <p class="subtitle">
+      Tu as déjà essayé une app, un tableur, une bonne résolution. Ça tient deux semaines.
+      Ce n'est pas ta faute. C'est le système.
+    </p>
+    {% cta product, 'hero', 'Je commence' %}
+    <p class="micro-copy">Dès le premier mois, tu le vois dans le template : ton épargne arrête de descendre</p>
+    <div class="browser-frame">
+      <div class="browser-chrome">
+        <div class="browser-top">
+          <div class="browser-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+          </div>
+          <div class="browser-url-bar">notion.so/mon-budget-simple</div>
+        </div>
+        <div class="browser-tabs">
+          <div class="browser-tab">
+            <div class="browser-tab-favicon">M</div>
+            {{ product.name }} - Mon Budget Simple
+          </div>
+        </div>
+      </div>
+      <div class="browser-content">
+        <picture>
+          <source srcset="/public/img/notion-guide-hero.webp" type="image/webp">
+          <img src="/public/img/notion-guide-hero.png" alt="Aperçu réel du Guide Express MBS sur Notion" loading="eager" width="1200" height="900">
+        </picture>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="proof-bar">
+  <div class="container">
+    <div class="proof-item">
+      <span class="proof-number">1 heure</span>
+      <span class="proof-label">pour poser le système</span>
+    </div>
+    <div class="proof-item">
+      <span class="proof-number">5 min</span>
+      <span class="proof-label">par semaine pour le tenir</span>
+    </div>
+    <div class="proof-item">
+      <span class="proof-number">Créé par Guillaume</span>
+      <span class="proof-label">développeur, pas conseiller financier</span>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block productSections %}
+{% set product = productsBySlug[productSlug] %}
+
+<section class="problem reveal">
+  <div class="container">
+    <h2>Tu gagnes ta vie. Et pourtant.</h2>
+    <ul class="problem-list">
+      <li>Le 25 du mois, tu regardes ton compte, tu recalcules trois fois, tu te demandes où c'est parti</li>
+      <li>Tu gères au feeling. Le moindre imprévu te met dans le rouge : un pneu, un anniversaire, et tout s'effondre</li>
+      <li>Tu as déjà essayé une app, un tableur, une bonne résolution. Ça n'a pas tenu</li>
+      <li>Tu culpabilises : "je gagne assez, pourquoi je n'y arrive pas ?"</li>
+    </ul>
+    <div class="problem-outro">
+      Ce n'est pas une question d'argent qui manque. C'est la boule au ventre qui revient à chaque fin de mois.
+    </div>
+  </div>
+</section>
+
+<section class="solution reveal">
+  <div class="container">
+    <h2>Ce que tu as déjà essayé</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>Une app de budget</h3>
+        <p>Ça aide à voir tes dépenses. Mais si tu ne remplis pas tous les jours, tu abandonnes.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>Un tableur maison</h3>
+        <p>Tu l'as ouvert deux fois. Trop de colonnes, trop de décisions à chaque case.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>"Je vais faire attention ce mois-ci"</h3>
+        <p>Ça marche jusqu'au premier imprévu. Un pneu, un anniversaire, et tout s'effondre.</p>
+      </div>
+    </div>
+    <div class="problem-outro">
+      Tout ça soulage sur le moment. Rien ne tient. Pas parce que tu manques de volonté. Parce que ça repose sur ta volonté.
+    </div>
+  </div>
+</section>
+
+<section class="before-after reveal">
+  <div class="container">
+    <h2>Ce n'est pas une affaire de discipline. C'est une affaire de système.</h2>
+    <p class="section-intro">
+      Tes trois tentatives avaient un point commun : elles te demandaient de décider à chaque dépense.
+      "Est-ce que je peux me payer ça ?" "Est-ce que je dépense trop ?" Une fatigue arrive, un mauvais jour, tu lâches.
+    </p>
+    <div class="ba-grid">
+      <div class="ba-col ba-before">
+        <p class="ba-label">Décider à chaque fois</p>
+        <ul>
+          <li>Chaque dépense est un test de volonté</li>
+          <li>L'épargne, c'est ce qui reste à la fin du mois</li>
+          <li>Et ce qui reste, c'est rien, ou tu pioches dedans</li>
+          <li>Un mauvais jour, tu lâches tout</li>
+        </ul>
+      </div>
+      <div class="ba-arrow" aria-hidden="true"><span class="ba-arrow-h">→</span><span class="ba-arrow-v">↓</span></div>
+      <div class="ba-col ba-after">
+        <p class="ba-label">Décider une fois</p>
+        <ul>
+          <li>L'épargne part en premier, par virement automatique</li>
+          <li>Le système décide, toi tu vis</li>
+          <li>Le plaisir est prévu dans le budget</li>
+          <li>Ce qui tient sans volonté, c'est ce qui est décidé d'avance</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="solution reveal" id="mecanisme">
+  <div class="container">
+    <h2>La méthode : se payer d'abord</h2>
+    <p class="section-intro">Le Guide Express inverse le problème. Au lieu de décider à chaque dépense, tu décides une fois.</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>L'épargne part en premier</h3>
+        <p>Un virement automatique le jour de la paie. Elle part avant les dépenses, pas après. Tu n'as plus à résister.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>Trois comptes, trois rôles</h3>
+        <p>Un pour vivre, un pour l'épargne, un pour les projets. Chaque euro a une adresse, rien à décider au moment de dépenser.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>Le plaisir est prévu</h3>
+        <p>Une enveloppe que tu dépenses sans culpabilité. Parce que si le budget interdit tout, il ne tient pas.</p>
+      </div>
+    </div>
+    <div class="problem-outro">
+      C'est un changement de structure, pas un changement de volonté. Et c'est ce qui fait que ça tient, là où les autres méthodes abandonnent au bout de deux semaines.
+    </div>
+  </div>
+</section>
+
+<section class="before-after reveal">
+  <div class="container">
+    <h2>Dès le premier mois, tu le vois</h2>
+    <div class="ba-grid">
+      <div class="ba-col ba-before">
+        <p class="ba-label">Avant</p>
+        <ul>
+          <li>Tu décides à chaque dépense, donc tu t'épuises</li>
+          <li>Le 25, tu regardes ton compte avec appréhension</li>
+          <li>L'épargne, c'est ce qu'il reste. Et ce qui reste, c'est rien</li>
+          <li>Ou pire : tu pioches dedans, et elle fond</li>
+        </ul>
+      </div>
+      <div class="ba-arrow" aria-hidden="true"><span class="ba-arrow-h">→</span><span class="ba-arrow-v">↓</span></div>
+      <div class="ba-col ba-after">
+        <p class="ba-label">Après</p>
+        <ul>
+          <li>L'épargne est partie le 1er, toute seule</li>
+          <li>Tu sais où va chaque euro, parce que c'est décidé d'avance</li>
+          <li>Un imprévu arrive, il y a une enveloppe pour ça</li>
+          <li>Dès le premier mois, tu le vois dans le template : ton épargne arrête de descendre, elle commence à monter</li>
+        </ul>
+      </div>
+    </div>
+    <div class="problem-outro">
+      La différence entre les deux, ce n'est pas la volonté. C'est le système.
+    </div>
+  </div>
+</section>
+
+<section class="steps-detail reveal" id="contenu">
+  <div class="container">
+    <h2>Le Guide Express, c'est un système complet</h2>
+    <p class="section-intro">Pas une théorie de plus. Un système prêt à tourner, posé sur trois comptes et un virement automatique.</p>
+
+    <div class="product-gallery">
+      <div class="product-shot">
+        <picture>
+          <source srcset="/public/img/notion-guide-hero.webp" type="image/webp">
+          <img src="/public/img/notion-guide-hero.png" alt="Aperçu réel du Guide Express : le parcours complet sur Notion" loading="lazy" width="1200" height="900">
+        </picture>
+        <p>Le parcours complet, pas à pas, sans jargon</p>
+      </div>
+      <div class="product-shot">
+        <picture>
+          <source srcset="/public/img/notion-guide-budget.webp" type="image/webp">
+          <img src="/public/img/notion-guide-budget.png" alt="Aperçu réel du tableau de budget Notion, prêt à remplir" loading="lazy" width="1200" height="900">
+        </picture>
+        <p>Le tableau de budget, prêt à remplir, où tu vois ton épargne qui monte</p>
+      </div>
+    </div>
+
+    <div class="steps-list" style="margin-top:28px">
+      <div class="step-detail">
+        <div class="bonus-tag">1</div>
+        <div>
+          <h3>Un guide pas-à-pas illustré</h3>
+          <p>Les 10 étapes pour poser ton budget, dans l'ordre, sans jargon. Tu dupliques, tu avances à ton rythme.</p>
+        </div>
+      </div>
+      <div class="step-detail">
+        <div class="bonus-tag">2</div>
+        <div>
+          <h3>Un modèle Notion prêt à l'emploi</h3>
+          <p>Le tableau qui tient sur une page. Tu remplis, c'est configuré. Tu vois ton reste à vivre et ton épargne qui monte.</p>
+        </div>
+      </div>
+      <div class="step-detail">
+        <div class="bonus-tag">3</div>
+        <div>
+          <h3>Les mises à jour gratuites à vie</h3>
+          <p>Le système évolue, tu reçois tout. Ton budget, tes revenus, ta vie : tout est prévu.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem-outro">
+      Ce que tu n'achètes pas : une théorie de plus. Ce que tu achètes : un système prêt à tourner, avec des revenus qui bougent, des enfants, des imprévus.
+    </div>
+  </div>
+</section>
+
+<section class="problem reveal">
+  <div class="container">
+    <h2>"Tout ça existe gratuitement"</h2>
+    <p class="section-intro">
+      YouTube, les templates Notion gratuits, les apps bancaires. Pourquoi payer {{ product.priceLaunch }}€ ?
+    </p>
+    <ul class="problem-list">
+      <li>Le gratuit t'a expliqué quoi faire. Il ne t'a jamais fait le faire</li>
+      <li>Sinon tu ne serais pas ici</li>
+      <li>Ce qui t'a manqué, ce n'est pas l'information. C'est la configuration</li>
+      <li>Les 40 décisions à prendre pour qu'un tableur vierge devienne un système qui tourne</li>
+    </ul>
+    <div class="problem-outro">
+      Un système déjà paramétré supprime les 40 décisions qui t'ont fait abandonner. Ce que tu achètes, ce n'est pas de l'information. C'est de ne plus avoir à décider.
+    </div>
+  </div>
+</section>
+
+<section class="creator reveal" id="createur">
+  <div class="container">
+    <div class="creator-avatar"><img src="/public/img/moi.png" alt="Guillaume, fondateur de Mon Budget Simple" loading="lazy"></div>
+    <div class="creator-text">
+      <p class="eyebrow">Qui suis-je</p>
+      <h2>Guillaume</h2>
+      <p>J'ai jamais fini le mois à zéro. J'ai plutôt toujours eu de l'argent. Mais je piochais dedans. Régulièrement. Mon épargne descendait, petit à petit, au fil de la vie. Pas d'incident. Juste une érosion.</p>
+      <p>Le déclic, c'est les enfants. Plus de dépenses. L'évidence que la pioche pouvait plus durer.</p>
+      <p>J'ai lu des livres. Testé des apps. Pendant des années. Rien n'a tenu. Parce que tout reposait sur ma motivation quotidienne. Et la motivation, c'est la première chose qui lâche.</p>
+      <p>J'ai adapté. Pas inventé. Trois comptes, trois rôles, l'épargne qui part en premier par virement automatique.</p>
+      <p><strong>Résultat :</strong> je pioche plus dans mes économies. Elles montent, lentement, au lieu de descendre. C'est pas spectaculaire. C'est juste la fin de la fuite.</p>
+      <p>Ça fait 4 ou 5 ans que je l'applique. Avec des périodes plus ou moins régulières, comme tout le monde. Mais le système tient même quand je tiens pas.</p>
+      <blockquote>"C'est pour ça que j'ai créé MBS. Pas parce que j'ai tout résolu. Parce que le système tient même quand je tiens pas."</blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="steps-detail reveal">
+  <div class="container">
+    <h2>Ce que disent de vraies personnes sur leur budget</h2>
+    <p class="section-intro">Pas des avis clients, on n'en a pas encore. Des témoignages réels de personnes qui vivent le problème que le Guide Express résout.</p>
+    <div class="verbatim-list">
+      <div class="verbatim-item">
+        <blockquote>"Je gagne bien ma vie mais je finis toujours le mois à découvert. Je ne sais pas où part mon argent."</blockquote>
+        <span class="verbatim-source">Reddit r/vosfinances (témoignage anonyme)</span>
+      </div>
+      <div class="verbatim-item">
+        <blockquote>"J'ai déjà essayé 3 applications de budget. J'abandonne à chaque fois au bout de deux semaines."</blockquote>
+        <span class="verbatim-source">Doctissimo, forum finances (témoignage anonyme)</span>
+      </div>
+      <div class="verbatim-item">
+        <blockquote>"Le pire, c'est la culpabilité. Je gagne assez, pourquoi je n'arrive pas à mettre de côté ?"</blockquote>
+        <span class="verbatim-source">Reddit r/vosfinances (témoignage anonyme)</span>
+      </div>
+    </div>
+
+    <div class="steps-list" style="margin-top:28px">
+      <div class="step-detail">
+        <div class="bonus-tag">+</div>
+        <div>
+          <h3>Bonus : la Checklist des 40 décisions</h3>
+          <p>La liste exacte des décisions déjà prises pour toi dans le Guide Express. Celle qui révèle pourquoi tes tableurs vierges ont échoué, et comment un système déjà configuré tient. Ton guide, c'est pas un tableur de plus, c'est les 40 décisions déjà prises.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing reveal" id="acheter">
+  <div class="container">
+    <h2>{{ product.priceLaunch }}€ jusqu'au {{ product.dateLimit }}, ensuite {{ product.priceRegular }}€</h2>
+    <div class="pricing-product-mockup">
+      <picture>
+        <source srcset="/public/img/notion-guide-budget.webp" type="image/webp">
+        <img src="/public/img/notion-guide-budget.png" alt="Aperçu réel du tableau de budget Notion" loading="lazy" width="1200" height="900">
+      </picture>
+    </div>
+    <div class="pricing-card">
+      <span class="badge pricing-badge">Prix de lancement</span>
+      <p class="pricing-name">{{ product.name }} · méthode se payer d'abord</p>
+      <div class="pricing-price">
+        <span class="pricing-currency">€</span><span class="pricing-amount">{{ product.priceLaunch }}</span>
+        <p class="pricing-note">paiement unique · accès à vie · jusqu'au {{ product.dateLimit }}, ensuite {{ product.priceRegular }}€</p>
+      </div>
+      <ul class="pricing-features">
+        <li>Le parcours complet en 10 étapes sur Notion</li>
+        <li>Le modèle de tableau de budget, prêt à remplir</li>
+        <li>La méthode se payer d'abord (3 comptes + virement auto)</li>
+        <li>Bonus : la Checklist des 40 décisions</li>
+        <li>Les mises à jour gratuites à vie</li>
+        <li>Accès immédiat après paiement</li>
+      </ul>
+      <div class="roi-box">
+        <h3>Pourquoi ce prix de lancement ?</h3>
+        <p>Parce que je cherche mes premiers clients. Leurs retours vaudront plus que {{ product.priceRegular - product.priceLaunch }}€ de différence. Une fois ces retours collectés, le prix passe à {{ product.priceRegular }}€.</p>
+        <p style="margin-top:8px">Sur un an : si le système te fait épargner 100€ par mois, c'est 1200€ de côté. Le guide ne coûte pas {{ product.priceLaunch }}€, il en fait revenir bien plus. Le montant exact dépend de ta situation. Le système, lui, tient.</p>
+      </div>
+      {% cta product, 'pricing', 'Je pose enfin un budget simple' %}
+      <p class="pricing-guarantee">Paiement sécurisé par Stripe</p>
+      <p class="pricing-guarantee">Rétractation 14 jours : exercice en ligne en un clic, <a href="/retractation.html#renoncer">Renoncer au contrat ici</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="guarantee-section reveal" style="padding:60px 0">
+  <div class="container">
+    <div class="guarantee-box">
+      <h3>14 jours pour changer d'avis. C'est la loi, c'est sans condition.</h3>
+      <p>Tu accèdes au guide, tu regardes, et si ça ne te convient pas : tu écris, je rembourse. Aucune question. Tu peux le faire en un clic : <a href="/retractation.html#renoncer">renoncer au contrat ici</a>.</p>
+      <h3 style="margin-top:16px">Au-delà des 14 jours : 30 jours pour poser le système et voir le résultat.</h3>
+      <p>Si tu suis les 10 étapes, que tu poses tes 3 comptes et ton virement automatique, et que ton mois ne change pas : écris-moi, je te rembourse.</p>
+      <p>Cette garantie-là, je peux la faire parce que le système tient. Pas parce que je te promets un miracle. Parce que je sais que la structure marche.</p>
+    </div>
+  </div>
+</section>
+
+<section class="faq reveal">
+  <div class="container">
+    <h2>Questions fréquentes</h2>
+    <div class="faq-list" role="list">
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-1">
+          Est-ce que c'est pour moi ?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-1" role="region">
+          <div class="faq-answer-inner">
+            C'est pour toi si : tu gagnes ta vie mais tu finis le mois à zéro · tu abandonnes tes budgets au bout de deux semaines · tu as déjà essayé une app, un tableur, une bonne résolution · tu veux arrêter de culpabiliser. Ce n'est pas pour toi si : tu cherches une solution miracle sans rien regarder · tu veux suivre tes dépenses au centime tous les jours.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-2">
+          Je ne connais pas Notion, c'est un problème ?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-2" role="region">
+          <div class="faq-answer-inner">
+            Pas besoin. Le modèle est déjà configuré. Tu remplis, tu n'installes rien. Si tu sais utiliser un navigateur, tu sais utiliser ce guide.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-3">
+          J'ai des revenus qui bougent, ça marche ?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-3" role="region">
+          <div class="faq-answer-inner">
+            C'est un cas prévu, pas une exception. Le système est pensé pour les revenus variables : on pose une base, on lisse, et on épargne d'abord.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-4">
+          Pourquoi {{ product.priceLaunch }}€ et pas gratuit ?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-4" role="region">
+          <div class="faq-answer-inner">
+            Le gratuit t'a expliqué quoi faire. Ce que tu achètes, c'est le comment : un système déjà configuré, sans les 40 décisions qui t'ont fait abandonner. Si le gratuit avait suffi, tu ne serais pas ici.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-5">
+          Et si ça ne marche pas pour moi ?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-5" role="region">
+          <div class="faq-answer-inner">
+            14 jours pour changer d'avis, c'est la loi, sans condition. Au-delà, 30 jours pour poser le système : si tu suis les étapes et que ton mois ne change pas, je te rembourse.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-6">
+          Combien de temps j'y ai accès ?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-6" role="region">
+          <div class="faq-answer-inner">
+            À vie. Paiement unique, accès illimité, mises à jour gratuites.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-7">
+          Le prix va monter ?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-7" role="region">
+          <div class="faq-answer-inner">
+            Oui. {{ product.priceLaunch }}€ jusqu'au {{ product.dateLimit }}, ensuite {{ product.priceRegular }}€. C'est un prix de lancement pour collecter les premiers retours clients.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="container">
+    <h2>Le meilleur moment, c'est maintenant</h2>
+    <p>1 heure pour le poser. 5 minutes par semaine. Dès le premier mois, tu le vois dans le template : ton épargne arrête de descendre. Le prix passe à {{ product.priceRegular }}€ après le {{ product.dateLimit }}. Pas pour punir, pour être honnête : {{ product.priceLaunch }}€ c'est un prix de lancement, il a une date de fin.</p>
+    <p style="margin-top:12px">Dans un an, deux scénarios. Tu n'as rien changé : même appréhension le 25, même culpabilité, l'épargne qui fond. Ou tu as posé le système : l'épargne part toute seule, un imprévu ne fait plus tout s'effondrer. La différence, ce n'est pas la volonté. C'est le système. Et il se pose en une heure, aujourd'hui.</p>
+    {% cta product, 'final', 'Je commence' %}
+    <p class="micro-copy">{{ product.priceLaunch }}€ · jusqu'au {{ product.dateLimit }} · Paiement unique · Paiement sécurisé par Stripe</p>
+  </div>
+</section>
+{% endblock %}

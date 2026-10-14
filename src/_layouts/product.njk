@@ -1,0 +1,142 @@
+{# Layout landing produit : topbar, hero, sections, sticky CTA. La copy reste PAR PAGE (blocks). #}
+{# La page déclare en front matter : productSlug, title, description, ogImage. #}
+{% extends "./base.njk" %}
+{% block headExtra %}
+<style>
+  /* ───── PARTAGÉ LANDINGS PRODUIT ───── */
+  .bonus-tag {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--white);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .roi-box {
+    background: var(--beige);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-top: 28px;
+    text-align: left;
+  }
+
+  .roi-box h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--brown);
+    margin-bottom: 8px;
+  }
+
+  .roi-box p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+  }
+
+  .product-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  .product-shot {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 0 rgba(44,31,20,0.08);
+  }
+
+  .product-shot img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .product-shot p {
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .verbatim-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  .verbatim-item {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 20px 24px;
+    border-left: 3px solid var(--terracotta);
+  }
+
+  .verbatim-item blockquote {
+    margin: 0 0 8px 0;
+    font-size: 0.98rem;
+    color: var(--brown);
+    font-style: italic;
+  }
+
+  .verbatim-item .verbatim-source {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+  }
+
+  .guarantee-box {
+    background: var(--beige);
+    border-radius: 12px;
+    padding: 28px;
+    margin-top: 28px;
+    text-align: left;
+  }
+
+  .guarantee-box h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--brown);
+    margin-bottom: 12px;
+  }
+
+  .guarantee-box p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+  }
+
+  .guarantee-box p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 680px) {
+    .product-gallery {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+{% block productLd %}{% endblock %}
+{% endblock %}
+{% block content %}
+{% set product = productsBySlug[productSlug] %}
+<main id="main">
+  <div class="topbar">
+    Paiement sécurisé · Accès immédiat · Prix de lancement {{ product.priceLaunch }}€
+  </div>
+
+  {% block productHero %}{% endblock %}
+  {% block productSections %}{% endblock %}
+
+  <div class="sticky-cta" id="sticky-cta">
+    {% cta product, 'sticky', 'Je commence' %}
+  </div>
+</main>
+{% endblock %}

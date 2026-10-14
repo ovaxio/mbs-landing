@@ -1,0 +1,19 @@
+{# Coquille HTML commune. Blocks : headExtra (styles/ld+json par page), content. #}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  {% include "head.njk" %}
+  {% block headExtra %}{% endblock %}
+</head>
+<body>
+
+<a href="#main" class="skip-link">Aller au contenu</a>
+
+{% block content %}{% endblock %}
+
+{% include "footer.njk" %}
+
+<script src="/js/main.js" defer></script>
+
+</body>
+</html>

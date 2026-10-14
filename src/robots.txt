@@ -1,0 +1,7 @@
+# robots.txt — Mon Budget Simple (Netlify)
+User-agent: *
+Allow: /
+Disallow: /confirmation.html
+Disallow: /404.html
+
+Sitemap: https://www.monbudgetsimple.fr/sitemap.xml

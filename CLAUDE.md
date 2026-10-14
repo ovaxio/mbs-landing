@@ -2,165 +2,90 @@
 
 ## Projet
 
-Repo de landing pages HTML pour Mon Budget Simple, un business d'éducation financière en français.
-Les landing pages sont hébergées sur Netlify (go.monbudgetsimple.fr), séparées du site vitrine Podia (www.monbudgetsimple.fr).
+Repo du site Mon Budget Simple (éducation financière en français), buildé avec Eleventy.
+Le site est hébergé sur Netlify (www.monbudgetsimple.fr), séparé du site Podia (learn.monbudgetsimple.fr).
 
 ### Architecture
 
 ```
-go.monbudgetsimple.fr (Netlify)        → Landing pages de vente + confirmation
-Stripe Payment Links                   → Paiement direct, codes promo
-www.monbudgetsimple.fr (Podia)         → Site vitrine + blog SEO + hébergement cours
+www.monbudgetsimple.fr (Netlify)       → Landing pages de vente + confirmation + homepage + pages légales
+learn.monbudgetsimple.fr (Podia)       → Blog SEO + hébergement cours + espace membre
+Stripe Payment Links                   → Paiement direct (39€ flat, sans code promo)
 ActiveCampaign                         → Email marketing
-GTM + GA4 + Google Ads                 → Tracking (sur les landing pages uniquement)
+Umami Cloud (data-website-id)          → Tracking (zéro cookie, pas de bandeau RGPD, indépendant de Google)
 ```
+
+> ⚠️ Migration en cours (2026-09-01) : le site passe de `go.` (Netlify) + `www.` (Podia) à
+> `www.` (Netlify) + `learn.` (Podia). GTM/GA4/Google Ads retirés au profit d'Umami (zéro cookie).
 
 ### Flow d'achat
 
-1. Client arrive sur `go.monbudgetsimple.fr/guide-express` (landing page)
-2. Clic CTA → Stripe Payment Link (paiement hébergé par Stripe)
-3. Après paiement → `go.monbudgetsimple.fr/confirmation` (page de confirmation)
-4. Page de confirmation : lien d'accès Podia + conversion tracking Google Ads
+1. Client arrive sur `www.monbudgetsimple.fr/guide-express` (landing page)
+2. Clic CTA → Stripe Payment Link 39€ flat (paiement hébergé par Stripe)
+3. Après paiement → `www.monbudgetsimple.fr/confirmation?product=guide-express&session_id=...`
+4. Page de confirmation : lien d'accès Podia + événement `purchase` Umami
 5. Email ActiveCampaign envoyé en parallèle avec le lien Podia
 
 ### Livraison des formations
 
-Les formations sont hébergées sur Podia. Après paiement Stripe, le client accède à sa formation via un lien d'inscription gratuit Podia affiché sur la page de confirmation.
+Les formations sont hébergées sur Podia (`learn.monbudgetsimple.fr`). Après paiement Stripe, le client accède à sa formation via un lien d'inscription gratuit Podia affiché sur la page de confirmation.
 Pas de bridge technique (webhook/API) — le client s'inscrit lui-même sur Podia.
+**Contrôle payé/inscrit (Option B, MVP)** : Podia notifie Guillaume à chaque inscription → il vérifie dans le Dashboard Stripe que l'email a payé → si non, il retire l'accès. Automatisation (webhook Stripe → script VPS) si les ventes montent.
 Quand le volume dépasse 50 ventes/mois, automatiser via Make.com (Stripe webhook → Podia API).
 
 ---
 
 ## Stack technique
 
-- **HTML5** — fichiers single-page, JS inline, CSS partagé dans `styles.css` + styles page-spécifiques inline
-- **CSS** — `styles.css` (design system partagé) + `<style>` inline pour les styles propres à chaque page. Custom properties (variables CSS), pas de framework CSS
-- **JS** — vanilla uniquement, pas de dépendances, pas de bundler
+- **Eleventy (11ty) v3** — SSG Node. Source : `src/`, output : `dist/` (publish Netlify). Permaliens à plat (`/guide-express.html`).
+- **`src/_data/site.json`** — SOURCE DE VÉRITÉ unique : prix, liens Stripe/Podia, produits[], légal, tracking. JAMAIS de valeur métier en dur dans un template.
+- **Templates** — Nunjucks `.njk` : pages dans `src/pages/`, layouts dans `src/_layouts/` (base, legal, product), partials dans `src/_includes/` (head, footer). Héritage via `{% extends %}`.
+- **CTA Stripe** — shortcode `{% cta product, 'position', 'label' %}`. Rend un span désactivé tant que le Payment Link contient `__REMPLACE` (règle unique : `lib/stripe-rule.js`).
+- **CSS** — `src/css/styles.css` (design system) + styles page dans les blocks `headExtra` des templates. Custom properties, pas de framework CSS
+- **JS** — vanilla, un seul fichier `src/js/main.js` (reveal, FAQ, sticky, tracking data-track, rétractation, routing confirmation). Zéro JS inline (`onclick` interdit).
 - **Fonts** — Google Fonts via CDN : `DM Serif Display` (titres), `Inter` (body)
-- **Tracking** — GTM + gtag.js (seuls scripts externes autorisés) + Google Ads conversion tag inline sur confirmation.html
-- **Déploiement** — Netlify, domaine `go.monbudgetsimple.fr`
+- **Tracking** — Umami Cloud (snippet dans `head.njk`, id depuis site.json), zéro cookie. Événement `purchase` sur confirmation avec garde `session_id`. **Plus de GTM, plus de GA4, plus de Google Ads.**
+- **Tests** — Jest (`test/data.test.js`, `build.test.js`, `stripe.test.js` conditionnel). Build Netlify : `npm ci && npx eleventy && npx jest`.
+- **Déploiement** — Netlify, domaine `www.monbudgetsimple.fr`, publish `dist/`
 - **Paiement** — Stripe Payment Links (pas d'API, pas de backend)
-- **Pas de** : React, npm, build step, SCSS, PostCSS, Node.js, framework CSS
+- **Pas de** : React, framework CSS, SCSS, PostCSS, bundler
+
+> ⚠️ Règles de maintenance complètes pour LLM : **CONVENTIONS.md** (fait foi pour l'architecture).
 
 ---
 
 ## Design System MBS
 
-### Palette couleurs
+> **La charte canonique est `BRAND.md` (même dossier), valeurs machine dans `brand.tokens.json`.**
+> Couleurs, contrastes, typographie, imagerie, portage Podia : tout est là, et en cas de divergence
+> avec n'importe quel autre document, c'est `BRAND.md` qui fait foi. Ne pas recopier ses valeurs ici.
 
-```css
-:root {
-  --beige: #F2EBE0;
-  --brown: #2C1F14;
-  --gold: #C4A882;
-  --terracotta: #C4614A;
-  --terracotta-dark: #A8503D;
-  --white: #FEFCF9;
-  --light-gold: #D4BFA0;
-  --soft-bg: #FAF7F3;
-  --text-secondary: #5C4A3A;
-  --text-tertiary: #8A7565;
-  --before-bg: #FDF3F1;
-  --muted: #D4C4B8;
-}
-```
+Rappels opérationnels propres à ce repo :
 
-### Couleurs sémantiques
-
-| Rôle | Variable | Usage |
-|---|---|---|
-| Texte principal | `--brown` | Titres, corps de texte |
-| Texte secondaire | `--text-secondary` | Sous-titres, descriptions, paragraphes |
-| Texte tertiaire | `--text-tertiary` | Micro-copy, légendes, prix barrés |
-| Accent primaire | `--terracotta` | CTA, highlights, chiffres clés |
-| Accent secondaire | `--gold` | Badges, décorations, séparateurs, FAQ toggles, checkmarks positifs |
-| Fond clair | `--beige` | Hero, sections alternées |
-| Fond subtil | `--soft-bg` | Cards, sections alternées, colonne "après" |
-| Fond sombre | `--brown` | Topbar, footer, section finale CTA |
-| Fond "avant" | `--before-bg` | Colonne "avant" dans les sections avant/après |
-| Élément muet | `--muted` | Bordures discrètes, section "pas pour toi" |
-
-### Typographie
-
-- **Titres** (h1, h2, h3) : `'DM Serif Display', serif` — font-weight: 400, line-height: 1.25
-- **Corps** : `'Inter', -apple-system, sans-serif` — font-size: 17px, line-height: 1.7
-- **H1** : `clamp(2.2rem, 6.5vw, 3.6rem)`
-- **H2** : `clamp(1.6rem, 4vw, 2.2rem)`
-- **Échelle body** : 0.78rem (micro) → 0.85rem (small) → 0.95rem (secondary) → 1rem (body) → 1.1rem (emphasis)
-
-### Composants récurrents
-
-#### CTA primaire
-```css
-.cta-primary {
-  display: inline-block;
-  background: var(--terracotta);
-  color: var(--white);
-  font-size: 1.1rem;
-  font-weight: 600;
-  padding: 18px 44px;
-  border-radius: 8px;
-  text-decoration: none;
-  box-shadow: 0 4px 14px rgba(196,97,74,0.25);
-  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-}
-.cta-primary:hover {
-  background: var(--terracotta-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(196,97,74,0.35);
-}
-```
-
-#### Badge
-```css
-.badge {
-  display: inline-block;
-  background: var(--gold);
-  color: var(--brown);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 6px 18px;
-  border-radius: 20px;
-}
-```
-
-#### Cards
-- Background : `var(--white)` ou `var(--soft-bg)`
-- Border-radius : 12px-14px
-- Box-shadow : `0 1px 6px rgba(44,31,20,0.05)`
-- Padding : 22px-32px
-
-#### Sticky mobile CTA
-Toutes les landing pages doivent inclure un CTA sticky en bas sur mobile (apparaît au scroll après le hero).
-
-### Espacements
-
-- Padding vertical des sections : `72px 24px`
-- `.container` : `max-width: 760px; margin: 0 auto; padding: 0 24px`
-- Gap grids : 18px-28px
-
----
+- Toujours passer par les variables CSS de `:root` dans `styles.css`, jamais de couleur en dur.
+- Couleur d'action des CTA = `--terracotta-dark` (`#A8503D`). `--terracotta` reste l'accent de marque
+  et ne porte jamais de texte blanc en taille courante.
+- Fontes : `DM Serif Display` (titres, graisse 400 uniquement) + `Inter` (corps).
 
 ## Structure type d'une landing page
 
 Chaque landing page suit cette structure de sections (dans l'ordre) :
 
 1. **Topbar** — barre de confiance sombre (`--brown`), une ligne de texte
-2. **Hero** — fond `--beige`, badge, H1 avec mot en `--terracotta`, sous-titre, CTA primaire, micro-copy
-3. **Social proof bar** — chiffres clés (icônes + nombres)
-4. **Problème** — H2, liste de pain points (bullets gold), outro encadré beige
-5. **Avant/Après** — grille 2 colonnes avec flèche au milieu
-6. **Solution (méthode)** — 3 étapes numérotées en cards
+2. **Social proof bar** — chiffres clés (icônes + nombres)
+3. **Hero** — fond `--beige`, badge, H1 avec mot en `--terracotta`, sous-titre, CTA primaire, micro-copy, icônes de confiance
+4. **Vidéo** — section vidéo avec thumbnail custom, play button overlay
+5. **Problème** — H2, liste de pain points avec icônes, outro encadré beige
+6. **Pour qui / Pas pour qui** — 2 colonnes oui/non
 7. **Mid-page CTA** — rappel CTA
-8. **Contenu du produit** — grille de cards avec icônes emoji
-9. **Créateur** — section "Qui suis-je", avatar, texte personnel
-10. **Pour qui / Pas pour qui** — 2 colonnes oui/non
-11. **Pricing** — card centrée avec prix, liste de features, CTA. Lien → Stripe Payment Link
-12. **FAQ** — accordéon JS (click toggle)
-13. **Final CTA** — section fond `--brown`, H2, CTA terracotta
-14. **Footer** — fond `--brown`, liens légaux, copyright
+8. **Avant/Après** — grille 2 colonnes avec flèche au milieu
+9. **Solution (méthode)** — 4 étapes numérotées en narrative scroll
+10. **Créateur** — section "Qui suis-je", avatar, texte personnel, citation
+11. **Témoignages** — avis de vrais clients (avec mention "retours réels")
+12. **Pricing** — card centrée avec mockup produit, prix, ROI calculator, garantie, CTA
+13. **FAQ** — accordéon JS (click toggle)
+14. **Final CTA** — section fond `--brown`, H2, CTA terracotta
+15. **Footer** — fond `--brown`, liens légaux, copyright
 
 L'ordre peut varier mais le Hero + Final CTA sont obligatoires.
 
@@ -168,33 +93,30 @@ L'ordre peut varier mais le Hero + Final CTA sont obligatoires.
 
 ## Tracking
 
-### GTM (Google Tag Manager)
-- Script externe autorisé sur toutes les landing pages
-- Snippet dans `<head>` + `<noscript>` après `<body>`
-- GA4 et tout autre pixel configurés dans le dashboard GTM
-- Placeholder : `GTM-XXXXXXX`
-
-### Google Ads Conversion
-- Tag de conversion placé en INLINE sur `confirmation.html` uniquement
-- NE PAS passer par GTM pour le tag de conversion Google Ads (race condition)
-- Utiliser `gtag()` en script synchrone
+### Umami (recommandé, zéro cookie)
+- Script externe autorisé sur toutes les pages
+- Snippet dans `<head>` : `<script defer src="https://cloud.umami.is/script.js" data-website-id="9ddbd906-f59d-4d0f-8fcc-42e3ae7f4f31"></script>`
+- Zéro cookie → pas de bandeau RGPD nécessaire (juste mention dans la politique de confidentialité)
+- Indépendant de Google (pas de GTM, pas de GA4, pas de Google Ads)
 
 ### Événements trackés
-- Pageview (via GTM/GA4) sur toutes les pages
-- Clic CTA (via GTM, event listener)
-- Conversion achat (inline sur confirmation.html)
+- Pageview (automatique via Umami) sur toutes les pages
+- Clic CTA : `umami.track('cta_click')` (event listener sur les CTA)
+- Conversion achat : `umami.track('purchase', { product: 'guide-express', revenue: 39 })` sur confirmation.html
+
+### API (pour analyse côté VPS → LLM)
+- Endpoint : `https://api.umami.is/v1/websites/{websiteId}/stats` avec un API Key
+- Permet d'exporter stats/événements en JSON pour les traiter avec un LLM (pipeline VPS)
 
 ---
 
 ## Conventions de code
 
-### HTML
-- `lang="fr"` obligatoire
-- Meta viewport et description toujours présents
+### Templates (njk)
+- `lang="fr"` via `base.njk`, meta via `head.njk`
 - Nommage des classes : BEM simplifié (`.section-element`)
-- Commentaires de séparation : `<!-- ───── NOM SECTION ───── -->`
-- Commentaires CSS de séparation : `/* ───── NOM SECTION ───── */`
-- Commentaires pour les placeholders : `<!-- STRIPE_LINK: ... -->`, `<!-- PODIA_LINK: ... -->`, `<!-- CONVERSION: ... -->`
+- Commentaires de séparation : `<!-- ───── NOM SECTION ───── -->` et `/* ───── NOM SECTION ───── */`
+- Héritage : pages → `{% extends "../_layouts/<layout>.njk" %}` ; styles page dans block `headExtra`
 - Sémantique : `<section>`, `<footer>`, `<nav>`
 
 ### CSS
@@ -206,11 +128,12 @@ L'ordre peut varier mais le Hero + Final CTA sont obligatoires.
 - Transitions : `all 0.2s` pour les hovers, `0.35s ease` pour les accordéons
 
 ### JavaScript
-- Vanilla JS uniquement, dans `<script>` en bas du fichier
+- Vanilla JS uniquement, centralisé dans `src/js/main.js` (chargé defer sur toutes les pages)
+- Guards par présence d'élément (le fichier tourne sur toutes les pages sans erreur)
 - FAQ : toggle de classe `.open` sur click
 - Sticky CTA : `IntersectionObserver` sur le hero
+- Tracking CTA : attributs `data-track` / `data-track-props` + addEventListener (zéro onclick inline)
 - Pas de jQuery, pas de librairies externes
-- `addEventListener`, pas de `onclick` inline
 
 ---
 
@@ -223,7 +146,7 @@ L'ordre peut varier mais le Hero + Final CTA sont obligatoires.
 - Métaphores accessibles (boussole, photo, lampe torche)
 
 ### Interdits absolus
-- Jamais "Satisfait ou remboursé" (décision business)
+- Garantie : 14 jours légaux inconditionnels (droit de rétractation L221-18 C. conso.) + garantie commerciale 30 jours conditionnelle en bonus ("si tu poses le système et que ton mois ne change pas, je te rembourse"). L'ancienne règle "jamais satisfait ou remboursé" est illégale (L221-18 + ordonnance 2026-2 du 05/01/2026, fonction de rétractation en ligne obligatoire depuis le 19/06/2026, sanction 75 000€ pour personne morale). Amendée le 2026-08-31 après audit juridique deepsearch.
 - Jamais de témoignages fictifs
 - Pas de tirets cadratins, pas de caractères décoratifs IA
 - Pas de tics IA : "il est essentiel", "dans un monde où", "en conclusion", "n'hésitez pas"
@@ -240,19 +163,23 @@ L'ordre peut varier mais le Hero + Final CTA sont obligatoires.
 
 ## Produits et pages
 
-| Page | Produit | Prix | Cible | Stripe Link | Podia Link |
-|---|---|---|---|---|---|
-| `guide-express.html` | Guide Express MBS | 39€ (prix barré 49€, coupon MBS-DEPART pré-appliqué via Stripe) | Généralistes | TODO | TODO |
-| `budget-a-deux.html` | Formation "Budget à deux" | 69€ | Couples | TODO | TODO |
-| `pack-freelance.html` | Pack Freelance | 97€ | Freelances | TODO | TODO |
-| `confirmation.html` | Page post-paiement | — | Tous | — | TODO |
+Config des produits : `src/_data/site.json` (prix, liens, `publishPage`). Pages : `src/pages/*.njk`.
+
+| Page générée | Produit | Prix lancement/régulier | publishPage | Lien Podia |
+|---|---|---|---|---|
+| `guide-express.html` | Guide Express MBS | 39€ / 59€ (jusqu'au 15/10/2026) | true | `guide-express-notion/buy` |
+| (hors build, redirect Podia) | Budget à Deux Simplement | 69€ / 79€ | false | `mon-budget-a-deux-simplement/buy` |
+| (hors build, redirect Podia) | Pack Freelance | 97€ / 117€ | false | `pack-tresorerie-freelance/buy` |
+| `confirmation.html` | Page post-paiement | — | — | routing dynamique via `products[]` |
+
+Pages hors build (non migrées, redirigées via netlify.toml) : `budget-a-deux.html`, `runway.html` à la racine.
 
 ---
 
 ## Déploiement
 
 - **Plateforme** : Netlify
-- **Domaine** : `go.monbudgetsimple.fr` (CNAME sur Hostinger → Netlify)
+- **Domaine** : `www.monbudgetsimple.fr` (CNAME sur Hostinger → Netlify)
 - **SSL** : automatique via Netlify (Let's Encrypt)
 - **Deploy** : push sur `main` → déploiement automatique
 - **Config** : `netlify.toml` à la racine
@@ -273,31 +200,29 @@ L'ordre peut varier mais le Hero + Final CTA sont obligatoires.
 
 - Pas d'images lourdes → emojis ou SVG inline
 - Google Fonts avec `preconnect`
-- Seul JS externe : GTM (chargé async, ne bloque pas le rendu)
-- Fichier unique = 0 requête HTTP supplémentaire (hors fonts + GTM)
-- Objectif : < 50 KB par page (hors fonts et GTM)
+- Seul JS externe : Umami (chargé defer, ne bloque pas le rendu)
+- Fichier unique = 0 requête HTTP supplémentaire (hors fonts + Umami)
+- Objectif : < 50 KB par page (hors fonts et Umami)
 
 ---
 
 ## Workflow
 
-### Créer une nouvelle landing page
-1. Copier `_template.html` et renommer (ex: `guide-express.html`)
-2. Remplacer le contenu placeholder (hero, problème, solution, pricing, FAQ)
-3. Ajouter les styles page-spécifiques dans le `<style>` inline (les styles partagés sont dans `styles.css`)
-4. Remplacer `<!-- STRIPE_LINK -->` par le vrai Stripe Payment Link
-5. Mettre à jour `confirmation.html` si besoin (nouveau lien Podia, nouveau prix de conversion)
-6. Vérifier les variables CSS (ne pas en ajouter de nouvelles sans raison)
-7. Tester responsive à 375px, 768px, 1440px
-8. Vérifier tous les liens (CTA → bon Stripe Payment Link)
-9. Valider le copywriting (relire les interdits)
-10. Push sur `main` → déploiement Netlify automatique
+### Modifier une valeur métier (prix, lien, date, légal)
+1. Éditer `src/_data/site.json`
+2. `npm run verify` (build + tests)
 
-### Modifier une page existante
-1. Lire le fichier complet avant de modifier
-2. Ne pas casser la structure des sections
-3. Garder la cohérence avec le design system
-4. Tester le responsive après modification
+### Créer une nouvelle landing produit
+1. Ajouter l'objet produit dans `site.json` (schéma homogène : slug, name, title, tagline, priceLaunch, priceRegular, dateLimit, stripeLink, podiaLink, publishPage)
+2. Créer `src/pages/<slug>.njk` avec `{% extends "../_layouts/product.njk" %}` + front matter `productSlug`
+3. Écrire la copy dans les blocks `productHero` / `productSections`, CTA via `{% cta product, 'position', 'label' %}`
+4. `npm run verify`
+5. Push sur `main` → déploiement Netlify automatique
+
+### Modifier la copy d'une page existante
+1. Éditer le fichier `.njk` correspondant dans `src/pages/`
+2. Ne pas mettre de valeur métier en dur (site.json fait foi)
+3. `npm run verify`
 
 ---
 
@@ -306,45 +231,46 @@ L'ordre peut varier mais le Hero + Final CTA sont obligatoires.
 - Utiliser les variables CSS existantes, jamais de couleurs en dur
 - Respecter le ton MBS (chaleureux, pas de manipulation)
 - Produire du HTML valide et accessible
-- Inclure les meta tags (title, description, viewport, charset)
-- Garder tout inline (CSS + JS dans le même fichier HTML)
-- Tester mentalement le responsive
-- Mettre des commentaires placeholder pour les liens Stripe et Podia
+- Garder les meta tags (title, description, viewport, charset) via `head.njk`
+- Mettre toute valeur métier dans `src/_data/site.json`
+- Lancer `npm run verify` après chaque modification
 
 ## Ce que Claude ne doit JAMAIS faire
 
 - Ajouter un framework CSS ou JS
-- Utiliser des scripts externes (sauf GTM et gtag.js sur confirmation.html)
+- Utiliser des scripts externes (sauf Umami via `head.njk`)
 - Écrire "Satisfait ou remboursé" ou inventer des témoignages
 - Utiliser des tirets cadratins ou du langage "IA"
-- Créer des fichiers JS séparés pour du code page-spécifique (JS de page reste inline dans chaque HTML). Exception : les scripts partagés entre plusieurs pages (ex: `consent.js`, `gtm-init.js`) peuvent être extraits dans un fichier JS dédié chargé via `<script src="...">` dans le `<head>`.
-- Créer de nouveaux fichiers CSS (le design system partagé est dans `styles.css`, les styles page-spécifiques restent inline). Exception : les styles partagés entre plusieurs pages peuvent être mutualisés dans `styles.css`.
+- Mettre du JS inline (`onclick`, `onsubmit`) ou du JS de page hors `src/js/main.js`
+- Mettre une valeur métier (prix, lien, SIRET, email) en dur dans un template
+- Utiliser les placeholders `[STRIPE_LINK]` / `[DATE_LIMITE]` (ils n'existent plus : variables + shortcode `{% cta %}`)
 - Modifier la palette de couleurs sans demander
-- Mettre le tag de conversion Google Ads dans GTM (doit rester inline)
+- Mettre le tag de conversion Google Ads dans GTM (plus aucun tag Google, tracking = Umami)
 
 ---
 
 ## SoloCraft
 
 ### stack
-HTML5 single-page files (tout inline : CSS + JS), custom properties CSS, vanilla JS, Google Fonts (DM Serif Display, Inter), GTM pour le tracking, Stripe Payment Links, Netlify pour le déploiement. Pas de build step, pas de bundler, pas de npm.
+Eleventy v3 (SSG Node), Nunjucks, data-driven via `src/_data/site.json`, CSS custom properties (`src/css/styles.css`), vanilla JS (`src/js/main.js`), Google Fonts (DM Serif Display, Inter), Umami tracking, Stripe Payment Links, Jest pour les tests, Netlify pour le déploiement.
 
 ### target
 B2C éducation financière en français. Produits digitaux (formations complètes) hébergés sur Podia, vendus via Stripe Payment Links, prix 39-97€. Cible : particuliers francophones. Stade : lancement, 0 client.
 
 ### constraints
-- Pas de framework CSS ou JS
-- Pas de dépendances externes (sauf Google Fonts + GTM)
-- Code page-spécifique inline dans chaque HTML. Code partagé entre plusieurs pages : CSS dans `styles.css`, JS dans un fichier partagé dédié (ex: `consent.js`)
+- Source de vérité unique : `src/_data/site.json` (prix, liens, produits, légal)
+- Pas de framework CSS ou JS, pas de bundler
+- Zéro JS inline : logique dans `src/js/main.js`, tracking via attributs `data-track`
 - Variables CSS existantes dans :root, jamais de couleurs en dur
 - Pas de nouvelles variables CSS sans raison explicite
-- Jamais "Satisfait ou remboursé" ni témoignages fictifs
+- Jamais de témoignages fictifs. Garantie : 14j légaux + 30j conditionnelle (voir Interdits absolus).
 - Tutoiement (sauf formation couples = vouvoiement)
 - Pas de tirets cadratins, pas de langage "IA"
-- Tag de conversion Google Ads inline sur confirmation.html, jamais dans GTM
+- Événement `purchase` Umami sur confirmation avec garde `session_id` (anti faux positifs)
+- Tests obligatoires : `npm run verify` après chaque modification
 
 ### high-risk-zones
-- confirmation.html — page post-paiement, conversion tracking Google Ads, lien Podia. Toute casse = perte de conversions trackées
+- confirmation.html — page post-paiement, événement `purchase` Umami, lien Podia. Toute casse = perte de conversions trackées
 - Variables CSS :root — cascade sur tout le design, une modification impacte toutes les pages
 - Liens Stripe Payment Links dans les CTA — mauvais lien = conversion perdue
 - netlify.toml — config de déploiement et headers sécurité

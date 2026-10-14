@@ -106,7 +106,9 @@ section {
 /* ───── COMPONENTS ───── */
 .cta-primary {
   display: inline-block;
-  background: var(--terracotta);
+  /* Couleur d'action = --terracotta-dark : blanc dessus = 5,41:1 (WCAG AA toutes tailles).
+     --terracotta ne donnait que 4,07:1 et échouait en taille courante. Voir BRAND.md §2. */
+  background: var(--terracotta-dark);
   color: var(--white);
   font-family: 'Inter', sans-serif;
   font-size: 1.1rem;
@@ -121,14 +123,31 @@ section {
 }
 
 .cta-primary:hover {
-  background: var(--terracotta-dark);
+  filter: brightness(0.92);
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(196, 97, 74, 0.35);
+  box-shadow: 0 6px 24px rgba(168, 80, 61, 0.35);
 }
 
 .cta-primary:active {
   transform: translateY(1px);
   box-shadow: 0 2px 8px rgba(196, 97, 74, 0.2);
+}
+
+/* CTA désactivé : lien Stripe non résolu (état transitoire).
+   Rendu non interactif : ni hover, ni curseur pointer, clic sans effet. */
+.cta-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+/* CTA désactivé : lien Stripe non résolu (placeholder). Ne simule pas un bouton. */
+.cta-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+  pointer-events: none;
 }
 
 .badge {
@@ -398,7 +417,7 @@ section {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: var(--terracotta);
+  background: var(--terracotta-dark);
   color: var(--white);
   font-family: 'DM Serif Display', serif;
   font-size: 1.1rem;
@@ -973,7 +992,7 @@ section {
   width: 14px;
   height: 14px;
   border-radius: 3px;
-  background: var(--terracotta);
+  background: var(--terracotta-dark);
   color: var(--white);
   font-size: 9px;
   font-weight: 700;
@@ -1060,7 +1079,7 @@ section {
   display: block;
   width: 100%;
   text-align: center;
-  background: var(--terracotta);
+  background: var(--terracotta-dark);
   color: var(--white);
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
@@ -1220,10 +1239,10 @@ section {
   transition: all 0.2s;
 }
 .consent-btn-accept {
-  background: var(--terracotta);
+  background: var(--terracotta-dark);
   color: var(--white);
 }
-.consent-btn-accept:hover { background: var(--terracotta-dark); }
+.consent-btn-accept:hover { filter: brightness(0.92); }
 .consent-btn-refuse {
   background: transparent;
   color: var(--light-gold);

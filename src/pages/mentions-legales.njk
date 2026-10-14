@@ -1,0 +1,72 @@
+---
+permalink: /mentions-legales.html
+title: "Mentions légales — Mon Budget Simple"
+description: "Mentions légales du site Mon Budget Simple"
+---
+{% extends "../_layouts/legal.njk" %}
+{% block legalContent %}
+<h1>Mentions légales</h1>
+<p class="legal-updated">Dernière mise à jour : 3 septembre 2026</p>
+
+<h2>Éditeur du site</h2>
+<p>
+  Le site <strong>Mon Budget Simple</strong> est édité par <strong>{{ site.legal.company }}, {{ site.legal.form }} au capital de {{ site.legal.capital }}</strong>,
+  immatriculée au {{ site.legal.rcs }}, siège social {{ site.legal.address }}{% if site.legal.vat %}, n° de TVA intracommunautaire {{ site.legal.vat }}{% endif %}{% if site.legal.phone %}, téléphone {{ site.legal.phone }}{% endif %}, e-mail {{ site.brand.contactEmail }}.
+  Directeur de la publication : {{ site.legal.director }}.
+</p>
+<ul>
+  <li>Dénomination : {{ site.legal.company }} {{ site.legal.form }}</li>
+  <li>Forme juridique : {{ site.legal.form }} (Entreprise Unipersonnelle à Responsabilité Limitée)</li>
+  <li>Capital social : {{ site.legal.capital }}</li>
+  <li>Siège social : {{ site.legal.address }}</li>
+  <li>Immatriculation : {{ site.legal.rcs }}</li>
+  <li>Numéro SIRET : {{ site.legal.siret }}</li>
+  {% if site.legal.vat %}<li>N° de TVA intracommunautaire : {{ site.legal.vat }}</li>{% endif %}
+  {% if site.legal.phone %}<li>Téléphone : {{ site.legal.phone }}</li>{% endif %}
+  <li>Contact : {{ site.brand.contactEmail }}</li>
+  <li>Directeur de la publication : {{ site.legal.director }}</li>
+</ul>
+
+<h2>Continuité d'exploitation</h2>
+<p>
+  Codeblend EURL poursuit l'exploitation de Mon Budget Simple dans le cadre d'une reprise de l'activité
+  d'édition auparavant exercée par Guillaume Chambard en entreprise individuelle.
+  {% if site.legal.eiSuccessionDate %}Codeblend EURL vient aux droits de l'entreprise individuelle Guillaume Chambard pour les contrats conclus avant le {{ site.legal.eiSuccessionDate }}.{% endif %}
+</p>
+
+<h2>Hébergement</h2>
+<p>Le site est hébergé par :</p>
+<ul>
+  <li>{{ site.legal.host.name }}</li>
+  <li>Adresse : {{ site.legal.host.address }}</li>
+  <li>Site : {{ site.legal.host.url }}</li>
+  <li>Contact : {{ site.legal.host.contact }}</li>
+</ul>
+
+<h2>Propriété intellectuelle</h2>
+<p>
+  L'ensemble des contenus du site (textes, guides, modèles, graphismes, logo, structure) est protégé par le droit d'auteur et appartient à {{ site.legal.company }}, sauf mention contraire.
+  Toute reproduction, représentation, modification ou exploitation, totale ou partielle, sans autorisation écrite préalable est interdite.
+</p>
+
+<h2>Responsabilité</h2>
+<p>
+  Le site {{ site.brand.name }} fournit des contenus d'éducation financière à titre informatif. Il ne constitue pas un conseil en investissement, en gestion de patrimoine ou en matière fiscale.
+  L'éditeur ne saurait être tenu responsable des décisions prises par les utilisateurs sur la base de ces contenus.
+</p>
+
+<h2>Médiation de la consommation</h2>
+{% if site.legal.mediator.name %}
+<p>
+  Conformément à l'article L616-1 du Code de la consommation, en cas de litige non résolu avec le service client,
+  vous pouvez recourir gratuitement au médiateur de la consommation dont nous relevons :
+</p>
+<ul>
+  <li>{{ site.legal.mediator.name }}</li>
+  <li>Adresse : {{ site.legal.mediator.address }}</li>
+  <li>Site : <a href="{{ site.legal.mediator.website }}" rel="nofollow">{{ site.legal.mediator.website }}</a></li>
+</ul>
+{% else %}
+<p>Les coordonnées du médiateur de la consommation retenu par l'éditeur seront indiquées ici dès leur désignation (article L616-1 du Code de la consommation).</p>
+{% endif %}
+{% endblock %}

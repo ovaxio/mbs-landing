@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap">
+<style>
+  /* Tokens — miroir de ../brand.tokens.json. Ne jamais diverger. */
+  :root {
+    --beige: #F2EBE0;
+    --soft-bg: #FAF7F3;
+    --brown: #2C1F14;
+    --terracotta: #C4614A;
+    --terracotta-dark: #A8503D;
+    --text-tertiary: #8A7565;
+    --muted: #D4C4B8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: var(--beige); }
+  body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+
+  .cover {
+    width: var(--w); height: var(--h);
+    background: var(--bg, var(--beige));
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: var(--pad);
+    position: relative; overflow: hidden;
+  }
+  .top { display: flex; flex-direction: column; gap: calc(var(--u) * 1.1); }
+  .rule { width: calc(var(--u) * 4); height: calc(var(--u) * 0.16); background: var(--terracotta); }
+  .kicker {
+    font-family: 'Inter', sans-serif; font-weight: 500;
+    font-size: calc(var(--u) * 0.72);
+    letter-spacing: 0.17em; text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+  .line {
+    font-family: 'DM Serif Display', Georgia, serif; font-weight: 400;
+    font-size: var(--fs); line-height: 1.02;
+    letter-spacing: -0.015em;
+    color: var(--brown);
+    max-width: var(--measure);
+    text-wrap: pretty;
+  }
+  .line em { font-style: normal; color: var(--terracotta); }
+  .bottom { display: flex; align-items: flex-end; justify-content: flex-end; }
+  .sig {
+    font-family: 'Inter', sans-serif; font-weight: 400;
+    font-size: calc(var(--u) * 0.78); letter-spacing: 0.02em;
+    color: var(--text-tertiary);
+  }
+  .sig::before { content: ""; display: inline-block; width: calc(var(--u) * 1.4); height: 1px;
+    background: var(--muted); vertical-align: middle; margin-right: calc(var(--u) * 0.5); }
+</style>
+</head>
+<body>
+  <div class="cover" id="cover"></div>
+<script>
+  const P = new URLSearchParams(location.search);
+  const FORMATS = {
+    featured: { w: 1600, h: 900,  u: 34, pad: '84px 96px', fs: '132px', measure: '1180px' },
+    social:   { w: 1080, h: 1080, u: 32, pad: '90px 88px', fs: '116px', measure: '890px' }
+  };
+  const fmt = FORMATS[P.get('format') || 'featured'];
+  const el = document.getElementById('cover');
+  el.style.setProperty('--w', fmt.w + 'px');
+  el.style.setProperty('--h', fmt.h + 'px');
+  el.style.setProperty('--u', fmt.u + 'px');
+  el.style.setProperty('--pad', fmt.pad);
+  el.style.setProperty('--fs', fmt.fs);
+  el.style.setProperty('--measure', fmt.measure);
+  if (P.get('bg') === 'soft') el.style.setProperty('--bg', 'var(--soft-bg)');
+
+  const kicker = P.get('kicker') || '';
+  const line = P.get('line') || '';
+  const esc = (s) => s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  // *segment* met le segment en terracotta
+  const marked = esc(line).replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
+  el.innerHTML =
+    '<div class="top">' +
+      '<div class="rule"></div>' +
+      (kicker ? '<div class="kicker">' + esc(kicker) + '</div>' : '') +
+    '</div>' +
+    '<div class="line">' + marked + '</div>' +
+    '<div class="bottom">' +
+      '<div class="sig">monbudgetsimple.fr</div>' +
+    '</div>';
+  document.title = 'ready';
+</script>
+</body>
+</html>
